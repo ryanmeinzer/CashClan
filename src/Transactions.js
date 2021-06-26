@@ -7,7 +7,7 @@ const Transactions = (props) => {
             <h1>Transactions:</h1>
             <ul>
                 {props.transactions.map(transaction =>
-                    <li>${transaction.amount} at {transaction.updated_at}</li>
+                    <li>${transaction.amount} (${(4.44 - 1 - (transaction.amount * .03)).toFixed(2)} saved / ${((1 + transaction.amount * .03)).toFixed(2)} earned)</li>
                 )}
             </ul>
         </>

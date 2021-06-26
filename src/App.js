@@ -28,6 +28,7 @@ const App = () => {
 
   return (
     <>
+      <h1 align="center">CashClan</h1>
       <NewMember refresh={refreshMembersUponFormSubmit} />
       <Members members={members} />
       <Transactions transactions={transactions}/>

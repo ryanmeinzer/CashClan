@@ -40,7 +40,7 @@ const NewMember = (props) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} align="center">
                 <input
                     type="text"
                     name="name"
@@ -59,7 +59,7 @@ const NewMember = (props) => {
                     type="text"
                     name="venmo"
                     value={state.venmo}
-                    placeholder="Your Venmo"
+                    placeholder="Your Venmo Handle"
                     onChange={handleChange} required
                 />
                 <button type="submit">Save Your Member Profile</button>
