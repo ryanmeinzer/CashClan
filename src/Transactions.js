@@ -1,11 +1,13 @@
 const Transactions = (props) => {
 
+    console.log(props.transactions)
+
     return (
         <>
             <h1>Transactions:</h1>
             <ul>
                 {props.transactions.map(transaction =>
-                    <li>Transaction ID: {transaction.id} / Amount: {transaction.amount}</li>
+                    <li>${transaction.amount} at {transaction.updated_at}</li>
                 )}
             </ul>
         </>

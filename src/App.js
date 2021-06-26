@@ -1,26 +1,24 @@
 import React, {useEffect, useState} from 'react'
-import NewGiver from './NewGiver'
-import Givers from './Givers'
-import Getters from './Getters'
+import NewMember from './NewMember'
+import Members from './Members'
 import Transactions from './Transactions'
 
 const App = () => {
 
-  const [givers, setGivers] = useState([])
-  const [getters, setGetters] = useState([])
+  const [members, setMembers] = useState([])
   const [transactions, setTransactions] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3000/getters')
+    fetch('http://localhost:3000/members')
       .then((obj) => obj.json())
-      .then(json => setGetters(json))
+      .then(json => setMembers(json))
   }, [])
 
-  useEffect(() => {
-    fetch('http://localhost:3000/givers')
+  const refreshMembersUponFormSubmit = () => {
+    fetch('http://localhost:3000/members')
       .then((obj) => obj.json())
-      .then(json => setGivers(json))
-  }, [])
+      .then(json => setMembers(json))
+  }
 
   useEffect(() => {
     fetch('http://localhost:3000/transactions')
@@ -30,9 +28,8 @@ const App = () => {
 
   return (
     <>
-      <NewGiver />
-      <Givers givers={givers} />
-      <Getters getters={getters}/>
+      <NewMember refresh={refreshMembersUponFormSubmit} />
+      <Members members={members} />
       <Transactions transactions={transactions}/>
     </>
   )

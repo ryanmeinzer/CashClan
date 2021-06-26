@@ -1,13 +1,15 @@
 import React, {useState} from "react"
 
-const NewGiver = () => {
+const NewMember = (props) => {
 
     const initialState = {
         name: '',
         phone: '',
         venmo: '',
-        location: '37.794374248633815, -122.400108679331',
-        amount: 0
+        selling: true,
+        buying: true,
+        amount: 0,
+        location: '37.794374248633815, -122.400108679331'
     }
 
     const [state, setState] = useState(initialState)
@@ -21,15 +23,19 @@ const NewGiver = () => {
         })
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault()
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(state)
         }
-        fetch('http://localhost:3000/givers', requestOptions)
+        fetch('http://localhost:3000/members', requestOptions)
             .then(response => response.json())
             .catch(error => error)
+            .then(alert('Thanks for joining the clan'))
+            .then(setState(initialState))
+            .finally(props.refresh)
     }
 
     return (
@@ -56,10 +62,10 @@ const NewGiver = () => {
                     placeholder="Your Venmo"
                     onChange={handleChange} required
                 />
-                <button type="submit">Save Your Giver Profile</button>
+                <button type="submit">Save Your Member Profile</button>
             </form>
         </div>
     )
 }
 
-export default NewGiver
+export default NewMember
