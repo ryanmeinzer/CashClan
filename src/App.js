@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import NewGiver from './NewGiver'
 import Givers from './Givers'
 import Getters from './Getters'
 import Transactions from './Transactions'
@@ -29,7 +30,8 @@ const App = () => {
 
   return (
     <>
-      <Givers givers={givers}/>
+      <NewGiver />
+      <Givers givers={givers} />
       <Getters getters={getters}/>
       <Transactions transactions={transactions}/>
     </>
