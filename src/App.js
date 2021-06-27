@@ -26,19 +26,12 @@ const App = () => {
       .then(json => setTransactions(json))
   }, [])
 
-  const getTransactionSellerName = (id) => {
-    fetch(`http://localhost:3000/transactions/${id}`)
-      .then(response => response.text())
-      // .then(text => console.log(text))
-      .then(text => text)
-  }
-
   return (
     <>
       <h1 align="center">CashClan</h1>
       <NewMember refresh={refreshMembersUponFormSubmit} />
       <Members members={members} />
-      <Transactions transactions={transactions} sellerName={getTransactionSellerName}/>
+      <Transactions transactions={transactions}/>
     </>
   )
 }
