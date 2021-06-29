@@ -37,9 +37,9 @@ const App = () => {
       <h1 align="center">CashClan</h1>
       {/* <SignInNPM />
       <SignOutNPM /> */}
-      {/* <SignInGoogle /> */}
-      <Login />
-      <Logout />
+      <SignInGoogle />
+      {/* <Login />
+      <Logout /> */}
       <NewMember refresh={refreshMembersUponFormSubmit} />
       <Members members={members} />
       <Transactions transactions={transactions}/>
