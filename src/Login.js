@@ -34,11 +34,35 @@ function Login() {
     })
 
     return (
+        <>
+        {/* ToDo - Auto sign-in */}
+        {/* <div id="g_id_onload"
+            data-client_id={clientId}
+            data-auto_select="true"
+            data-login_uri="http://localhost:3001"
+        >
+        </div> */}
+        {/* ToDo - configure more customized google sign-in */}
+        {/* <div id="g_id_onload"
+            data-client_id={clientId}
+            data-login_uri="http://localhost:3001"
+            data-auto_prompt="false"
+            >
+        </div>
+        <div className="g_id_signin"
+            data-type="standard"
+            data-size="large"
+            data-theme="outline"
+            data-text="sign_in_with"
+            data-shape="rectangular"
+            data-logo_alignment="left">
+        </div> */}
         <button onClick={signIn} className="button">
             <img src="icons/google.svg" alt="google login" className="icon"></img>
 
             <span className="buttonText">Sign in with Google</span>
         </button>
+        </>
     )
 }
 
