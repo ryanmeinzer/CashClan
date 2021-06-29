@@ -5,6 +5,9 @@ import Members from './Members'
 import Transactions from './Transactions'
 import Login from './Login'
 import Logout from './Logout'
+import SignInGoogle from './SignInGoogle'
+import SignInNPM from './SignInNPM'
+import SignOutNPM from './SignOutNPM'
 
 const App = () => {
 
@@ -32,6 +35,9 @@ const App = () => {
   return (
     <>
       <h1 align="center">CashClan</h1>
+      {/* <SignInNPM />
+      <SignOutNPM /> */}
+      {/* <SignInGoogle /> */}
       <Login />
       <Logout />
       <NewMember refresh={refreshMembersUponFormSubmit} />
