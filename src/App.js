@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from 'react'
+import './App.css'
 import NewMember from './NewMember'
 import Members from './Members'
 import Transactions from './Transactions'
+import Login from './Login'
+import Logout from './Logout'
 
 const App = () => {
 
@@ -29,6 +32,8 @@ const App = () => {
   return (
     <>
       <h1 align="center">CashClan</h1>
+      <Login />
+      <Logout />
       <NewMember refresh={refreshMembersUponFormSubmit} />
       <Members members={members} />
       <Transactions transactions={transactions}/>

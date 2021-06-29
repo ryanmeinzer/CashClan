@@ -40,6 +40,7 @@ const NewMember = (props) => {
 
     return (
         <div>
+            <br />
             <form onSubmit={handleSubmit} align="center">
                 <input
                     type="text"
