@@ -1,4 +1,3 @@
-import React from 'react'
 import {useGoogleLogin} from 'react-google-login'
 
 // refresh token
@@ -8,11 +7,35 @@ const clientId =
     '495182513894-qpo5gbo9ppe0gucfq6oq0vrkr4mmlpvb.apps.googleusercontent.com'
 
 function Login() {
+
+    const initialState = {
+        name: '',
+        phone: '',
+        venmo: '',
+        email: '',
+        selling: true,
+        buying: true,
+        amount: 0,
+        location: '37.794374248633815, -122.400108679331'
+    }
+
+    const createMember = (googleId, name, email) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({...initialState, googleId: googleId, name: name, email: email})
+        }
+        fetch('http://localhost:3000/members', requestOptions)
+            .then(response => response.json())
+            .catch(error => error)
+    }
+
     const onSuccess = (res) => {
         console.log('Login Success: currentUser:', res.profileObj)
         alert(
             `Logged in successfully. Welcome to the CashClan, ${res.profileObj.name}.`
         )
+        createMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email)
         refreshTokenSetup(res)
     }
 
