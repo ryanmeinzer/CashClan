@@ -1,6 +1,6 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 
-const NewMember = (props) => {
+const MemberInfoUpdate = (props) => {
 
     const initialState = {
         name: '',
@@ -24,16 +24,18 @@ const NewMember = (props) => {
     }
 
     const handleSubmit = (event) => {
+        // console.log(id)
         event.preventDefault()
         const requestOptions = {
-            method: 'POST',
+            method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(state)
         }
-        fetch('http://localhost:3000/members', requestOptions)
+        // need to include id after members/ to update
+        fetch(`http://localhost:3000/members`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
-            .then(alert('Thanks for joining the clan'))
+            .then(alert(`Thanks for joining the clan ${state.name}!`))
             .then(setState(initialState))
             .finally(props.refresh)
     }
@@ -69,4 +71,4 @@ const NewMember = (props) => {
     )
 }
 
-export default NewMember
+export default MemberInfoUpdate

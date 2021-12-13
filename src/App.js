@@ -1,14 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import './App.css'
-import NewMember from './NewMember'
+import MemberInfoUpdate from './MemberInfoUpdate'
 import Members from './Members'
 import Transactions from './Transactions'
 import Login from './Login'
 import Logout from './Logout'
-import SignInGoogle from './SignInGoogle'
-import SignInNPM from './SignInNPM'
-import SignOutNPM from './SignOutNPM'
-import {useGoogleLogin} from 'react-google-login'
+import SignUp from './SignUp'
 
 const App = () => {
 
@@ -33,15 +30,14 @@ const App = () => {
       .then(json => setTransactions(json))
   }, [])
 
+
   return (
     <>
       <h1 align="center">CashClan</h1>
-      {/* <SignInNPM />
-      <SignOutNPM /> */}
-      {/* <SignInGoogle /> */}
+      <SignUp />
       <Login />
       <Logout />
-      <NewMember refresh={refreshMembersUponFormSubmit} />
+      <MemberInfoUpdate refresh={refreshMembersUponFormSubmit} />
       <Members members={members} />
       <Transactions transactions={transactions}/>
     </>

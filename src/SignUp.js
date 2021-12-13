@@ -1,8 +1,6 @@
-import {GoogleLogin} from 'react-google-login'
-// refresh token
-import {refreshTokenSetup} from './utils/refreshToken'
+import { GoogleLogin } from 'react-google-login'
 
-function Login() {
+function SignUp() {
 
     const responseGoogle = (res) => {
         console.log(res)
@@ -34,22 +32,20 @@ function Login() {
     const onSuccess = (res) => {
         // console.log('inside Login - onSuccess response:', res)
         alert(
-            `Welcome back to the CashClan, ${res.profileObj.name}.`
+            `Welcome to the CashClan, ${res.profileObj.name}.`
         )
         findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email)
-        refreshTokenSetup(res)
     }
 
     return (
         <GoogleLogin
             clientId="495182513894-qpo5gbo9ppe0gucfq6oq0vrkr4mmlpvb.apps.googleusercontent.com"
-            buttonText="Login with Google"
+            buttonText="Sign Up with Google"
             onSuccess={onSuccess}
             onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}
-            isSignedIn={true}
         />
     )
 }
 
-export default Login
+export default SignUp

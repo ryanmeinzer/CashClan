@@ -1,31 +1,18 @@
-import React from 'react'
-import {useGoogleLogout} from 'react-google-login'
-
-const clientId =
-    '495182513894-qpo5gbo9ppe0gucfq6oq0vrkr4mmlpvb.apps.googleusercontent.com'
+import {GoogleLogout} from 'react-google-login'
 
 function Logout() {
-    const onLogoutSuccess = (res) => {
-        console.log('Logged out Success')
-        alert('Logged out Successfully ✌')
-    }
 
-    const onFailure = () => {
-        console.log('Handle failure cases')
+    const responseGoogle = (res) => {
+        console.log(res)
     }
-
-    const {signOut} = useGoogleLogout({
-        clientId,
-        onLogoutSuccess,
-        onFailure,
-    })
 
     return (
-        <button onClick={signOut} className="button">
-            <img src="icons/google.svg" alt="google login" className="icon"></img>
-
-            <span className="buttonText">Sign out</span>
-        </button>
+        <GoogleLogout
+            clientId="495182513894-qpo5gbo9ppe0gucfq6oq0vrkr4mmlpvb.apps.googleusercontent.com"
+            buttonText="Logout"
+            onLogoutSuccess={responseGoogle}
+            onFailure={responseGoogle}
+        />
     )
 }
 
