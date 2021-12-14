@@ -9,7 +9,9 @@ const MemberInfoUpdate = (props) => {
         selling: true,
         buying: true,
         amount: 0,
-        location: '37.794374248633815, -122.400108679331'
+        location: '37.794374248633815, -122.400108679331',
+        // could use googleId from a provider, but it is unsecure
+        googleId: ''
     }
 
     const [state, setState] = useState(initialState)
@@ -31,8 +33,8 @@ const MemberInfoUpdate = (props) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(state)
         }
-        // need to include id after members/ to update
-        fetch(`http://localhost:3000/members`, requestOptions)
+        // could use googleId instead of id, but it is unsecure
+        fetch(`http://localhost:3000/members/${state.googleId}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
             .then(alert(`Thanks for joining the clan ${state.name}!`))

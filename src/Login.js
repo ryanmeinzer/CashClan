@@ -1,8 +1,11 @@
 import {GoogleLogin} from 'react-google-login'
 // refresh tokenId
 import {refreshTokenSetup} from './utils/refreshToken'
+import {useState} from 'react'
 
 function Login() {
+
+    const [isLoggedIn, setisLoggedIn] = useState(false)
 
     const responseGoogle = (res) => {
         console.log(res)
@@ -38,11 +41,13 @@ function Login() {
             `Welcome back to the CashClan, ${res.profileObj.name}.`
         )
         findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email)
+        setisLoggedIn(true)
         // refresh tokenId (every hour it expires) to access data and authenticate users
         refreshTokenSetup(res)
     }
 
     return (
+        !isLoggedIn &&
         <GoogleLogin
             clientId="495182513894-qpo5gbo9ppe0gucfq6oq0vrkr4mmlpvb.apps.googleusercontent.com"
             buttonText="Login with Google"
