@@ -1,5 +1,5 @@
 import {GoogleLogin} from 'react-google-login'
-// refresh token
+// refresh tokenId
 import {refreshTokenSetup} from './utils/refreshToken'
 
 function Login() {
@@ -20,6 +20,7 @@ function Login() {
         // location: '37.794374248633815, -122.400108679331'
     }
 
+    // ToDo - securely authenticate & validate with BE via user ID token (https://developers.google.com/identity/sign-in/web/backend-auth)
     const findOrCreateMember = (googleId, name, email) => {
         const requestOptions = {
             method: 'POST',
@@ -37,6 +38,7 @@ function Login() {
             `Welcome back to the CashClan, ${res.profileObj.name}.`
         )
         findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email)
+        // refresh tokenId (every hour it expires) to access data and authenticate users
         refreshTokenSetup(res)
     }
 
