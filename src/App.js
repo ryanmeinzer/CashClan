@@ -39,7 +39,7 @@ const App = () => {
       <Logout />
       <MemberInfoUpdate refresh={refreshMembersUponFormSubmit} />
       <Members members={members} />
-      <Transactions transactions={transactions}/>
+      <Transactions transactions={transactions} />
     </>
   )
 }

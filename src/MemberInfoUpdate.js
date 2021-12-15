@@ -1,6 +1,13 @@
-import React, { useState } from "react"
+import React, {useState, useEffect} from "react"
+import {useMemberContext} from './providers/member'
 
 const MemberInfoUpdate = (props) => {
+
+    const {member} = useMemberContext()
+
+    useEffect(() => {
+        console.log('inside MemberInfoUpdate:', member)
+    })
 
     const initialState = {
         name: '',
@@ -9,9 +16,7 @@ const MemberInfoUpdate = (props) => {
         selling: true,
         buying: true,
         amount: 0,
-        location: '37.794374248633815, -122.400108679331',
-        // could use googleId from a provider, but it is unsecure
-        googleId: ''
+        location: '37.794374248633815, -122.400108679331'
     }
 
     const [state, setState] = useState(initialState)
@@ -26,18 +31,16 @@ const MemberInfoUpdate = (props) => {
     }
 
     const handleSubmit = (event) => {
-        // console.log(id)
         event.preventDefault()
         const requestOptions = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(state)
         }
-        // could use googleId instead of id, but it is unsecure
-        fetch(`http://localhost:3000/members/${state.googleId}`, requestOptions)
+        // use googleId instead of id, but it is unsecure
+        fetch(`http://localhost:3000/members/${member}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
-            .then(alert(`Thanks for joining the clan ${state.name}!`))
             .then(setState(initialState))
             .finally(props.refresh)
     }

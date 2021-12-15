@@ -1,6 +1,15 @@
-import { GoogleLogin } from 'react-google-login'
+import {GoogleLogin} from 'react-google-login'
+// refresh tokenId
+import {refreshTokenSetup} from './utils/refreshToken'
+import {useMemberContext} from './providers/member'
 
 function SignUp() {
+
+    const {setMember} = useMemberContext()
+    const {isLoggedIn} = useMemberContext()
+    const {setIsLoggedIn} = useMemberContext()
+
+    // const [isLoggedIn, setisLoggedIn] = useState(false)
 
     const responseGoogle = (res) => {
         console.log(res)
@@ -27,6 +36,7 @@ function SignUp() {
         fetch('http://localhost:3000/members', requestOptions)
             .then(response => response.json())
             .catch(error => error)
+            .finally(setMember(googleId))
     }
 
     const onSuccess = (res) => {
@@ -35,9 +45,13 @@ function SignUp() {
             `Welcome to the CashClan, ${res.profileObj.name}.`
         )
         findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email)
+        setIsLoggedIn(true)
+        // refresh tokenId (every hour it expires) to access data and authenticate users
+        refreshTokenSetup(res)
     }
 
     return (
+        !isLoggedIn &&
         <GoogleLogin
             clientId="495182513894-qpo5gbo9ppe0gucfq6oq0vrkr4mmlpvb.apps.googleusercontent.com"
             buttonText="Sign Up with Google"
