@@ -9,7 +9,6 @@ function Logout() {
     const responseGoogle = (res) => {
         console.log(res)
         setIsLoggedIn(false)
-        // window.refresh()
     }
 
     return (
