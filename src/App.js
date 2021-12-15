@@ -24,6 +24,12 @@ const App = () => {
       .then(json => setMembers(json))
   }
 
+  const refreshMembersUponSignUp = () => {
+    fetch('http://localhost:3000/members')
+      .then((obj) => obj.json())
+      .then(json => setMembers(json))
+  }
+
   useEffect(() => {
     fetch('http://localhost:3000/transactions')
       .then((obj) => obj.json())
@@ -34,7 +40,7 @@ const App = () => {
   return (
     <>
       <h1 align="center">CashClan</h1>
-      <SignUp />
+      <SignUp refresh={refreshMembersUponSignUp} />
       <Login />
       <Logout />
       <MemberInfoUpdate refresh={refreshMembersUponFormSubmit} />

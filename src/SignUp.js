@@ -3,13 +3,11 @@ import {GoogleLogin} from 'react-google-login'
 import {refreshTokenSetup} from './utils/refreshToken'
 import {useMemberContext} from './providers/member'
 
-function SignUp() {
+const SignUp = (props) => {
 
     const {setMember} = useMemberContext()
     const {isLoggedIn} = useMemberContext()
     const {setIsLoggedIn} = useMemberContext()
-
-    // const [isLoggedIn, setisLoggedIn] = useState(false)
 
     const responseGoogle = (res) => {
         console.log(res)
@@ -36,7 +34,8 @@ function SignUp() {
         fetch('http://localhost:3000/members', requestOptions)
             .then(response => response.json())
             .catch(error => error)
-            .finally(setMember(googleId))
+            .then(setMember(googleId))
+            .finally(props.refresh)
     }
 
     const onSuccess = (res) => {

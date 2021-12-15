@@ -9,8 +9,6 @@ function Login() {
     const {isLoggedIn} = useMemberContext()
     const {setIsLoggedIn} = useMemberContext()
 
-    // const [isLoggedIn, setisLoggedIn] = useState(false)
-
     const responseGoogle = (res) => {
         console.log(res)
     }
