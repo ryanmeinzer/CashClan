@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './App.css'
-import MemberInfoUpdate from './MemberInfoUpdate'
+import Profile from './Profile'
+import Publish from './Publish'
 import Members from './Members'
 import Transactions from './Transactions'
 import Login from './Login'
@@ -43,7 +44,8 @@ const App = () => {
       <SignUp refresh={refreshMembersUponSignUp} />
       <Login />
       <Logout />
-      <MemberInfoUpdate refresh={refreshMembersUponFormSubmit} />
+      <Profile refresh={refreshMembersUponFormSubmit} />
+      <Publish />
       <Members members={members} />
       <Transactions transactions={transactions} />
     </>

@@ -10,7 +10,7 @@ const SignUp = (props) => {
     const {setIsLoggedIn} = useMemberContext()
 
     const responseGoogle = (res) => {
-        console.log(res)
+        console.log('inside SignUp', res)
     }
 
     const initialState = {
@@ -43,6 +43,7 @@ const SignUp = (props) => {
         alert(
             `Welcome to the CashClan, ${res.profileObj.name}.`
         )
+        console.log('inside SignUp - onSuccess response:', res)
         findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email)
         setIsLoggedIn(true)
         // refresh tokenId (every hour it expires) to access data and authenticate users
