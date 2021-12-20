@@ -27,7 +27,7 @@ const Publish = () => {
             body: JSON.stringify({active: value})
         }
         // use googleId instead of id, but it is unsecure
-        // fetch(`http://localhost:3000/members/225`, requestOptions)
+        // fetch(`http://localhost:3000/members/233`, requestOptions)
         // ToDo - swap above with below
         fetch(`http://localhost:3000/members/${member}`, requestOptions)
             .then(response => response.json())
@@ -42,7 +42,7 @@ const Publish = () => {
             body: JSON.stringify({...state, active: true})
         }
         // use googleId instead of id, but it is unsecure
-        // fetch(`http://localhost:3000/members/225`, requestOptions)
+        // fetch(`http://localhost:3000/members/233`, requestOptions)
         // ToDo - swap above with below
         fetch(`http://localhost:3000/members/${member}`, requestOptions)
             .then(response => response.json())
@@ -63,13 +63,21 @@ const Publish = () => {
                 }
             </span>
             {
-                state.active &&
-                <button
-                    name="active"
-                    value={false}
-                    onClick={handleChange}
-                > Unpublish or Update
-                </button>
+                state.active
+                    ?
+                    <button
+                        name="active"
+                        value={false}
+                        onClick={handleChange}
+                    > Unpublish or Update
+                    </button>
+                    :
+                    <button
+                        name="active"
+                        value={true}
+                        onClick={handleChange}
+                    > Cancel
+                    </button>
             }
             <br />
             <button

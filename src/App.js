@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import './App.css'
-import Profile from './Profile'
 import Publish from './Publish'
 import Members from './Members'
 import Transactions from './Transactions'
-import Login from './Login'
-import Logout from './Logout'
 import SignUp from './SignUp'
+import Login from './Login'
+import Profile from './Profile'
+import Logout from './Logout'
+import EditProfile from './EditProfile'
 
 const App = () => {
 
@@ -43,8 +44,9 @@ const App = () => {
       <h1 align="center">CashClan</h1>
       <SignUp refresh={refreshMembersUponSignUp} />
       <Login />
+      <Profile />
       <Logout />
-      <Profile refresh={refreshMembersUponFormSubmit} />
+      <EditProfile refresh={refreshMembersUponFormSubmit} />
       <Publish />
       <Members members={members} />
       <Transactions transactions={transactions} />
