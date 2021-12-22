@@ -29,7 +29,7 @@ const Publish = () => {
         // use googleId instead of id, but it is unsecure
         // fetch(`http://localhost:3000/members/233`, requestOptions)
         // ToDo - swap above with below
-        fetch(`http://localhost:3000/members/${member}`, requestOptions)
+        fetch(`http://localhost:3000/members/${member.googleId}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
     }
@@ -44,7 +44,7 @@ const Publish = () => {
         // use googleId instead of id, but it is unsecure
         // fetch(`http://localhost:3000/members/233`, requestOptions)
         // ToDo - swap above with below
-        fetch(`http://localhost:3000/members/${member}`, requestOptions)
+        fetch(`http://localhost:3000/members/${member.googleId}`, requestOptions)
             .then(response => response.json())
             .then(setState({...state, active: true}))
             .catch(error => error)

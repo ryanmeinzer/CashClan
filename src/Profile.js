@@ -1,11 +1,15 @@
 import {Link} from "react-router-dom";
+import {useMemberContext} from './providers/member'
 
 const Profile = () => {
+
+    const {member} = useMemberContext()
+
     return (
-        // ToDo - make div an inline block ie have it span not create new div / element
-        <div>
-            <div>[Profile Image Here]</div>
-            <Link to="/editprofile">Profile</Link>
+        member &&
+        <div style={{display: 'inline-block'}}>
+            <img src={member.image} alt="profile" />
+            <div><Link to="/editprofile">Profile</Link></div>
         </div>
     )
 }

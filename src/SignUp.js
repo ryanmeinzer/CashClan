@@ -16,6 +16,7 @@ const SignUp = (props) => {
     const initialState = {
         name: '',
         email: '',
+        image: '',
         phone: '',
         venmo: '',
         selling: true,
@@ -25,26 +26,26 @@ const SignUp = (props) => {
         // location: '37.794374248633815, -122.400108679331'
     }
 
-    const findOrCreateMember = (googleId, name, email) => {
+    const findOrCreateMember = (googleId, name, email, imageUrl) => {
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({...initialState, googleId: googleId, name: name, email: email})
+            body: JSON.stringify({...initialState, googleId: googleId, name: name, email: email, image: imageUrl})
         }
         fetch('http://localhost:3000/members', requestOptions)
             .then(response => response.json())
             .catch(error => error)
-            .then(setMember(googleId))
+            .then(setMember({...initialState, googleId: googleId, name: name, email: email, image: imageUrl}))
             .finally(props.refresh)
     }
 
     const onSuccess = (res) => {
-        // console.log('inside Login - onSuccess response:', res)
+        console.log('inside Login - onSuccess response:', res)
         alert(
             `Welcome to the CashClan, ${res.profileObj.name}.`
         )
         console.log('inside SignUp - onSuccess response:', res)
-        findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email)
+        findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email, res.profileObj.imageUrl)
         setIsLoggedIn(true)
         // refresh tokenId (every hour it expires) to access data and authenticate users
         refreshTokenSetup(res)

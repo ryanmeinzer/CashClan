@@ -16,6 +16,7 @@ function Login() {
     const initialState = {
         name: '',
         email: '',
+        image: '',
         phone: '',
         venmo: '',
         selling: true,
@@ -27,16 +28,16 @@ function Login() {
 
     // ToDo - securely authenticate & validate with BE via user ID token (https://developers.google.com/identity/sign-in/web/backend-auth)
     // ToDo - integrate imageUrl with Google profile picture
-    const findOrCreateMember = (googleId, name, email) => {
+    const findOrCreateMember = (googleId, name, email, imageUrl) => {
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({...initialState, googleId: googleId, name: name, email: email})
+            body: JSON.stringify({...initialState, googleId: googleId, name: name, email: email, image: imageUrl})
         }
         fetch('http://localhost:3000/members', requestOptions)
             .then(response => response.json())
             .catch(error => error)
-            .finally(setMember(googleId))
+            .then(setMember({...initialState, googleId: googleId, name: name, email: email, image: imageUrl}))
     }
 
     const onSuccess = (res) => {
@@ -44,7 +45,7 @@ function Login() {
         alert(
             `Welcome back to the CashClan, ${res.profileObj.name}.`
         )
-        findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email)
+        findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email, res.profileObj.imageUrl)
         setIsLoggedIn(true)
         // refresh tokenId (every hour it expires) to access data and authenticate users
         refreshTokenSetup(res)

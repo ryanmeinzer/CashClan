@@ -19,6 +19,12 @@ const EditProfile = (props) => {
         setState({...state, [name]: value})
     }
 
+    // const refreshMembersUponFormSubmit = () => {
+    //     fetch('http://localhost:3000/members')
+    //         .then((obj) => obj.json())
+    //         .then(json => setMembers(json))
+    // }
+
     const handleSubmit = (event) => {
         event.preventDefault()
         const requestOptions = {
@@ -29,11 +35,11 @@ const EditProfile = (props) => {
         // use googleId instead of id, but it is unsecure
         // fetch(`http://localhost:3000/members/233`, requestOptions)
         // ToDo - swap above with below
-        fetch(`http://localhost:3000/members/${member}`, requestOptions)
+        fetch(`http://localhost:3000/members/${member.googleId}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
             // .then(setState(state))
-            .finally(props.refresh)
+            // .finally(refreshMembersUponFormSubmit)
     }
 
     return (

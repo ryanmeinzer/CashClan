@@ -6,10 +6,12 @@ import SignUp from './SignUp'
 import Login from './Login'
 import Profile from './Profile'
 import Logout from './Logout'
-import EditProfile from './EditProfile'
+// import EditProfile from './EditProfile'
+import {useMemberContext} from './providers/member'
 
 const Home = () => {
 
+    const {member} = useMemberContext()
     const [members, setMembers] = useState([])
     const [transactions, setTransactions] = useState([])
 
@@ -19,11 +21,11 @@ const Home = () => {
             .then(json => setMembers(json))
     }, [])
 
-    const refreshMembersUponFormSubmit = () => {
-        fetch('http://localhost:3000/members')
-            .then((obj) => obj.json())
-            .then(json => setMembers(json))
-    }
+    // const refreshMembersUponFormSubmit = () => {
+    //     fetch('http://localhost:3000/members')
+    //         .then((obj) => obj.json())
+    //         .then(json => setMembers(json))
+    // }
 
     const refreshMembersUponSignUp = () => {
         fetch('http://localhost:3000/members')
@@ -42,9 +44,11 @@ const Home = () => {
             <h1 align="center">CashClan</h1>
             <SignUp refresh={refreshMembersUponSignUp} />
             <Login />
-            <Profile />
+            {member &&
+                <Profile />
+            }
             <Logout />
-            <EditProfile refresh={refreshMembersUponFormSubmit} />
+            {/* <EditProfile refresh={refreshMembersUponFormSubmit} /> */}
             <Publish />
             <Members members={members} />
             <Transactions transactions={transactions} />
