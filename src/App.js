@@ -1,3 +1,4 @@
+import React, {useEffect, useState} from 'react'
 import Profile from './Profile'
 import EditProfile from './EditProfile'
 import Home from './Home'
@@ -5,12 +6,39 @@ import {Routes, Route} from "react-router-dom";
 
 const App = () => {
 
+  const [members, setMembers] = useState([])
+  const [transactions, setTransactions] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:3000/members')
+      .then((obj) => obj.json())
+      .then(json => setMembers(json))
+  }, [])
+
+  const refreshMembersUponFormSubmit = () => {
+    fetch('http://localhost:3000/members')
+      .then((obj) => obj.json())
+      .then(json => setMembers(json))
+  }
+
+  const refreshMembersUponSignUp = () => {
+    fetch('http://localhost:3000/members')
+      .then((obj) => obj.json())
+      .then(json => setMembers(json))
+  }
+
+  useEffect(() => {
+    fetch('http://localhost:3000/transactions')
+      .then((obj) => obj.json())
+      .then(json => setTransactions(json))
+  }, [])
+
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home members={members} transactions={transactions} refreshMembersUponSignUp={refreshMembersUponSignUp} />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="editprofile" element={<EditProfile />} />
+        <Route path="editprofile" element={<EditProfile refreshMembersUponFormSubmit={refreshMembersUponFormSubmit} />} />
       </Routes>
     </>
   )

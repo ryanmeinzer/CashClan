@@ -27,7 +27,6 @@ function Login() {
     }
 
     // ToDo - securely authenticate & validate with BE via user ID token (https://developers.google.com/identity/sign-in/web/backend-auth)
-    // ToDo - integrate imageUrl with Google profile picture
     const findOrCreateMember = (googleId, name, email, imageUrl) => {
         const requestOptions = {
             method: 'POST',
@@ -42,9 +41,6 @@ function Login() {
 
     const onSuccess = (res) => {
         console.log('inside Login - onSuccess response:', res)
-        alert(
-            `Welcome back to the CashClan, ${res.profileObj.name}.`
-        )
         findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email, res.profileObj.imageUrl)
         setIsLoggedIn(true)
         // refresh tokenId (every hour it expires) to access data and authenticate users

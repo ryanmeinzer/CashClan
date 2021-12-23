@@ -5,10 +5,12 @@ function Logout() {
 
     const {isLoggedIn} = useMemberContext()
     const {setIsLoggedIn} = useMemberContext()
+    const {setMember} = useMemberContext()
 
     const responseGoogle = (res) => {
         console.log(res)
         setIsLoggedIn(false)
+        setMember(null)
     }
 
     return (

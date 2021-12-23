@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import {useMemberContext} from './providers/member'
 
-const EditProfile = (props) => {
+const EditProfile = ({refreshMembersUponFormSubmit}) => {
 
     //ToDo - pass in state of member from BE
     const [state, setState] = useState({name: 'Joe Schmoe', phone: '5555555555', venmo: 'joeshmoe'})
@@ -19,12 +19,6 @@ const EditProfile = (props) => {
         setState({...state, [name]: value})
     }
 
-    // const refreshMembersUponFormSubmit = () => {
-    //     fetch('http://localhost:3000/members')
-    //         .then((obj) => obj.json())
-    //         .then(json => setMembers(json))
-    // }
-
     const handleSubmit = (event) => {
         event.preventDefault()
         const requestOptions = {
@@ -39,7 +33,7 @@ const EditProfile = (props) => {
             .then(response => response.json())
             .catch(error => error)
             // .then(setState(state))
-            // .finally(refreshMembersUponFormSubmit)
+            .finally(refreshMembersUponFormSubmit)
     }
 
     return (

@@ -26,6 +26,7 @@ const SignUp = (props) => {
         // location: '37.794374248633815, -122.400108679331'
     }
 
+    // ToDo - securely authenticate & validate with BE via user ID token (https://developers.google.com/identity/sign-in/web/backend-auth)
     const findOrCreateMember = (googleId, name, email, imageUrl) => {
         const requestOptions = {
             method: 'POST',
@@ -41,9 +42,6 @@ const SignUp = (props) => {
 
     const onSuccess = (res) => {
         console.log('inside Login - onSuccess response:', res)
-        alert(
-            `Welcome to the CashClan, ${res.profileObj.name}.`
-        )
         console.log('inside SignUp - onSuccess response:', res)
         findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email, res.profileObj.imageUrl)
         setIsLoggedIn(true)
@@ -55,10 +53,12 @@ const SignUp = (props) => {
         !isLoggedIn &&
         <GoogleLogin
             clientId="495182513894-qpo5gbo9ppe0gucfq6oq0vrkr4mmlpvb.apps.googleusercontent.com"
-            buttonText="Sign Up with Google"
+            buttonText="Sign Up / Login with Google"
             onSuccess={onSuccess}
             onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}
+            // disable the below if using Login component
+            isSignedIn={true}
         />
     )
 }
