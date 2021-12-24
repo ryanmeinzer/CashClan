@@ -12,7 +12,7 @@ const Home = ({members, transactions, refreshMembersUponSignUp}) => {
 
     return (
         <>
-            <h1 align="center">CashClan</h1>
+            <h1 align="center">CashClan 🤑</h1>
             {/* <div style={{margin: 'auto', textAlign: 'center', border: '1px solid black'}}> */}
             <SignUp refresh={refreshMembersUponSignUp} />
             {member &&
@@ -20,9 +20,13 @@ const Home = ({members, transactions, refreshMembersUponSignUp}) => {
             }
             <Logout />
             {/* </div> */}
-            <Publish />
-            <Members members={members} />
-            <Transactions transactions={transactions} />
+            {member &&
+                <>
+                <Publish />
+                <Members members={members} />
+                <Transactions transactions={transactions} />
+                </>
+            }
         </>
     )
 }
