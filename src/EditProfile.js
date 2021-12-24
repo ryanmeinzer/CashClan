@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react"
 import {useMemberContext} from './providers/member'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const EditProfile = ({refreshMembersUponFormSubmit}) => {
 
     //ToDo - pass in state of member from BE
     const [state, setState] = useState({name: 'Joe Schmoe', phone: '5555555555', venmo: 'joeshmoe'})
     const {member} = useMemberContext()
+    const navigate = useNavigate()
 
     useEffect(() => {
         console.log('inside EditProfile - member:', member)
@@ -34,7 +35,8 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
             .then(response => response.json())
             .catch(error => error)
             // .then(setState(state))
-            .finally(refreshMembersUponFormSubmit)
+            .then(refreshMembersUponFormSubmit)
+            .finally(navigate("/"))
     }
 
     return (

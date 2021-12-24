@@ -4,7 +4,7 @@ import {useMemberContext} from './providers/member'
 const Publish = () => {
 
     //ToDo - pass in state of member from BE
-    const [state, setState] = useState({active: true, mode: 'buying', amount: 50})
+    const [state, setState] = useState({active: true, mode: 'buying', amount: 0})
     const {member} = useMemberContext()
 
     useEffect(() => {
@@ -53,7 +53,7 @@ const Publish = () => {
     return (
         <div align="center">
             <br />
-            <span>
+            <div>
                 {
                     state.active
                         ?
@@ -61,24 +61,7 @@ const Publish = () => {
                         :
                         'You are not active. Publish an offer to the CashClan below.'
                 }
-            </span>
-            {
-                state.active
-                    ?
-                    <button
-                        name="active"
-                        value={false}
-                        onClick={handleChange}
-                    > Unpublish or Update
-                    </button>
-                    :
-                    <button
-                        name="active"
-                        value={true}
-                        onClick={handleChange}
-                    > Cancel
-                    </button>
-            }
+            </div>
             <br />
             <button
                 name="mode"
@@ -104,8 +87,7 @@ const Publish = () => {
             >
                 Sell Cash
             </button>
-
-            <form onSubmit={handleSubmit} align="center">
+            <br />
                 <input
                     type="number"
                     name="amount"
@@ -114,29 +96,32 @@ const Publish = () => {
                     onChange={handleChange}
                     disabled={state.active}
                 />
-                <br />
-                {
-                    !state.active &&
+            <br />
+            <br />
+            {
+                state.active
+                    ?
                     <button
-                        type="submit"
+                        name="active"
+                        value={false}
+                        onClick={handleChange}
+                    > Unpublish or Update
+                    </button>
+                    :
+                    // <button
+                    //     name="active"
+                    //     value={true}
+                    //     onClick={handleChange}
+                    // > Cancel
+                    // </button>
+                    <button
+                        // type="submit"
+                        onClick={handleSubmit}
                         disabled={state.active}
                     >
                         Publish to the CashClan
                     </button>
-                }
-            </form>
-
-            {/* <br />
-            {
-                !state.active &&
-                <button
-                    onClick={handleSubmit}
-                    disabled={state.active}
-                >
-                    Publish to the CashClan
-                </button>
-            } */}
-
+            }
         </div>
     )
 }
