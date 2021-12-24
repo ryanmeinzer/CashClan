@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
 import {useMemberContext} from './providers/member'
+import {Link} from "react-router-dom";
 
 const EditProfile = ({refreshMembersUponFormSubmit}) => {
 
@@ -61,6 +62,9 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
                     placeholder="Your Venmo Handle"
                     onChange={handleChange}
                 />
+                <br />
+                <br />
+                <Link to="/"><button>Cancel</button></Link>
                 <button type="submit">Update Your Member Profile</button>
             </form>
         </div>
