@@ -3,14 +3,20 @@ import {useMemberContext} from './providers/member'
 
 const Publish = () => {
 
-    //ToDo - pass in state of member from BE
-    const [state, setState] = useState({active: true, mode: 'buying', amount: 0})
+    const [state, setState] = useState({active: '', mode: '', amount: ''})
     const {member} = useMemberContext()
 
     useEffect(() => {
         console.log('inside Publish - member:', member)
         console.log('inside Publish - state:', state)
     })
+
+    useEffect(() => {
+        member &&
+            fetch(`http://localhost:3000/members/${member.googleId}`)
+                .then((obj) => obj.json())
+                .then(json => setState(json))
+    }, [member])
 
     const handleChange = (event) => {
         const target = event.target
