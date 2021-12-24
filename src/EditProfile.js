@@ -4,9 +4,8 @@ import {Link, useNavigate} from "react-router-dom";
 
 const EditProfile = ({refreshMembersUponFormSubmit}) => {
 
-    //ToDo - pass in state of member from BE
     const {member} = useMemberContext()
-    const [state, setState] = useState({name: 'Joe Schmoe', phone: '5555555555', venmo: 'joeshmoe'})
+    const [state, setState] = useState('')
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -14,13 +13,12 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
         console.log('inside EditProfile - state:', state)
     })
 
-    // useEffect(() => {
-    //     member &&
-    //         fetch(`http://localhost:3000/members/${member.googleId}`)
-    //             .then(response => response.json())
-    //             .then(json => setState(json.data))
-    //             .finally(console.log('inside EditProfile - useEffect:', state))
-    // })
+    useEffect(() => {
+        member &&
+            fetch(`http://localhost:3000/members/${member.googleId}`)
+                .then((obj) => obj.json())
+                .then(json => setState(json))
+    }, [member])
 
     const handleChange = (event) => {
         const target = event.target
@@ -54,21 +52,21 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
                 <input
                     type="text"
                     name="name"
-                    value={state.name}
+                    value={state && state.name}
                     placeholder="Your Name"
                     onChange={handleChange}
                 />
                 <input
                     type="number"
                     name="phone"
-                    value={state.phone}
+                    value={state && state.phone}
                     placeholder="Your Phone"
                     onChange={handleChange}
                 />
                 <input
                     type="text"
                     name="venmo"
-                    value={state.venmo}
+                    value={state && state.venmo}
                     placeholder="Your Venmo Handle"
                     onChange={handleChange}
                 />
