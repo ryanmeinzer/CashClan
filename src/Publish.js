@@ -3,7 +3,7 @@ import {useMemberContext} from './providers/member'
 
 const Publish = () => {
 
-    const [state, setState] = useState({active: '', mode: '', amount: ''})
+    const [state, setState] = useState({active: '', mode: '', amount: 0})
     const {member} = useMemberContext()
 
     useEffect(() => {
@@ -15,7 +15,14 @@ const Publish = () => {
         member &&
             fetch(`http://localhost:3000/members/${member.googleId}`)
                 .then((obj) => obj.json())
-                .then(json => setState(json))
+                .then(json => setState(
+                    json.active
+                        ?
+                        {active: json.active, mode: json.mode, amount: json.amount}
+                        :
+                        {mode: '', amount: 0}
+                ))
+                // .then(json => setState(json))
     }, [member])
 
     const handleChange = (event) => {
@@ -37,7 +44,12 @@ const Publish = () => {
         // ToDo - swap above with below
         fetch(`http://localhost:3000/members/${member.googleId}`, requestOptions)
             .then(response => response.json())
+            .then(!value && setState({active: value, mode: '', amount: 0}))
             .catch(error => error)
+    }
+
+    const handleCancel = () => {
+        setState({...state, mode: '', amount: 0})
     }
 
     const handleSubmit = (event) => {
@@ -114,19 +126,19 @@ const Publish = () => {
                     > Unpublish or Update
                     </button>
                     :
-                    // <button
-                    //     name="active"
-                    //     value={true}
-                    //     onClick={handleChange}
-                    // > Cancel
-                    // </button>
-                    <button
-                        // type="submit"
-                        onClick={handleSubmit}
-                        disabled={state.active}
-                    >
-                        Publish to the CashClan
-                    </button>
+                    <>
+                        <button
+                            onClick={handleCancel}
+                        > Cancel
+                        </button>
+                        <button
+                            // type="submit"
+                            onClick={handleSubmit}
+                            disabled={state.active}
+                        >
+                            Publish to the CashClan
+                        </button>
+                    </>
             }
         </div>
     )

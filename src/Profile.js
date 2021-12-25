@@ -8,8 +8,10 @@ const Profile = () => {
     return (
         member &&
         <div style={{display: 'inline-block'}}>
-            <img src={member.image} alt="profile" />
-            <div><Link to="/editprofile">Profile</Link></div>
+                <img src={member.image} alt="profile" style={{borderRadius: "50%"}} />
+                <div style={{textAlign: "center"}}>
+                    <Link to="/editprofile">Profile</Link>
+                </div>
         </div>
     )
 }
