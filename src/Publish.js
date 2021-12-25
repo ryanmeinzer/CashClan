@@ -3,7 +3,7 @@ import {useMemberContext} from './providers/member'
 
 const Publish = () => {
 
-    const [state, setState] = useState({active: '', mode: '', amount: 0})
+    const [state, setState] = useState({active: '', mode: null, amount: 0})
     const {member} = useMemberContext()
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const Publish = () => {
                         ?
                         {active: json.active, mode: json.mode, amount: json.amount}
                         :
-                        {mode: '', amount: 0}
+                        {active: json.active, mode: null, amount: 0}
                 ))
                 // .then(json => setState(json))
     }, [member])
@@ -37,19 +37,19 @@ const Publish = () => {
         const requestOptions = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({active: value})
+            body: JSON.stringify(value ? {active: value} : {active: value, mode: null, amount: 0})
         }
         // use googleId instead of id, but it is unsecure
         // fetch(`http://localhost:3000/members/233`, requestOptions)
         // ToDo - swap above with below
         fetch(`http://localhost:3000/members/${member.googleId}`, requestOptions)
             .then(response => response.json())
-            .then(!value && setState({active: value, mode: '', amount: 0}))
+            .then(!value && setState({active: value, mode: null, amount: 0}))
             .catch(error => error)
     }
 
     const handleCancel = () => {
-        setState({...state, mode: '', amount: 0})
+        setState({...state, mode: null, amount: 0})
     }
 
     const handleSubmit = (event) => {
