@@ -18,15 +18,21 @@ const Home = ({refreshMembersUponSignUp}) => {
             </div>
             {member &&
                 <div>
-                    <div>
+                    <div align="center">
                         <Profile />
                     </div>
-                    <div>
+                    <br />
+                    <div align="center">
                         <Logout />
                     </div>
-                    <div>
+                    <br />
+                    <hr width="50%" />
+                    <br />
+                    <div align="center">
                         <Publish />
                     </div>
+                    <br />
+                    <br />
                     <div>
                         <Link to="/members">Members</Link>
                     </div>

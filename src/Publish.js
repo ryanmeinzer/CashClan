@@ -70,7 +70,6 @@ const Publish = () => {
 
     return (
         <div align="center">
-            <br />
             <div>
                 {
                     state.active

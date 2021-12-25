@@ -47,6 +47,8 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
 
     return (
         <div>
+            <h1 align="center">CashClan 🤑</h1>
+            <h3 align="center">The Human ATM Network</h3>
             <br />
             <form onSubmit={handleSubmit} align="center">
                 <input

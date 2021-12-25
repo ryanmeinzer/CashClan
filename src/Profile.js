@@ -9,7 +9,7 @@ const Profile = () => {
         member &&
         <div style={{display: 'inline-block'}}>
                 <img src={member.image} alt="profile" style={{borderRadius: "50%"}} />
-                <div style={{textAlign: "center"}}>
+                <div>
                     <Link to="/editprofile">Profile</Link>
                 </div>
         </div>
