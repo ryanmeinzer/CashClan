@@ -22,7 +22,6 @@ const Publish = () => {
                         :
                         {active: json.active, mode: null, amount: 10}
                 ))
-        // console.log(state.mode)
     }, [member])
 
     const handleChange = (event) => {
@@ -37,6 +36,7 @@ const Publish = () => {
         const requestOptions = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
+            // if inactive, set mode to null and amount to 0 for extra BE clarity
             body: JSON.stringify(value ? {active: value} : {active: value, mode: null, amount: 0})
         }
         //! use googleId instead of id, but it is unsecure
