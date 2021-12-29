@@ -3,7 +3,7 @@ import {useMemberContext} from './providers/member'
 
 const Publish = () => {
 
-    const [state, setState] = useState({active: '', mode: null, amount: 0})
+    const [state, setState] = useState({active: '', mode: null, amount: 10})
     const {member} = useMemberContext()
 
     useEffect(() => {
@@ -20,9 +20,9 @@ const Publish = () => {
                         ?
                         {active: json.active, mode: json.mode, amount: json.amount}
                         :
-                        {active: json.active, mode: null, amount: 0}
+                        {active: json.active, mode: null, amount: 10}
                 ))
-                // .then(json => setState(json))
+        // console.log(state.mode)
     }, [member])
 
     const handleChange = (event) => {
@@ -39,33 +39,34 @@ const Publish = () => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(value ? {active: value} : {active: value, mode: null, amount: 0})
         }
-        // use googleId instead of id, but it is unsecure
-        // fetch(`http://localhost:3000/members/233`, requestOptions)
-        // ToDo - swap above with below
+        //! use googleId instead of id, but it is unsecure
         fetch(`http://localhost:3000/members/${member.googleId}`, requestOptions)
             .then(response => response.json())
-            .then(!value && setState({active: value, mode: null, amount: 0}))
+            .then(!value && setState({active: value, mode: null, amount: 10}))
             .catch(error => error)
     }
 
     const handleCancel = () => {
-        setState({...state, mode: null, amount: 0})
+        setState({...state, mode: null, amount: 10})
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault()
-        const requestOptions = {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({...state, active: true})
+        if (state.mode) {
+            event.preventDefault()
+            const requestOptions = {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({...state, active: true})
+            }
+            //! use googleId instead of id, but it is unsecure
+            fetch(`http://localhost:3000/members/${member.googleId}`, requestOptions)
+                .then(response => response.json())
+                .then(setState({...state, active: true}))
+                .catch(error => error)
+        } else {
+            event.preventDefault()
+            alert('To Publish, please choose to Buy or Sell Cash.')
         }
-        // use googleId instead of id, but it is unsecure
-        // fetch(`http://localhost:3000/members/233`, requestOptions)
-        // ToDo - swap above with below
-        fetch(`http://localhost:3000/members/${member.googleId}`, requestOptions)
-            .then(response => response.json())
-            .then(setState({...state, active: true}))
-            .catch(error => error)
     }
 
     return (
@@ -80,65 +81,98 @@ const Publish = () => {
                 }
             </div>
             <br />
-            <button
-                name="mode"
-                value="buying"
-                onClick={handleChange}
-                style={{
-                    backgroundColor: (state.mode === 'buying' && 'green'),
-                    color: (state.mode === 'buying' && 'white')
-                }}
-                disabled={state.active}
+            <form
+                onSubmit={handleSubmit}
             >
-                Buy Cash
-            </button>
-            <button
-                name="mode"
-                value="selling"
-                onClick={handleChange}
-                style={{
-                    backgroundColor: (state.mode === 'selling' && 'green'),
-                    color: (state.mode === 'selling' && 'white')
-                }}
-                disabled={state.active}
-            >
-                Sell Cash
-            </button>
-            <br />
                 <input
-                    type="number"
-                    name="amount"
-                    value={state.amount}
-                    placeholder="enter amount here"
+                    name="mode"
+                    type="radio"
+                    value="buying"
                     onChange={handleChange}
                     disabled={state.active}
+                    checked={state.mode === 'buying'}
+                    required
                 />
-            <br />
-            <br />
-            {
-                state.active
-                    ?
-                    <button
-                        name="active"
-                        value={false}
-                        onClick={handleChange}
-                    > Unpublish or Update
-                    </button>
-                    :
-                    <>
+                <label>Buy Cash</label>
+                <input
+                    name="mode"
+                    type="radio"
+                    value="selling"
+                    onChange={handleChange}
+                    disabled={state.active}
+                    checked={state.mode === 'selling'}
+                    required
+                />
+                <label>Sell Cash</label>
+                {/* <button
+                    name="mode"
+                    type="button"
+                    value="buying"
+                    onClick={handleChange}
+                    style={{
+                        backgroundColor: (state.mode === 'buying' && 'green'),
+                        color: (state.mode === 'buying' && 'white')
+                    }}
+                    disabled={state.active}
+                >
+                    Buy Cash
+                </button>
+                <button
+                    name="mode"
+                    type="button"
+                    value="selling"
+                    onClick={handleChange}
+                    style={{
+                        backgroundColor: (state.mode === 'selling' && 'green'),
+                        color: (state.mode === 'selling' && 'white')
+                    }}
+                    disabled={state.active}
+                >
+                    Sell Cash
+                </button> */}
+                <br />
+                <input
+                    // type="number"
+                    type="range"
+                    name="amount"
+                    min={10}
+                    max={300}
+                    value={state.amount}
+                    // placeholder="enter amount here"
+                    onChange={handleChange}
+                    disabled={state.active}
+                    required
+                />${state.amount}
+                <br />
+                <br />
+                {
+                    state.active
+                        ?
                         <button
+                            name="active"
+                            type="button"
+                            value={false}
+                            onClick={handleChange}
+                        > Unpublish or Update
+                        </button>
+                        :
+                        <>
+                            <button
+                                type="reset"
+                            // type="button"
                             onClick={handleCancel}
-                        > Cancel
-                        </button>
-                        <button
-                            // type="submit"
-                            onClick={handleSubmit}
-                            disabled={state.active}
-                        >
-                            Publish to the CashClan
-                        </button>
-                    </>
-            }
+                            > Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                // onClick={handleSubmit}
+                                disabled={state.active}
+                            >
+                                Publish to the CashClan
+                            </button>
+                        </>
+                }
+            </form>
         </div>
     )
 }

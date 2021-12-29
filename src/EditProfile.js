@@ -34,9 +34,7 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(state)
         }
-        // use googleId instead of id, but it is unsecure
-        // fetch(`http://localhost:3000/members/233`, requestOptions)
-        // ToDo - swap above with below
+        // ! use googleId instead of id, but it is unsecure
         fetch(`http://localhost:3000/members/${member.googleId}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
@@ -57,13 +55,17 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
                     value={state && state.name}
                     placeholder="Your Name"
                     onChange={handleChange}
+                    required
                 />
                 <input
                     type="number"
+                    // type="tel"
+                    // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     name="phone"
                     value={state && state.phone}
                     placeholder="Your Phone"
                     onChange={handleChange}
+                    required
                 />
                 <input
                     type="text"
@@ -71,6 +73,7 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
                     value={state && state.venmo}
                     placeholder="Your Venmo Handle"
                     onChange={handleChange}
+                    required
                 />
                 <br />
                 <br />
