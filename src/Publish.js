@@ -178,7 +178,6 @@ const Publish = () => {
                 </select>
                 <br />
                 <br />
-                <br />
                 {
                     state.active
                         ?
