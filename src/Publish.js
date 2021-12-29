@@ -104,41 +104,13 @@ const Publish = () => {
                     required
                 />
                 <label>Sell Cash</label>
-                {/* <button
-                    name="mode"
-                    type="button"
-                    value="buying"
-                    onClick={handleChange}
-                    style={{
-                        backgroundColor: (state.mode === 'buying' && 'green'),
-                        color: (state.mode === 'buying' && 'white')
-                    }}
-                    disabled={state.active}
-                >
-                    Buy Cash
-                </button>
-                <button
-                    name="mode"
-                    type="button"
-                    value="selling"
-                    onClick={handleChange}
-                    style={{
-                        backgroundColor: (state.mode === 'selling' && 'green'),
-                        color: (state.mode === 'selling' && 'white')
-                    }}
-                    disabled={state.active}
-                >
-                    Sell Cash
-                </button> */}
                 <br />
                 <input
-                    // type="number"
                     type="range"
                     name="amount"
                     min={10}
                     max={300}
                     value={state.amount}
-                    // placeholder="enter amount here"
                     onChange={handleChange}
                     disabled={state.active}
                     required
@@ -159,13 +131,12 @@ const Publish = () => {
                         <>
                             <button
                                 type="reset"
-                            // type="button"
-                            onClick={handleCancel}
+                                // have to do extra work to reset range input
+                                onClick={handleCancel}
                             > Cancel
                             </button>
                             <button
                                 type="submit"
-                                // onClick={handleSubmit}
                                 disabled={state.active}
                             >
                                 Publish to the CashClan
