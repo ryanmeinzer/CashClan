@@ -93,7 +93,11 @@ const Publish = () => {
                     checked={state.mode === 'buying'}
                     required
                 />
-                <label>Buy Cash</label>
+                <label
+                    style={{
+                        color: (!state.active ? 'black' : 'lightGray')
+                    }}
+                >Buy Cash</label>
                 <input
                     name="mode"
                     type="radio"
@@ -103,7 +107,11 @@ const Publish = () => {
                     checked={state.mode === 'selling'}
                     required
                 />
-                <label>Sell Cash</label>
+                <label
+                    style={{
+                        color: (!state.active ? 'black' : 'lightGray')
+                    }}
+                >Sell Cash</label>
                 <br />
                 <input
                     type="range"
@@ -114,7 +122,14 @@ const Publish = () => {
                     onChange={handleChange}
                     disabled={state.active}
                     required
-                />${state.amount}
+                    style={{
+                        color: (!state.active ? 'black' : 'lightGray')
+                    }}
+                /><span
+                    style={{
+                        color: (!state.active ? 'black' : 'lightGray')
+                    }}
+                >${state.amount}</span>
                 <br />
                 <select
                     name="location"
@@ -205,6 +220,16 @@ const Publish = () => {
                         </>
                 }
             </form>
+            {state.mode === 'buying' && <p
+                style={{
+                    color: (!state.active ? 'green' : 'lightGray')
+                }}
+            ><em>You'll save ${(((4 + state.amount * .03) / 2)).toFixed(2)}</em></p>}
+            {state.mode === 'selling' && <p
+                style={{
+                    color: (!state.active ? 'green' : 'lightGray')
+                }}
+            ><em>You'll earn ${(((4 + state.amount * .03) / 2)).toFixed(2)}</em></p>}
         </div>
     )
 }

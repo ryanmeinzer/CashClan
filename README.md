@@ -1,6 +1,6 @@
 # CashClan
 
-The Human ATM Network. Get cash, save money. Give cash, earn money.
+The Human ATM Network. Buy cash, save money. Sell cash, earn money.
 
 ## Use
 
