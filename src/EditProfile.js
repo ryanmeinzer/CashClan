@@ -5,7 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 const EditProfile = ({refreshMembersUponFormSubmit}) => {
 
     const {member} = useMemberContext()
-    const [state, setState] = useState('')
+    const [state, setState] = useState({name: '', phone: '', venmo: ''})
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -48,7 +48,7 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
             <h1 align="center">CashClan 🤑</h1>
             <h3 align="center">The Human ATM Network</h3>
             <div align="center">
-                <img src={member.image} alt="profile" style={{borderRadius: "50%"}} />
+                <img src={member && member.image} alt="profile" style={{borderRadius: "50%"}} />
             </div>
             <br />
             <form onSubmit={handleSubmit} align="center">
