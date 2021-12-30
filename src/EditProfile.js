@@ -47,6 +47,9 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
         <div>
             <h1 align="center">CashClan 🤑</h1>
             <h3 align="center">The Human ATM Network</h3>
+            <div align="center">
+                <img src={member.image} alt="profile" style={{borderRadius: "50%"}} />
+            </div>
             <br />
             <form onSubmit={handleSubmit} align="center">
                 <input

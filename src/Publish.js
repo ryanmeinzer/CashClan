@@ -118,6 +118,7 @@ const Publish = () => {
                     name="amount"
                     min={10}
                     max={300}
+                    step={5}
                     value={state.amount}
                     onChange={handleChange}
                     disabled={state.active}
@@ -139,7 +140,7 @@ const Publish = () => {
                     required
                 >
                     <option selected value=''>-- Select Nearest Location --</option>
-                    <optgroup label="Polk">
+                    <optgroup label="Polk District">
                         <option value="Greens Sports Bar">Greens Sports Bar</option>
                         <option value="The Buccaneer">The Buccaneer</option>
                         <option value="Shanghai Kelly's">Shanghai Kelly's</option>
@@ -154,7 +155,7 @@ const Publish = () => {
                         <option value="Jackalope">Jackalope</option>
                         <option value="Edinburgh Castle Pub">Edinburh Castle Pub</option>
                     </optgroup>
-                    <optgroup label="Mission">
+                    <optgroup label="Mission District">
                         <option value="Double Dutch">Double Dutch</option>
                         <option value="Blondie's Bar">Blondie's Bar</option>
                         <option value="Bond Bar">Bond Bar</option>
@@ -174,7 +175,7 @@ const Publish = () => {
                         <option value="Evil Eye">Evil Eye</option>
                         <option value="El Rio">El Rio</option>
                     </optgroup>
-                    <optgroup label="Haight">
+                    <optgroup label="Haight District">
                         <option value="Nickie's">Nickie's</option>
                         <option value="Toranado">Toranado</option>
                         <option value="Noc Noc">Noc Noc</option>
