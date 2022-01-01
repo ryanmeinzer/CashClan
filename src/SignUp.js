@@ -22,6 +22,7 @@ const SignUp = (props) => {
         active: null,
         mode: null,
         amount: null,
+        premium: null,
         location: ''
     }
 

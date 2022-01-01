@@ -20,7 +20,7 @@ const Matches = ({offer}) => {
                 }
                 <ul>
                     {matches.map(member =>
-                        <li key={member.id}>{member.name} {member.mode && member.mode} {member.amount !== 0 && `$${member.amount}`} {member.location && `at ${member.location}`}</li>
+                        <li key={member.id}>{member.name} {member.mode === 'buying' && 'is buying at least'} {member.mode === 'selling' && 'is selling up to'} {member.amount !== 0 && `$${member.amount}`} {member.location && `at ${member.location}`}</li>
                     )}
                 </ul>
             </>
