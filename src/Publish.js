@@ -209,7 +209,7 @@ const Publish = () => {
                         style={{
                             color: (!state.active ? 'green' : 'lightGray')
                         }}
-                    ><em>You'll make at least ${(state.amount * (state.premium / 100)).toFixed(2)} using CashClan instead of the ATM.</em>
+                    ><em>You'll make at least ${(state.amount * (state.premium / 100)).toFixed(2)} using CashClan.</em>
                     </p>
                 }
             </div>
