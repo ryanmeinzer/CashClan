@@ -143,7 +143,7 @@ const Publish = () => {
                     />
                     <span
                         style={{
-                            color: (!state.active ? 'black' : 'lightGray')
+                            color: (!state.active && state.mode !== null ? 'black' : 'lightGray')
                         }}
                     >
                         {state.mode === 'buying' && 'will buy at least '}
@@ -167,7 +167,7 @@ const Publish = () => {
                     />
                     <span
                         style={{
-                            color: (!state.active ? 'black' : 'lightGray')
+                            color: (!state.active && state.mode !== null ? 'black' : 'lightGray')
                         }}
                     >
                         {state.mode === 'buying' && 'will pay up to a '}
