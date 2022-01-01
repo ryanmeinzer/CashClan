@@ -78,12 +78,23 @@ const Publish = () => {
                     {
                         state.active
                             ?
-                            'You are actively publishing your below offer to the CashClan.'
+                            (
+                                <>
+                                    You are actively publishing your below offer to the CashClan.
+                                    <p>
+                                        {state.mode === 'buying' && 'You will buy at least'} {state.mode === 'selling' && 'You will sell up to'} ${state.amount !== 0 && state.amount !== null && `${state.amount}`} {state.mode === 'buying' && 'and will pay up to a '} {state.mode === 'selling' && 'and must make at least a '} {state.premium !== 0 && state.premium !== null && `${state.premium}%`} {state.mode === 'buying' && 'cost'} {state.mode === 'selling' && 'profit'} {state.location && `at ${state.location}.`}
+                                    </p>
+                                </>
+                            )
                             :
-                            'You are not active. Publish an offer to the CashClan below.'
+                            <>
+                                <p>You are not active. Publish an offer to the CashClan below.</p>
+                                <p>
+                                    {state.mode === 'buying' && 'You will buy at least'} {state.mode === 'selling' && 'You will sell up to'} {state.mode !== null && state.amount !== 0 && state.amount !== null && `$${state.amount}`} {state.mode === 'buying' && 'and will pay up to a '} {state.mode === 'selling' && 'and must make at least a '} {state.mode !== null && state.premium !== 0 && state.premium !== null && `${state.premium}%`} {state.mode === 'buying' && 'cost'} {state.mode === 'selling' && 'profit'} {state.mode !== null && state.location && `at ${state.location}.`}
+                                </p>
+                            </>
                     }
                 </div>
-                <br />
                 <form
                     onSubmit={handleSubmit}
                 >
@@ -124,7 +135,7 @@ const Publish = () => {
                         step={5}
                         value={state.amount}
                         onChange={handleChange}
-                        disabled={state.active}
+                        disabled={state.active || state.mode === null}
                         required
                         style={{
                             color: (!state.active ? 'black' : 'lightGray')
@@ -135,8 +146,8 @@ const Publish = () => {
                             color: (!state.active ? 'black' : 'lightGray')
                         }}
                     >
-                        {state.mode === 'buying' && 'buying at least '}
-                        {state.mode === 'selling' && 'selling up to '}
+                        {state.mode === 'buying' && 'will buy at least '}
+                        {state.mode === 'selling' && 'will sell up to '}
                         ${state.amount}
                     </span>
                     <br />
@@ -148,7 +159,7 @@ const Publish = () => {
                         step={1}
                         value={state.premium}
                         onChange={handleChange}
-                        disabled={state.active}
+                        disabled={state.active || state.mode === null}
                         required
                         style={{
                             color: (!state.active ? 'black' : 'lightGray')
@@ -159,8 +170,8 @@ const Publish = () => {
                             color: (!state.active ? 'black' : 'lightGray')
                         }}
                     >
-                        {state.mode === 'buying' && 'willing to pay up to a '}
-                        {state.mode === 'selling' && 'must earn at least a '}
+                        {state.mode === 'buying' && 'will pay up to a '}
+                        {state.mode === 'selling' && 'must make at least a '}
                         {state.premium}%
                         {state.mode === 'buying' && ' cost'}
                         {state.mode === 'selling' && ' profit'}
@@ -185,11 +196,12 @@ const Publish = () => {
                                     type="reset"
                                     // have to do extra work to reset range input
                                     onClick={handleCancel}
+                                    disabled={state.active || state.mode === null}
                                 > Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    disabled={state.active}
+                                    disabled={state.active || state.mode === null}
                                 >
                                     Publish to the CashClan
                                 </button>

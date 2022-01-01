@@ -4,7 +4,7 @@ const Locations = ({state, handleChange}) => {
             name="location"
             value={state.location}
             onChange={handleChange}
-            disabled={state.active}
+            disabled={state.active || state.mode === null}
             required
         // defaultValue=""
         >
@@ -24,8 +24,10 @@ const Locations = ({state, handleChange}) => {
                 <option value="Edinburgh Castle Pub">Edinburh Castle Pub</option>
             </optgroup>
             <optgroup label="Mission District">
-                <option value="Double Dutch">Double Dutch</option>
-                <option value="Blondie's Bar">Blondie's Bar</option>
+                <option value="Zeitgeist">Zeitgeist</option>
+                <option value="Kilowatt">Kilowatt</option>
+                <option value="Gestalt">Gestalt</option>
+                <option value="Delirium">Delirium</option>
                 <option value="Bond Bar">Bond Bar</option>
                 <option value="Casanova Lounge">Casanova Lounge</option>
                 <option value="Slate">Slate</option>
@@ -33,15 +35,15 @@ const Locations = ({state, handleChange}) => {
                 <option value="The Valencia Room">The Valencia Room</option>
                 <option value="The Sycamore">The Sycamore</option>
                 <option value="Beauty Bar">Beauty Bar</option>
-                <option value="The Beehive">The Beehive</option>
+                <option value="The Chapel">The Chapel</option>
                 <option value="Teeth">Teeth</option>
                 <option value="Doc's Clock">Doc's Clock</option>
                 <option value="El Techo">El Techo</option>
                 <option value="Latin American Club">Latin American Club</option>
                 <option value="Make-Out Room">Make-Out Room</option>
                 <option value="Mision Bar">Mision Bar</option>
-                <option value="Evil Eye">Evil Eye</option>
                 <option value="El Rio">El Rio</option>
+                <option value="The Royal Cuckoo">The Royal Cuckoo</option>
             </optgroup>
             <optgroup label="Haight District">
                 <option value="Toranado">Toranado</option>
