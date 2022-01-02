@@ -3,7 +3,7 @@ import SignUp from './SignUp'
 import Profile from './Profile'
 import Logout from './Logout'
 import {useMemberContext} from './providers/member'
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom"
 
 const Home = ({refreshMembersUponSignUp}) => {
 
@@ -31,14 +31,14 @@ const Home = ({refreshMembersUponSignUp}) => {
                     <div align="center">
                         <Publish />
                     </div>
-                    <br />
+                    {/* <br />
                     <br />
                     <div>
                         <Link to="/members">Members</Link>
                     </div>
                     <div>
                         <Link to="/transactions">Transactions</Link>
-                    </div>
+                    </div> */}
                 </div>
             }
         </>

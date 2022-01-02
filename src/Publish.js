@@ -202,8 +202,7 @@ const Publish = () => {
                                 <button
                                     type="submit"
                                     disabled={state.active || state.mode === null}
-                                >
-                                    Publish to the CashClan
+                                > Publish to the CashClan
                                 </button>
                             </>
                     }

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import Meet from './Meet'
 
 const Matches = ({offer}) => {
 
@@ -24,7 +25,7 @@ const Matches = ({offer}) => {
         return (
             <>
                 {matches.length > 0
-                    ? <h3 style={{color: "green"}}>You've Matched!:</h3>
+                    ? <h3 style={{color: "green"}}>You've Matched!</h3>
                     : <h3 style={{color: "red"}}>Your offer has no current matches in the CashClan.</h3>
                 }
                 <ul>
@@ -38,7 +39,10 @@ const Matches = ({offer}) => {
     }
 
     return (
-        <Matches />
+        <>
+            <Matches />
+            <Meet />
+        </>
     )
 }
 

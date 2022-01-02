@@ -8,7 +8,7 @@ const Locations = ({state, handleChange}) => {
             required
         // defaultValue=""
         >
-            <option value=''>-- Select Nearest Location --</option>
+            <option value=''>- Select Nearest Location -</option>
             <optgroup label="Polk District">
                 <option value="Greens Sports Bar">Greens Sports Bar</option>
                 <option value="The Buccaneer">The Buccaneer</option>
