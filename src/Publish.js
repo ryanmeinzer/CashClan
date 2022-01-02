@@ -15,7 +15,7 @@ const Publish = () => {
 
     useEffect(() => {
         member &&
-            fetch(`http://localhost:3000/members/${member.googleId}`)
+            fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
                 .then((obj) => obj.json())
                 .then(json => setState(
                     json.active
@@ -42,7 +42,7 @@ const Publish = () => {
             body: JSON.stringify(value ? {active: value} : {active: value, mode: null, amount: 0, premium: 0, location: null})
         }
         //! use googleId instead of id, but it is unsecure
-        fetch(`http://localhost:3000/members/${member.googleId}`, requestOptions)
+        fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
             .then(response => response.json())
             .then(!value && setState({active: value, mode: null, amount: 10, premium: 1, location: ''}))
             .catch(error => error)
@@ -61,7 +61,7 @@ const Publish = () => {
                 body: JSON.stringify({...state, active: true})
             }
             //! use googleId instead of id, but it is unsecure
-            fetch(`http://localhost:3000/members/${member.googleId}`, requestOptions)
+            fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
                 .then(response => response.json())
                 .then(setState({...state, active: true}))
                 .catch(error => error)

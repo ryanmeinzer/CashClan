@@ -12,25 +12,25 @@ const App = () => {
   const [transactions, setTransactions] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3000/members')
+    fetch('https://cashclan-backend.herokuapp.com/members')
       .then((obj) => obj.json())
       .then(json => setMembers(json))
   }, [])
 
   const refreshMembersUponFormSubmit = () => {
-    fetch('http://localhost:3000/members')
+    fetch('https://cashclan-backend.herokuapp.com/members')
       .then((obj) => obj.json())
       .then(json => setMembers(json))
   }
 
   const refreshMembersUponSignUp = () => {
-    fetch('http://localhost:3000/members')
+    fetch('https://cashclan-backend.herokuapp.com/members')
       .then((obj) => obj.json())
       .then(json => setMembers(json))
   }
 
   useEffect(() => {
-    fetch('http://localhost:3000/transactions')
+    fetch('https://cashclan-backend.herokuapp.com/transactions')
       .then((obj) => obj.json())
       .then(json => setTransactions(json))
   }, [])

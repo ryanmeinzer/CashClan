@@ -5,7 +5,7 @@ const Matches = ({offer}) => {
     const [members, setMembers] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:3000/members')
+        fetch('https://cashclan-backend.herokuapp.com/members')
             .then((obj) => obj.json())
             .then(json => setMembers(json))
     }, [])

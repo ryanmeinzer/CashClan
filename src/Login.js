@@ -33,7 +33,7 @@ function Login() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({...initialState, googleId: googleId, name: name, email: email, image: imageUrl})
         }
-        fetch('http://localhost:3000/members', requestOptions)
+        fetch('https://cashclan-backend.herokuapp.com/members', requestOptions)
             .then(response => response.json())
             .catch(error => error)
             .then(setMember({...initialState, googleId: googleId, name: name, email: email, image: imageUrl}))

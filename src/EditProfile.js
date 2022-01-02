@@ -15,7 +15,7 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
 
     useEffect(() => {
         member &&
-            fetch(`http://localhost:3000/members/${member.googleId}`)
+            fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
                 .then((obj) => obj.json())
                 .then(json => setState(json))
     }, [member])
@@ -35,7 +35,7 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
             body: JSON.stringify(state)
         }
         // ! use googleId instead of id, but it is unsecure
-        fetch(`http://localhost:3000/members/${member.googleId}`, requestOptions)
+        fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
             // .then(setState(state))

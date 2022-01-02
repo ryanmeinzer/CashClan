@@ -5,8 +5,8 @@ const Transactions = (props) => {
     // const [name, setName] = useState('')
 
     // const getSellerName = (id) => {
-        
-    //     fetch(`http://localhost:3000/transactions/${id}`)
+
+    //     fetch(`https://cashclan-backend.herokuapp.com/transactions/${id}`)
     //         .then(response => response.text())
     //         // .then(text => console.log(text))
     //         .then(text => setName(text))
@@ -15,7 +15,7 @@ const Transactions = (props) => {
     // console.log(name)
 
     // useEffect(() => {
-    //     fetch(`http://localhost:3000/transactions/55`)
+    //     fetch(`https://cashclan-backend.herokuapp.com/transactions/55`)
     //         .then(response => response.text())
     //         .then(text => console.log(text))
     //         // .then(text => setName(text))
