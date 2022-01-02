@@ -18,7 +18,7 @@ const Publish = () => {
             fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
                 .then((obj) => obj.json())
                 .then(json => setState(
-                    json.active === true
+                    json.active && json.active
                         ?
                         {active: json.active, mode: json.mode, amount: json.amount, premium: json.premium, location: json.location}
                         :
