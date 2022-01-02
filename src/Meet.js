@@ -74,9 +74,16 @@ const Meet = () => {
                     required
                 >
                     <option value=''>-- Select Top Color (e.g. shirt) --</option>
+                    <option value="Red">Red</option>
                     <option value="Blue">Blue</option>
                     <option value="Green">Green</option>
-                    <option value="Red">Red</option>
+                    <option value="Yellow">Yellow</option>
+                    <option value="Orange">Orange</option>
+                    <option value="Purple">Purple</option>
+                    <option value="Pink">Pink</option>
+                    <option value="Brown">Brown</option>
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
                 </select>
                 <select
                     name={'outfitBottom'}
@@ -85,9 +92,16 @@ const Meet = () => {
                     required
                 >
                     <option value=''>-- Select Bottom Color (e.g. jeans) --</option>
+                    <option value="Red">Red</option>
                     <option value="Blue">Blue</option>
                     <option value="Green">Green</option>
-                    <option value="Red">Red</option>
+                    <option value="Yellow">Yellow</option>
+                    <option value="Orange">Orange</option>
+                    <option value="Purple">Purple</option>
+                    <option value="Pink">Pink</option>
+                    <option value="Brown">Brown</option>
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
                 </select>
                 <select
                     name={'outfitShoes'}
@@ -96,9 +110,16 @@ const Meet = () => {
                     required
                 >
                     <option value=''>-- Select Shoes Color --</option>
+                    <option value="Red">Red</option>
                     <option value="Blue">Blue</option>
                     <option value="Green">Green</option>
-                    <option value="Red">Red</option>
+                    <option value="Yellow">Yellow</option>
+                    <option value="Orange">Orange</option>
+                    <option value="Purple">Purple</option>
+                    <option value="Pink">Pink</option>
+                    <option value="Brown">Brown</option>
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
                 </select>
                 {
                     state.meeting
