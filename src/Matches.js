@@ -44,8 +44,14 @@ const Matches = ({offer}) => {
         <>
             {matches.length > 0
                 ? <div>
-                    <h3 style={{color: "green"}}>You've Matched with {topMatch.name}!</h3>
-                    <p>Meet now at the ATM inside of {offer.location}. Say "CashClan" while asking for {topMatch.name} {topMatch.image} who {topMatch.mode === 'buying' && 'will buy'} {topMatch.mode === 'selling' && 'will sell'} ${offer.mode === 'buying' && offer.amount}{offer.mode === 'selling' && topMatch.amount} cash {topMatch.mode === 'buying' && 'from you'} {topMatch.mode === 'selling' && 'to you'} through Venmo for ${topMatch && transactionAmount()}.</p>
+                    <div>
+                        <h3 style={{color: "green"}}>You've Matched with {topMatch.name}!</h3>
+                        {
+                            topMatch.image
+                            && <img src={topMatch.image} alt="profile" style={{borderRadius: "50%"}} />
+                        }
+                    </div>
+                    <p>Meet now at the ATM inside of {offer.location}. Say "CashClan" while asking for {topMatch.name} who {topMatch.mode === 'buying' && 'will buy'} {topMatch.mode === 'selling' && 'will sell'} ${offer.mode === 'buying' && offer.amount}{offer.mode === 'selling' && topMatch.amount} cash {topMatch.mode === 'buying' && 'from you'} {topMatch.mode === 'selling' && 'to you'} through Venmo for ${topMatch && transactionAmount()}.</p>  
                 </div>
                 : <h3 style={{color: "red"}}>Your offer has no current matches in the CashClan.</h3>
             }
