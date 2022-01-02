@@ -13,30 +13,17 @@ const SignUp = (props) => {
         console.log('inside SignUp', res)
     }
 
-    const initialState = {
-        name: '',
-        email: '',
-        image: '',
-        phone: '',
-        venmo: '',
-        active: null,
-        mode: null,
-        amount: null,
-        premium: null,
-        location: ''
-    }
-
     // ToDo - securely authenticate & validate with BE via user ID token (https://developers.google.com/identity/sign-in/web/backend-auth)
     const findOrCreateMember = (googleId, name, email, imageUrl) => {
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({...initialState, googleId: googleId, name: name, email: email, image: imageUrl})
+            body: JSON.stringify({googleId: googleId, name: name, email: email, image: imageUrl})
         }
         fetch('http://localhost:3000/members', requestOptions)
             .then(response => response.json())
             .catch(error => error)
-            .then(setMember({...initialState, googleId: googleId, name: name, email: email, image: imageUrl}))
+            .then(setMember({googleId: googleId, name: name, email: email, image: imageUrl}))
             .finally(props.refresh)
     }
 

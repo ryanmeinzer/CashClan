@@ -213,7 +213,7 @@ const Publish = () => {
                         style={{
                             color: (!state.active ? 'green' : 'lightGray')
                         }}
-                    ><em>You'll save at least ${(5 - (state.amount * (state.premium / 100))).toFixed(2)} using CashClan instead of the ATM.</em>
+                    ><em>You'll save at least ${(5 - (state.amount * (state.premium / 100))).toFixed(2)} buying at least ${state.amount} cash through Venmo from a CashClan member instead of the ATM.</em>
                     </p>
                 }
                 {state.mode === 'selling'
@@ -221,7 +221,7 @@ const Publish = () => {
                         style={{
                             color: (!state.active ? 'green' : 'lightGray')
                         }}
-                    ><em>You'll make at least ${(state.amount * (state.premium / 100)).toFixed(2)} using CashClan.</em>
+                    ><em>You'll make at least ${(state.amount * (state.premium / 100)).toFixed(2)} selling at least ${state.amount} of your cash through Venmo to a CashClan member.</em>
                     </p>
                 }
             </div>

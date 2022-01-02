@@ -5,7 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 const EditProfile = ({refreshMembersUponFormSubmit}) => {
 
     const {member} = useMemberContext()
-    const [state, setState] = useState({name: '', phone: '', venmo: ''})
+    const [state, setState] = useState()
     const navigate = useNavigate()
 
     useEffect(() => {
