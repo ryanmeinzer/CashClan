@@ -18,12 +18,10 @@ function Login() {
         email: '',
         image: '',
         phone: '',
-        venmo: '',
         selling: true,
         buying: true,
         amount: 0,
         location: ''
-        // location: '37.794374248633815, -122.400108679331'
     }
 
     // ToDo - securely authenticate & validate with BE via user ID token (https://developers.google.com/identity/sign-in/web/backend-auth)

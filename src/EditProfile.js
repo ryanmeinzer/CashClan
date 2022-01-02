@@ -70,14 +70,6 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
                     onChange={handleChange}
                     required
                 />
-                <input
-                    type="text"
-                    name="venmo"
-                    value={state && state.venmo}
-                    placeholder="Your Venmo Handle"
-                    onChange={handleChange}
-                    required
-                />
                 <br />
                 <br />
                 <Link to="/"><button>Cancel</button></Link>
