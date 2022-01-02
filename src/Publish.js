@@ -40,7 +40,7 @@ const Publish = () => {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             // if inactive, set mode & location to null and amount to 0 for extra BE clarity
-            body: JSON.stringify(value ? {active: value} : {active: value, mode: null, amount: 0, premium: 0, location: null, meeting: false, outfitTop: null, outfitBottom: null, outfitShoes: null})
+            body: JSON.stringify(value ? {active: value} : {active: value, mode: null, amount: 0, premium: 0, location: null})
         }
         //! use googleId instead of id, but it is unsecure
         fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
