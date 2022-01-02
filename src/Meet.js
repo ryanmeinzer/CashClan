@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import {useMemberContext} from './providers/member'
 
-const Meet = () => {
+const Meet = ({location, active}) => {
 
     const [state, setState] = useState({meeting: '', outfitTop: '', outfitBottom: '', outfitShoes: ''})
     const {member} = useMemberContext()
@@ -16,11 +16,11 @@ const Meet = () => {
             fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
                 .then((obj) => obj.json())
                 .then(json => setState(
-                    json.meeting
+                    json.active && json.meeting
                         ?
                         {meeting: json.meeting, outfitTop: json.outfitTop, outfitBottom: json.outfitBottom, outfitShoes: json.outfitShoes}
                         :
-                        {meeting: json.meeting, outfitTop: '', outfitBottom: '', outfitShoes: ''}
+                        {meeting: false, outfitTop: '', outfitBottom: '', outfitShoes: ''}
                 ))
     }, [member])
 
@@ -73,7 +73,7 @@ const Meet = () => {
                     onChange={handleChange}
                     required
                 >
-                    <option value=''>-- Select Top Color (e.g. shirt) --</option>
+                    <option value=''>- Select Top Color (e.g. shirt) -</option>
                     <option value="Red">Red</option>
                     <option value="Blue">Blue</option>
                     <option value="Green">Green</option>
@@ -91,7 +91,7 @@ const Meet = () => {
                     onChange={handleChange}
                     required
                 >
-                    <option value=''>-- Select Bottom Color (e.g. jeans) --</option>
+                    <option value=''>- Select Bottom Color (e.g. jeans) -</option>
                     <option value="Red">Red</option>
                     <option value="Blue">Blue</option>
                     <option value="Green">Green</option>
@@ -109,7 +109,7 @@ const Meet = () => {
                     onChange={handleChange}
                     required
                 >
-                    <option value=''>-- Select Shoes Color --</option>
+                    <option value=''>- Select Shoes Color -</option>
                     <option value="Red">Red</option>
                     <option value="Blue">Blue</option>
                     <option value="Green">Green</option>
@@ -146,6 +146,15 @@ const Meet = () => {
                         </>
                 }
             </form>
+            {state.meeting
+                && <p
+                    style={{
+                        color: 'green',
+                        fontStyle: 'italic'
+                    }}
+                >Awesome - We will let you know once the CashClan member with the best deal is ready to meet you in {location}.
+                </p>
+            }
         </>
     )
 }

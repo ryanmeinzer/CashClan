@@ -11,7 +11,7 @@ const Matches = ({offer}) => {
             .then(json => setMembers(json))
     }, [])
 
-    const Matches = () => {
+    const MatchesSorted = () => {
         const matches = members.filter(member => offer.mode === 'buying' ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location)
 
         function sortedMatches() {
@@ -30,19 +30,18 @@ const Matches = ({offer}) => {
                 }
                 <ul>
                     {sortedMatches().map(member =>
-                        // <li key={member.id}>{member.name} {member.mode === 'buying' && 'is buying at least'} {member.mode === 'selling' && 'is selling up to'} {member.amount !== 0 && `$${member.amount}`} {member.location && `at ${member.location}`}</li>
-                        <li key={member.id}>{member.name} {member.mode === 'buying' && 'will buy at least'} {member.mode === 'selling' && 'will sell up to'} {member.amount !== 0 && member.amount !== null && `$${member.amount}`} {member.mode === 'buying' && 'and will pay up to a '} {member.mode === 'selling' && 'and must earn at least a '} {member.premium !== 0 && member.premium !== null && `${member.premium}%`} {member.mode === 'buying' && 'cost'} {member.mode === 'selling' && 'profit'} {member.location && `at ${member.location}`}</li>
+                        <li key={member.id}>{member.name} {member.mode === 'buying' && 'will buy at least'} {member.mode === 'selling' && 'will sell up to'} {member.amount !== 0 && member.amount !== null && `$${member.amount}`} {member.mode === 'buying' && 'from you'} {member.mode === 'selling' && 'to you'} for a {member.premium !== 0 && member.premium !== null && `${member.premium}%`} {member.mode === 'buying' && 'cost'} {member.mode === 'selling' && 'profit'} {member.location && `at ${member.location}`}</li>
                     )}
                 </ul>
+                {matches.length > 0
+                    && <Meet location={offer.location} active={offer.active} />
+                }
             </>
         )
     }
 
     return (
-        <>
-            <Matches />
-            <Meet />
-        </>
+        <MatchesSorted />
     )
 }
 
