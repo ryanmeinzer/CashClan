@@ -50,7 +50,7 @@ const Matches = ({offer}) => {
                 : <h3 style={{color: "red"}}>Your offer has no current matches in the CashClan.</h3>
             }
             {
-                matches.length > 0
+                matches.length > 1
                 && <div style={{color: 'lightGray'}}>
                     <h4>All Matches (you're meeting with your best):</h4>
                     <ul>
