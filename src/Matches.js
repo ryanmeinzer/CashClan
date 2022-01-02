@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
-const Matches = ({offer}) => {
+const Matches = ({offer, memberImage}) => {
 
     const [members, setMembers] = useState([])
 
@@ -37,7 +37,7 @@ const Matches = ({offer}) => {
     console.log('offer', offer)
     console.log('offer.premium:', offer.premium)
     console.log('topMatch.premium:', topMatch && topMatch.premium)
-
+    console.log('topMatch:', topMatch && topMatch)
     console.log('transactionAmount:', topMatch && transactionAmount())
 
     return (
@@ -48,7 +48,12 @@ const Matches = ({offer}) => {
                         <h3 style={{color: "green"}}>You've Matched with {topMatch.name}!</h3>
                         {
                             topMatch.image
-                            && <img src={topMatch.image} alt="profile" style={{borderRadius: "50%"}} />
+                            &&
+                            <span>
+                                <img src={memberImage} alt="profile" style={{borderRadius: "50%"}} />
+                                <span style={{fontSize: '5rem'}}>🤝</span>
+                                <img src={topMatch.image} alt="profile" style={{borderRadius: "50%"}} />
+                            </span>
                         }
                     </div>
                     <p>Meet now at the ATM inside of {offer.location}. Say "CashClan" while asking for {topMatch.name} who {topMatch.mode === 'buying' && 'will buy'} {topMatch.mode === 'selling' && 'will sell'} ${offer.mode === 'buying' && offer.amount}{offer.mode === 'selling' && topMatch.amount} cash {topMatch.mode === 'buying' && 'from you'} {topMatch.mode === 'selling' && 'to you'} through Venmo for ${topMatch && transactionAmount()}.</p>  

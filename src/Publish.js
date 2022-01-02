@@ -229,7 +229,7 @@ const Publish = () => {
             </div>
             {
                 state.active
-                && <div align="left"><Matches offer={state} /></div>
+                && <div align="left"><Matches offer={state} memberImage={member.image} /></div>
             }
         </>
     )
