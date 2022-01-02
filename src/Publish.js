@@ -22,7 +22,7 @@ const Publish = () => {
                         ?
                         {active: json.active, mode: json.mode, amount: json.amount, premium: json.premium, location: json.location}
                         :
-                        {active: json.active, mode: null, amount: 10, premium: 1, location: ''}
+                        {active: false, mode: null, amount: 10, premium: 1, location: ''}
                 ))
     }, [member])
 
