@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import Meet from './Meet'
+// import Meet from './Meet'
 
 const Matches = ({offer}) => {
 
@@ -11,37 +11,57 @@ const Matches = ({offer}) => {
             .then(json => setMembers(json))
     }, [])
 
-    const MatchesSorted = () => {
-        const matches = members.filter(member => offer.mode === 'buying' ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location)
+    const matches = members.filter(member => offer.mode === 'buying' ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location)
 
-        function sortedMatches() {
-            if (offer.mode === 'buying') {
-                return matches.sort(function (a, b) {return a.premium - b.premium})
-            } else if (offer.mode === 'selling') {
-                return matches.sort(function (a, b) {return b.premium - a.premium})
-            }
+    function sortedMatches() {
+        if (offer.mode === 'buying') {
+            return matches.sort(function (a, b) {return a.premium - b.premium})
+        } else if (offer.mode === 'selling') {
+            return matches.sort(function (a, b) {return b.premium - a.premium})
         }
+    }
 
-        return (
-            <>
-                {matches.length > 0
-                    ? <h3 style={{color: "green"}}>You've Matched!</h3>
-                    : <h3 style={{color: "red"}}>Your offer has no current matches in the CashClan.</h3>
-                }
+    const topMatch = sortedMatches()[0]
+
+    function transactionAmount() {
+        if (offer.mode === 'buying') {
+            let averagedPremiums = topMatch && (offer.premium + topMatch.premium) / 2
+            let fee = offer.amount * (averagedPremiums / 100)
+            return Math.round(offer.amount + fee)
+        } else if (offer.mode === 'selling') {
+            let averagedPremiums = topMatch && (topMatch.premium + offer.premium) / 2
+            let fee = topMatch && topMatch.amount * (averagedPremiums / 100)
+            return Math.round(topMatch && topMatch.amount + fee)
+        }
+    }
+
+    console.log('offer', offer)
+    console.log('offer.premium:', offer.premium)
+    console.log('topMatch.premium:', topMatch && topMatch.premium)
+
+    console.log('transactionAmount:', topMatch && transactionAmount())
+
+    return (
+        <>
+            {matches.length > 0
+                ? <div>
+                    <h3 style={{color: "green"}}>You've Matched with {topMatch.name}!</h3>
+                    <p>Meet now at the ATM inside of {offer.location}. Say "CashClan" while asking for {topMatch.name} {topMatch.image} who {topMatch.mode === 'buying' && 'will buy'} {topMatch.mode === 'selling' && 'will sell'} ${offer.mode === 'buying' && offer.amount}{offer.mode === 'selling' && topMatch.amount} cash {topMatch.mode === 'buying' && 'from you'} {topMatch.mode === 'selling' && 'to you'} through Venmo for ${topMatch && transactionAmount()}.</p>
+                </div>
+                : <h3 style={{color: "red"}}>Your offer has no current matches in the CashClan.</h3>
+            }
+            <div style={{color: 'lightGray'}}>
+                <h4>All Matches:</h4>
                 <ul>
                     {sortedMatches().map(member =>
                         <li key={member.id}>{member.name} {member.mode === 'buying' && 'will buy at least'} {member.mode === 'selling' && 'will sell up to'} {member.amount !== 0 && member.amount !== null && `$${member.amount}`} {member.mode === 'buying' && 'from you'} {member.mode === 'selling' && 'to you'} for a {member.premium !== 0 && member.premium !== null && `${member.premium}%`} {member.mode === 'buying' && 'cost'} {member.mode === 'selling' && 'profit'} {member.location && `at ${member.location}`}</li>
                     )}
                 </ul>
-                {matches.length > 0
-                    && <Meet location={offer.location} active={offer.active} />
-                }
-            </>
-        )
-    }
-
-    return (
-        <MatchesSorted />
+            </div>
+            {/* {matches.length > 0
+                && <Meet location={offer.location} active={offer.active} />
+            } */}
+        </>
     )
 }
 

@@ -28,8 +28,9 @@ const Publish = () => {
 
     const handleChange = (event) => {
         const target = event.target
-        const value = target.value === 'true' ? true : target.value === 'false' ? false : target.value
-        const name = target.name
+        let value = target.value === 'true' ? true : target.value === 'false' ? false : target.value
+        let name = target.name
+        if (name === 'amount' || name === 'premium') {value = parseInt(value)}
         setState({...state, [name]: value})
         name === 'active' && handleActiveChange(value)
     }
@@ -70,6 +71,8 @@ const Publish = () => {
             alert('To Publish, please choose to Buy or Sell Cash.')
         }
     }
+
+    console.log('state/offer inside Publish:', state)
 
     return (
         <>
@@ -157,7 +160,7 @@ const Publish = () => {
                         min={1}
                         max={10}
                         step={1}
-                        value={state.premium}
+                        value={parseInt(state.premium)}
                         onChange={handleChange}
                         disabled={state.active || state.mode === null}
                         required
