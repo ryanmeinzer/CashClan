@@ -92,9 +92,9 @@ const Publish = () => {
                             :
                             <>
                                 <p>You are not active. Publish an offer to the CashClan below.</p>
-                                <p>
+                                {/* <p>
                                     {state.mode === 'buying' && 'You will buy at least'} {state.mode === 'selling' && 'You will sell up to'} {state.mode !== null && state.amount !== 0 && state.amount !== null && `$${state.amount}`} {state.mode === 'buying' && 'and will pay up to a '} {state.mode === 'selling' && 'and must make at least a '} {state.mode !== null && state.premium !== 0 && state.premium !== null && `${state.premium}%`} {state.mode === 'buying' && 'cost'} {state.mode === 'selling' && 'profit'} {state.mode !== null && state.location && `at ${state.location}.`}
-                                </p>
+                                </p> */}
                             </>
                     }
                 </div>
@@ -143,11 +143,13 @@ const Publish = () => {
                         style={{
                             color: (!state.active ? 'black' : 'lightGray')
                         }}
+                        hidden={!state.mode}
                     />
                     <span
                         style={{
                             color: (!state.active && state.mode !== null ? 'black' : 'lightGray')
                         }}
+                        hidden={!state.mode}
                     >
                         {state.mode === 'buying' && 'will buy at least '}
                         {state.mode === 'selling' && 'will sell up to '}
@@ -167,11 +169,13 @@ const Publish = () => {
                         style={{
                             color: (!state.active ? 'black' : 'lightGray')
                         }}
+                        hidden={!state.mode}
                     />
                     <span
                         style={{
                             color: (!state.active && state.mode !== null ? 'black' : 'lightGray')
                         }}
+                        hidden={!state.mode}
                     >
                         {state.mode === 'buying' && 'will pay up to a '}
                         {state.mode === 'selling' && 'must make at least a '}
@@ -200,11 +204,13 @@ const Publish = () => {
                                     // have to do extra work to reset range input
                                     onClick={handleCancel}
                                     disabled={state.active || state.mode === null}
+                                    hidden={!state.mode}
                                 > Cancel
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={state.active || state.mode === null}
+                                    hidden={!state.mode}
                                 > Publish to the CashClan
                                 </button>
                             </>
@@ -215,7 +221,7 @@ const Publish = () => {
                         style={{
                             color: (!state.active ? 'green' : 'lightGray')
                         }}
-                    ><em>You'll save at least ${(5 - (state.amount * (state.premium / 100))).toFixed(2)} buying at least ${state.amount} cash through Venmo from a CashClan member instead of the ATM.</em>
+                    ><em>You'll save at least ${(5 - (state.amount * (state.premium / 100))).toFixed(2)} buying at least ${state.amount} cash for up to a {state.premium}% cost through Venmo from a CashClan member instead of the ATM.</em>
                     </p>
                 }
                 {state.mode === 'selling'
@@ -223,7 +229,7 @@ const Publish = () => {
                         style={{
                             color: (!state.active ? 'green' : 'lightGray')
                         }}
-                    ><em>You'll make at least ${(state.amount * (state.premium / 100)).toFixed(2)} selling at least ${state.amount} of your cash through Venmo to a CashClan member.</em>
+                    ><em>You'll make at least ${(state.amount * (state.premium / 100)).toFixed(2)} ({state.premium}% profit) selling up to ${state.amount} of your cash through Venmo to a CashClan member.</em>
                     </p>
                 }
             </div>

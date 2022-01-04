@@ -6,7 +6,7 @@ const Locations = ({state, handleChange}) => {
             onChange={handleChange}
             disabled={state.active || state.mode === null}
             required
-        // defaultValue=""
+            hidden={!state.mode}
         >
             <option value=''>- Select Nearest Location -</option>
             <optgroup label="Polk District">
