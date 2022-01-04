@@ -3,15 +3,10 @@ import {useMemberContext} from './providers/member'
 import Matches from './Matches'
 import Locations from './Locations'
 
-const Publish = () => {
+const Publish = ({members}) => {
 
     const [state, setState] = useState({active: '', mode: null, amount: 10, premium: 1, location: ''})
     const {member} = useMemberContext()
-
-    useEffect(() => {
-        console.log('inside Publish - member:', member)
-        console.log('inside Publish - state:', state)
-    })
 
     useEffect(() => {
         member &&
@@ -72,8 +67,6 @@ const Publish = () => {
         }
     }
 
-    console.log('state/offer inside Publish:', state)
-
     return (
         <>
             <div align="center">
@@ -92,9 +85,6 @@ const Publish = () => {
                             :
                             <>
                                 <p>You are not active. Publish an offer to the CashClan below.</p>
-                                {/* <p>
-                                    {state.mode === 'buying' && 'You will buy at least'} {state.mode === 'selling' && 'You will sell up to'} {state.mode !== null && state.amount !== 0 && state.amount !== null && `$${state.amount}`} {state.mode === 'buying' && 'and will pay up to a '} {state.mode === 'selling' && 'and must make at least a '} {state.mode !== null && state.premium !== 0 && state.premium !== null && `${state.premium}%`} {state.mode === 'buying' && 'cost'} {state.mode === 'selling' && 'profit'} {state.mode !== null && state.location && `at ${state.location}.`}
-                                </p> */}
                             </>
                     }
                 </div>
@@ -235,7 +225,7 @@ const Publish = () => {
             </div>
             {
                 state.active
-                && <div align="left"><Matches offer={state} memberImage={member.image} /></div>
+                && <div align="left"><Matches members={members} offer={state} memberImage={member.image} /></div>
             }
         </>
     )

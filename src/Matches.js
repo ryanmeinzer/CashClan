@@ -1,14 +1,6 @@
-import React, {useEffect, useState} from 'react'
+// import Transaction from './Transaction'
 
-const Matches = ({offer, memberImage}) => {
-
-    const [members, setMembers] = useState([])
-
-    useEffect(() => {
-        fetch('https://cashclan-backend.herokuapp.com/members')
-            .then((obj) => obj.json())
-            .then(json => setMembers(json))
-    }, [])
+const Matches = ({members, offer, memberImage}) => {
 
     const matches = members.filter(member => offer.mode === 'buying' ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location)
 
@@ -26,6 +18,7 @@ const Matches = ({offer, memberImage}) => {
         if (offer.mode === 'buying') {
             let averagedPremiums = topMatch && (offer.premium + topMatch.premium) / 2
             let fee = offer.amount * (averagedPremiums / 100)
+            // setPendingTransaction({seller: topMatch.id})
             return `${Math.round(offer.amount + fee)} (a ${Math.round(averagedPremiums)}% cost)`
         } else if (offer.mode === 'selling') {
             let averagedPremiums = topMatch && (topMatch.premium + offer.premium) / 2
@@ -54,6 +47,7 @@ const Matches = ({offer, memberImage}) => {
                 </div>
                 : <h3 style={{color: "red"}}>Your offer has no current matches in the CashClan.</h3>
             }
+            {/* <Transaction /> */}
             {
                 matches.length > 1
                 && <div style={{color: 'lightGray'}}>
