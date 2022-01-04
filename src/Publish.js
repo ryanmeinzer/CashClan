@@ -225,7 +225,7 @@ const Publish = ({members}) => {
             </div>
             {
                 state.active
-                && <div align="left"><Matches members={members} offer={state} memberImage={member.image} /></div>
+                && <div align="left"><Matches members={members} offer={state} memberImage={member.image} handleActiveChange={handleActiveChange} /></div>
             }
         </>
     )

@@ -1,6 +1,6 @@
-// import Transaction from './Transaction'
+import Transaction from './Transaction'
 
-const Matches = ({members, offer, memberImage}) => {
+const Matches = ({members, offer, memberImage, handleActiveChange}) => {
 
     const matches = members.filter(member => offer.mode === 'buying' ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location)
 
@@ -18,7 +18,6 @@ const Matches = ({members, offer, memberImage}) => {
         if (offer.mode === 'buying') {
             let averagedPremiums = topMatch && (offer.premium + topMatch.premium) / 2
             let fee = offer.amount * (averagedPremiums / 100)
-            // setPendingTransaction({seller: topMatch.id})
             return `${Math.round(offer.amount + fee)} (a ${Math.round(averagedPremiums)}% cost)`
         } else if (offer.mode === 'selling') {
             let averagedPremiums = topMatch && (topMatch.premium + offer.premium) / 2
@@ -43,11 +42,10 @@ const Matches = ({members, offer, memberImage}) => {
                             </span>
                         }
                     </div>
-                    <p>Meet now at the ATM inside of {offer.location}. Say "CashClan" while asking for {topMatch.name} who {topMatch.mode === 'buying' && 'will buy'} {topMatch.mode === 'selling' && 'will sell'} ${offer.mode === 'buying' && offer.amount}{offer.mode === 'selling' && topMatch.amount} cash {topMatch.mode === 'buying' && 'from you'} {topMatch.mode === 'selling' && 'to you'} through Venmo for ${topMatch && transactionAmount()}.</p>  
+                    <p>Meet now at the ATM inside of {offer.location}. Say "CashClan" while asking for {topMatch.name} who {topMatch.mode === 'buying' && 'will buy'} {topMatch.mode === 'selling' && 'will sell'} ${offer.mode === 'buying' && offer.amount}{offer.mode === 'selling' && topMatch.amount} cash {topMatch.mode === 'buying' && 'from you'} {topMatch.mode === 'selling' && 'to you'} through Venmo for ${topMatch && transactionAmount()}. <Transaction seller={topMatch.id} handleActiveChange={handleActiveChange} /></p> 
                 </div>
                 : <h3 style={{color: "red"}}>Your offer has no current matches in the CashClan.</h3>
             }
-            {/* <Transaction /> */}
             {
                 matches.length > 1
                 && <div style={{color: 'lightGray'}}>

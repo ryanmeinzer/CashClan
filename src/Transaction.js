@@ -1,24 +1,31 @@
 import React, {useState} from 'react'
 
-const Transaction = (props) => {
+const Transaction = ({seller, handleActiveChange}) => {
 
-    const [transaction, setTransaction] = useState(null)
+    const [transaction, setTransaction] = useState({seller_id: seller})
 
-    const handleSubmit = (event) => {
-        // event.preventDefault()
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({transaction})
-        }
-        fetch(`https://cashclan-backend.herokuapp.com/transactions`, requestOptions)
-            .then(response => response.json())
-            .catch(error => error)
-            .then(setTransaction(transaction))
+    console.log(transaction)
+
+    // const handleSubmit = (event) => {
+    //     // event.preventDefault()
+    //     const requestOptions = {
+    //         method: 'POST',
+    //         headers: {'Content-Type': 'application/json'},
+    //         body: JSON.stringify({transaction})
+    //     }
+    //     fetch(`https://cashclan-backend.herokuapp.com/transactions`, requestOptions)
+    //         .then(response => response.json())
+    //         .catch(error => error)
+    //         .then(setTransaction(transaction))
+    // }
+
+    const tempFunc = () => {
+        alert('placeholder for transaction confirmation')
+        handleActiveChange(false)
     }
 
     return (
-        <button onClick={handleSubmit}>Transaction Completed</button>
+        <button onClick={tempFunc}>Transaction Completed</button>
     )
 }
 
