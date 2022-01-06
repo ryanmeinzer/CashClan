@@ -28,8 +28,6 @@ const SignUp = (props) => {
     }
 
     const onSuccess = (res) => {
-        console.log('inside Login - onSuccess response:', res)
-        console.log('inside SignUp - onSuccess response:', res)
         findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email, res.profileObj.imageUrl)
         setIsLoggedIn(true)
         // refresh tokenId (every hour it expires) to access data and authenticate users

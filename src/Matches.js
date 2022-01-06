@@ -1,6 +1,8 @@
 import Transaction from './Transaction'
 
-const Matches = ({members, offer, memberImage, handleActiveChange}) => {
+const Matches = ({members, offer, memberImage, handleActiveChange, member_id}) => {
+
+    console.log('inside Matches', member_id)
 
     const matches = members.filter(member => offer.mode === 'buying' ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location)
 
@@ -42,7 +44,7 @@ const Matches = ({members, offer, memberImage, handleActiveChange}) => {
                             </span>
                         }
                     </div>
-                    <p>Meet now at the ATM inside of {offer.location}. Say "CashClan" while asking for {topMatch.name} who {topMatch.mode === 'buying' && 'will buy'} {topMatch.mode === 'selling' && 'will sell'} ${offer.mode === 'buying' && offer.amount}{offer.mode === 'selling' && topMatch.amount} cash {topMatch.mode === 'buying' && 'from you'} {topMatch.mode === 'selling' && 'to you'} through Venmo for ${topMatch && transactionAmount()}. <Transaction seller={topMatch.id} handleActiveChange={handleActiveChange} /></p> 
+                    <p>Meet now at the ATM inside of {offer.location}. Say "CashClan" while asking for {topMatch.name} who {topMatch.mode === 'buying' && 'will buy'} {topMatch.mode === 'selling' && 'will sell'} ${offer.mode === 'buying' && offer.amount}{offer.mode === 'selling' && topMatch.amount} cash {topMatch.mode === 'buying' && 'from you'} {topMatch.mode === 'selling' && 'to you'} through Venmo for ${topMatch && transactionAmount()}. <Transaction seller_id={offer.mode === 'selling' ? member_id : topMatch.id} handleActiveChange={handleActiveChange} buyer_id={offer.mode === 'buying' ? member_id : topMatch.id} mode={offer.mode} amount={offer.mode === 'buying' ? offer.amount : topMatch.amount} location={offer.location} /></p> 
                 </div>
                 : <h3 style={{color: "red"}}>Your offer has no current matches in the CashClan.</h3>
             }

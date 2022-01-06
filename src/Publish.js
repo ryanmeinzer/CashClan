@@ -7,6 +7,7 @@ const Publish = ({members}) => {
 
     const [state, setState] = useState({active: '', mode: null, amount: 10, premium: 1, location: ''})
     const {member} = useMemberContext()
+    const [memberId, setMemberId] = useState()
 
     useEffect(() => {
         member &&
@@ -20,6 +21,15 @@ const Publish = ({members}) => {
                         {active: false, mode: null, amount: 10, premium: 1, location: ''}
                 ))
     }, [member])
+
+    useEffect(() => {
+        member &&
+            fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
+                .then((obj) => obj.json())
+                .then(json => setMemberId(json.id))
+    })
+
+    console.log('inside Publish', memberId)
 
     const handleChange = (event) => {
         const target = event.target
@@ -225,7 +235,7 @@ const Publish = ({members}) => {
             </div>
             {
                 state.active
-                && <div align="left"><Matches members={members} offer={state} memberImage={member.image} handleActiveChange={handleActiveChange} /></div>
+                && <div align="left"><Matches members={members} offer={state} member_id={memberId} memberImage={member.image} handleActiveChange={handleActiveChange} /></div>
             }
         </>
     )
