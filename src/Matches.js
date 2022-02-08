@@ -1,6 +1,9 @@
+import React, {useState, useEffect} from 'react'
 import Transaction from './Transaction'
 
 const Matches = ({members, offer, memberImage, handleActiveChange, member_id}) => {
+
+    const [transactionTerms, setTransactionTerms] = useState()
 
     console.log('inside Matches', member_id)
 
@@ -16,14 +19,40 @@ const Matches = ({members, offer, memberImage, handleActiveChange, member_id}) =
 
     const topMatch = sortedMatches()[0]
 
+    useEffect(() => {
+        !transactionTerms && transactionAmount()
+    })
+
     function transactionAmount() {
         if (offer.mode === 'buying') {
             let averagedPremiums = topMatch && (offer.premium + topMatch.premium) / 2
             let cost = offer.amount * (averagedPremiums / 100)
+            setTransactionTerms({
+                amount: Math.round(offer.amount + cost),
+                premium: Math.round(averagedPremiums),
+                cost: cost.toFixed(2),
+                profit: cost.toFixed(2),
+                savings: (4.44 - cost.toFixed(2)).toFixed(2),
+                buyer_offer_amount: offer.amount,
+                buyer_offer_premium: offer.premium,
+                seller_offer_amount: topMatch.amount,
+                seller_offer_premium: topMatch.premium,
+            })
             return `${Math.round(offer.amount + cost)} (a ${Math.round(averagedPremiums)}% cost)`
         } else if (offer.mode === 'selling') {
             let averagedPremiums = topMatch && (topMatch.premium + offer.premium) / 2
             let cost = topMatch && topMatch.amount * (averagedPremiums / 100)
+            setTransactionTerms({
+                amount: Math.round(topMatch.amount + cost),
+                premium: Math.round(averagedPremiums),
+                cost: cost.toFixed(2),
+                profit: cost.toFixed(2),
+                savings: (4.44 - cost.toFixed(2)).toFixed(2),
+                buyer_offer_amount: topMatch && topMatch.amount,
+                buyer_offer_premium: topMatch && topMatch.premium,
+                seller_offer_amount: offer.amount,
+                seller_offer_premium: offer.premium,
+            })
             return `${Math.round(topMatch && topMatch.amount + cost)} (a ${Math.round(averagedPremiums)}% profit)`
         }
     }
@@ -44,7 +73,18 @@ const Matches = ({members, offer, memberImage, handleActiveChange, member_id}) =
                             </span>
                         }
                     </div>
-                    <p>Meet now at the ATM inside of {offer.location}. Say "CashClan" while asking for {topMatch.name} who {topMatch.mode === 'buying' && 'will buy'} {topMatch.mode === 'selling' && 'will sell'} ${offer.mode === 'buying' && offer.amount}{offer.mode === 'selling' && topMatch.amount} cash {topMatch.mode === 'buying' && 'from you'} {topMatch.mode === 'selling' && 'to you'} through Venmo for ${topMatch && transactionAmount()}. <Transaction seller_id={offer.mode === 'selling' ? member_id : topMatch.id} handleActiveChange={handleActiveChange} buyer_id={offer.mode === 'buying' ? member_id : topMatch.id} mode={offer.mode} amount={offer.mode === 'buying' ? offer.amount : topMatch.amount} location={offer.location} /></p> 
+                    <p>
+                        Meet now at the ATM inside of {offer.location}. Say "CashClan" while asking for {topMatch.name} who {topMatch.mode === 'buying' && 'will buy'} {topMatch.mode === 'selling' && 'will sell'} ${offer.mode === 'buying' && offer.amount}{offer.mode === 'selling' && topMatch.amount} cash {topMatch.mode === 'buying' && 'from you'} {topMatch.mode === 'selling' && 'to you'} through Venmo for ${transactionTerms?.amount}.
+                        {transactionTerms &&
+                            <Transaction
+                                seller_id={offer.mode === 'selling' ? member_id : topMatch.id} handleActiveChange={handleActiveChange}
+                                buyer_id={offer.mode === 'buying' ? member_id : topMatch.id}
+                                mode={offer.mode}
+                                transactionTerms={transactionTerms}
+                                location={offer.location}
+                            />
+                        }
+                    </p> 
                 </div>
                 : <h3 style={{color: "red"}}>Your offer has no current matches in the CashClan.</h3>
             }

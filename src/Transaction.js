@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 
-const Transaction = ({seller_id, mode, handleActiveChange, buyer_id, amount, location}) => {
+const Transaction = ({seller_id, mode, handleActiveChange, buyer_id, transactionTerms, location}) => {
 
     const [transaction] = useState({
+        ...transactionTerms,
         seller_id: seller_id,
         buyer_id: buyer_id,
         seller_confirmed: mode === 'buying' ? false : true,
         buyer_confirmed: mode === 'selling' ? false : true,
         status: 'pending',
-        amount: amount,
         location: location,
     })
 
