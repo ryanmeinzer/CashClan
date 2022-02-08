@@ -19,12 +19,12 @@ const Matches = ({members, offer, memberImage, handleActiveChange, member_id}) =
     function transactionAmount() {
         if (offer.mode === 'buying') {
             let averagedPremiums = topMatch && (offer.premium + topMatch.premium) / 2
-            let fee = offer.amount * (averagedPremiums / 100)
-            return `${Math.round(offer.amount + fee)} (a ${Math.round(averagedPremiums)}% cost)`
+            let cost = offer.amount * (averagedPremiums / 100)
+            return `${Math.round(offer.amount + cost)} (a ${Math.round(averagedPremiums)}% cost)`
         } else if (offer.mode === 'selling') {
             let averagedPremiums = topMatch && (topMatch.premium + offer.premium) / 2
-            let fee = topMatch && topMatch.amount * (averagedPremiums / 100)
-            return `${Math.round(topMatch && topMatch.amount + fee)} (a ${Math.round(averagedPremiums)}% profit)`
+            let cost = topMatch && topMatch.amount * (averagedPremiums / 100)
+            return `${Math.round(topMatch && topMatch.amount + cost)} (a ${Math.round(averagedPremiums)}% profit)`
         }
     }
 
