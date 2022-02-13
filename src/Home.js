@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from 'react'
 import Publish from './Publish'
 import SignUp from './SignUp'
 import Profile from './Profile'
@@ -8,6 +9,16 @@ import {useMemberContext} from './providers/member'
 const Home = ({members, refreshMembersUponSignUp}) => {
 
     const {member} = useMemberContext()
+
+
+    // const [time, setTime] = useState(Date.now())
+
+    // useEffect(() => {
+    //     const interval = setInterval(() => setTime(Date.now()), 3000)
+    //     return () => {
+    //         clearInterval(interval)
+    //     }
+    // }, [])
 
     return (
         <>

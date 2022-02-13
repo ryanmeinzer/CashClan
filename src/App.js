@@ -11,11 +11,25 @@ const App = () => {
   const [members, setMembers] = useState([])
   const [transactions, setTransactions] = useState([])
 
+  const [time, setTime] = useState(Date.now())
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => setTime(Date.now()), 3000)
+  //   return () => {
+  //     clearInterval(interval)
+  //   }
+  // }, [])
+
   useEffect(() => {
+    const interval = setInterval(() => setTime(Date.now()), 5000)
     fetch('https://cashclan-backend.herokuapp.com/members')
       .then((obj) => obj.json())
       .then(json => setMembers(json))
-  }, [])
+      .finally(console.log('inside App - refetched'))
+    return () => {
+      clearInterval(interval)
+    }
+  }, [time])
 
   const refreshMembersUponFormSubmit = () => {
     fetch('https://cashclan-backend.herokuapp.com/members')

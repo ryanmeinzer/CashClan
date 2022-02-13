@@ -5,7 +5,9 @@ const Matches = ({members, offer, memberImage, handleActiveChange, member_id}) =
 
     const [transactionTerms, setTransactionTerms] = useState()
 
-    console.log('inside Matches', member_id)
+    // useEffect(() => {
+    // }, [])
+
 
     const matches = members.filter(member => offer.mode === 'buying' ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location)
 
@@ -19,9 +21,18 @@ const Matches = ({members, offer, memberImage, handleActiveChange, member_id}) =
 
     const topMatch = sortedMatches()[0]
 
+    console.log('inside Matches - members:', members)
+    console.log('inside Matches - matches:', matches)
+    console.log('inside Matches - topMatch:', topMatch)
+
     useEffect(() => {
+        // !transactionTerms && transactionAmount()
         !transactionTerms && transactionAmount()
     })
+
+    useEffect(() => {
+        transactionAmount()
+    }, [topMatch])
 
     function transactionAmount() {
         if (topMatch) {
