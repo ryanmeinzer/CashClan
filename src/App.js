@@ -45,7 +45,7 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home members={members} refreshMembersUponSignUp={refreshMembersUponSignUp} />} />
+        <Route path="/" element={<Home members={members} refreshMembersUponSignUp={refreshMembersUponSignUp} transactions={transactions} />} />
         <Route path="profile" element={<Profile />} />
         <Route path="editprofile" element={<EditProfile refreshMembersUponFormSubmit={refreshMembersUponFormSubmit} />} />
         <Route path="members" element={<Members members={members} />} />

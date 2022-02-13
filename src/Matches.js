@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import Transaction from './Transaction'
 
-const Matches = ({members, offer, memberImage, handleActiveChange, member_id}) => {
+const Matches = ({members, offer, memberImage, handleActiveChange, member_id, transactions}) => {
 
     const [transactionTerms, setTransactionTerms] = useState()
+    // ToDo - use a toggle state variable for pending transaction of user
 
-    // ToDo - implement logic to hold match for one-sided confirmed transaction
+    // ToDo - find pending transaction if exists to override matches logic
+
     const matches = members.filter(member => offer.mode === 'buying' ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location)
 
     function sortedMatches() {
@@ -23,15 +25,6 @@ const Matches = ({members, offer, memberImage, handleActiveChange, member_id}) =
     console.log('inside Matches - topMatch:', topMatch)
 
     useEffect(() => {
-        // !transactionTerms && transactionAmount()
-        !transactionTerms && transactionAmount()
-    })
-
-    useEffect(() => {
-        transactionAmount()
-    }, [topMatch])
-
-    function transactionAmount() {
         if (topMatch) {
             if (offer.mode === 'buying') {
                 let averagedPremiums = topMatch && (offer.premium + topMatch.premium) / 2
@@ -65,7 +58,7 @@ const Matches = ({members, offer, memberImage, handleActiveChange, member_id}) =
                 return `${Math.round(topMatch && topMatch.amount + cost)} (a ${Math.round(averagedPremiums)}% profit)`
             }
         }
-    }
+    }, [topMatch, offer.mode, offer.premium, offer.amount])
 
     return (
         <>

@@ -1,4 +1,3 @@
-import React, {useState, useEffect} from 'react'
 import Publish from './Publish'
 import SignUp from './SignUp'
 import Profile from './Profile'
@@ -6,7 +5,7 @@ import Logout from './Logout'
 import {useMemberContext} from './providers/member'
 // import {Link} from "react-router-dom"
 
-const Home = ({members, refreshMembersUponSignUp}) => {
+const Home = ({members, refreshMembersUponSignUp, transactions}) => {
 
     const {member} = useMemberContext()
 
@@ -30,7 +29,7 @@ const Home = ({members, refreshMembersUponSignUp}) => {
                     <hr width="50%" />
                     <br />
                     <div align="center">
-                        <Publish members={members} />
+                        <Publish members={members} transactions={transactions} />
                     </div>
                     {/* <br />
                     <br />

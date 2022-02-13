@@ -3,7 +3,7 @@ import {useMemberContext} from './providers/member'
 import Matches from './Matches'
 import Locations from './Locations'
 
-const Publish = ({members}) => {
+const Publish = ({members, transactions}) => {
 
     const [state, setState] = useState({active: '', mode: null, amount: 10, premium: 1, location: ''})
     const {member} = useMemberContext()
@@ -235,7 +235,7 @@ const Publish = ({members}) => {
             </div>
             {
                 state.active
-                && <div align="left"><Matches members={members} offer={state} member_id={memberId} memberImage={member.image} handleActiveChange={handleActiveChange} /></div>
+                && <div align="left"><Matches members={members} offer={state} member_id={memberId} memberImage={member.image} handleActiveChange={handleActiveChange} transactions={transactions} /></div>
             }
         </>
     )
