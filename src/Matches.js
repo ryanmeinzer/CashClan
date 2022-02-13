@@ -5,10 +5,7 @@ const Matches = ({members, offer, memberImage, handleActiveChange, member_id}) =
 
     const [transactionTerms, setTransactionTerms] = useState()
 
-    // useEffect(() => {
-    // }, [])
-
-
+    // ToDo - implement logic to hold match for one-sided confirmed transaction
     const matches = members.filter(member => offer.mode === 'buying' ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location)
 
     function sortedMatches() {

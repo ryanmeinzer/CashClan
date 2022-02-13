@@ -10,16 +10,6 @@ const Home = ({members, refreshMembersUponSignUp}) => {
 
     const {member} = useMemberContext()
 
-
-    // const [time, setTime] = useState(Date.now())
-
-    // useEffect(() => {
-    //     const interval = setInterval(() => setTime(Date.now()), 3000)
-    //     return () => {
-    //         clearInterval(interval)
-    //     }
-    // }, [])
-
     return (
         <>
             <h1 align="center">CashClan 🤑</h1>

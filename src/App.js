@@ -13,13 +13,6 @@ const App = () => {
 
   const [time, setTime] = useState(Date.now())
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => setTime(Date.now()), 3000)
-  //   return () => {
-  //     clearInterval(interval)
-  //   }
-  // }, [])
-
   useEffect(() => {
     const interval = setInterval(() => setTime(Date.now()), 5000)
     fetch('https://cashclan-backend.herokuapp.com/members')
