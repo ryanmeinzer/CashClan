@@ -24,36 +24,38 @@ const Matches = ({members, offer, memberImage, handleActiveChange, member_id}) =
     })
 
     function transactionAmount() {
-        if (offer.mode === 'buying') {
-            let averagedPremiums = topMatch && (offer.premium + topMatch.premium) / 2
-            let cost = offer.amount * (averagedPremiums / 100)
-            setTransactionTerms({
-                amount: Math.round(offer.amount + cost),
-                premium: Math.round(averagedPremiums),
-                cost: cost.toFixed(2),
-                profit: cost.toFixed(2),
-                savings: (4.44 - cost.toFixed(2)).toFixed(2),
-                buyer_offer_amount: offer.amount,
-                buyer_offer_premium: offer.premium,
-                seller_offer_amount: topMatch.amount,
-                seller_offer_premium: topMatch.premium,
-            })
-            return `${Math.round(offer.amount + cost)} (a ${Math.round(averagedPremiums)}% cost)`
-        } else if (offer.mode === 'selling') {
-            let averagedPremiums = topMatch && (topMatch.premium + offer.premium) / 2
-            let cost = topMatch && topMatch.amount * (averagedPremiums / 100)
-            setTransactionTerms({
-                amount: Math.round(topMatch.amount + cost),
-                premium: Math.round(averagedPremiums),
-                cost: cost.toFixed(2),
-                profit: cost.toFixed(2),
-                savings: (4.44 - cost.toFixed(2)).toFixed(2),
-                buyer_offer_amount: topMatch && topMatch.amount,
-                buyer_offer_premium: topMatch && topMatch.premium,
-                seller_offer_amount: offer.amount,
-                seller_offer_premium: offer.premium,
-            })
-            return `${Math.round(topMatch && topMatch.amount + cost)} (a ${Math.round(averagedPremiums)}% profit)`
+        if (topMatch) {
+            if (offer.mode === 'buying') {
+                let averagedPremiums = topMatch && (offer.premium + topMatch.premium) / 2
+                let cost = offer.amount * (averagedPremiums / 100)
+                setTransactionTerms({
+                    amount: Math.round(offer.amount + cost),
+                    premium: Math.round(averagedPremiums),
+                    cost: cost.toFixed(2),
+                    profit: cost.toFixed(2),
+                    savings: (4.44 - cost.toFixed(2)).toFixed(2),
+                    buyer_offer_amount: offer.amount,
+                    buyer_offer_premium: offer.premium,
+                    seller_offer_amount: topMatch.amount,
+                    seller_offer_premium: topMatch.premium,
+                })
+                return `${Math.round(offer.amount + cost)} (a ${Math.round(averagedPremiums)}% cost)`
+            } else if (offer.mode === 'selling') {
+                let averagedPremiums = topMatch && (topMatch.premium + offer.premium) / 2
+                let cost = topMatch && topMatch.amount * (averagedPremiums / 100)
+                setTransactionTerms({
+                    amount: Math.round(topMatch.amount + cost),
+                    premium: Math.round(averagedPremiums),
+                    cost: cost.toFixed(2),
+                    profit: cost.toFixed(2),
+                    savings: (4.44 - cost.toFixed(2)).toFixed(2),
+                    buyer_offer_amount: topMatch && topMatch.amount,
+                    buyer_offer_premium: topMatch && topMatch.premium,
+                    seller_offer_amount: offer.amount,
+                    seller_offer_premium: offer.premium,
+                })
+                return `${Math.round(topMatch && topMatch.amount + cost)} (a ${Math.round(averagedPremiums)}% profit)`
+            }
         }
     }
 

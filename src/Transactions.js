@@ -21,20 +21,25 @@ const Transactions = (props) => {
     //         // .then(text => setName(text))
     // }, [])
 
-    // const transactionsWithSellerNames = 
+    // const transactionsWithSellerNames =
     //     <ul>
     //         {props.transactions.map(transaction =>
     //             <li key={transaction.id}>${transaction.amount} (${(4.44 - 1 - (transaction.amount * .03)).toFixed(2)} saved / ${((1 + transaction.amount * .03)).toFixed(2)} earned)</li>
     //         )}
     //     </ul>
 
+    // const sortedTransactions = props.transactions.sort(function (a, b) {return a.created_at - b.created_at})
+    // console.log(sortedTransactions)
+
     return (
         <>
             <h1>Transactions:</h1>
             <ul>
-                {props.transactions.map(transaction =>
-                    <li key={transaction.id}>${transaction.amount} (${(4.44 - 1 - (transaction.amount * .03)).toFixed(2)} saved / ${((1 + transaction.amount * .03)).toFixed(2)} earned)</li>
-                )}
+                {
+                    props.transactions.map(transaction =>
+                        <li key={transaction.id}>${transaction.amount} at {transaction.location}</li>
+                    )
+                }
             </ul>
         </>
     )
