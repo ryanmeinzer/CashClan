@@ -29,7 +29,12 @@ const Publish = ({members, transactions}) => {
                 .then(json => setMemberId(json.id))
     })
 
-    console.log('inside Publish', memberId)
+    const memberActive = members.find(member => member.id === memberId)?.active
+    console.log('memberActive:', memberActive)
+
+    useEffect(() => {
+        !memberActive && handleActiveChange(false)
+    }, [memberActive])
 
     const handleChange = (event) => {
         const target = event.target
@@ -40,7 +45,7 @@ const Publish = ({members, transactions}) => {
         name === 'active' && handleActiveChange(value)
     }
 
-    const handleActiveChange = (value) => {
+    const handleActiveChange = (value, googleId) => {
         const requestOptions = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
@@ -48,7 +53,9 @@ const Publish = ({members, transactions}) => {
             body: JSON.stringify(value ? {active: value} : {active: value, mode: null, amount: 0, premium: 0, location: null})
         }
         //! use googleId instead of id, but it is unsecure
-        fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
+        googleId
+            ? fetch(`https://cashclan-backend.herokuapp.com/members/${googleId}`, requestOptions)
+            : fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
             .then(response => response.json())
             .then(!value && setState({active: value, mode: null, amount: 10, premium: 1, location: ''}))
             .catch(error => error)
@@ -82,7 +89,7 @@ const Publish = ({members, transactions}) => {
             <div align="center">
                 <div>
                     {
-                        state.active
+                        state.active && memberActive
                             ?
                             (
                                 <>
@@ -234,7 +241,7 @@ const Publish = ({members, transactions}) => {
                 }
             </div>
             {
-                state.active
+                state.active && memberActive
                 && <div align="left"><Matches members={members} offer={state} member_id={memberId} memberImage={member.image} handleActiveChange={handleActiveChange} transactions={transactions} /></div>
             }
         </>

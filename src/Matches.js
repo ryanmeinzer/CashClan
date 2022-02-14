@@ -37,10 +37,6 @@ const Matches = ({members, offer, memberImage, handleActiveChange, member_id, tr
 
     const topMatch = sortedMatches()[0]
 
-    console.log('inside Matches - members:', members)
-    console.log('inside Matches - matches:', matches)
-    console.log('inside Matches - topMatch:', topMatch)
-
     useEffect(() => {
         if (topMatch) {
             if (offer.mode === 'buying') {
@@ -134,6 +130,7 @@ const Matches = ({members, offer, memberImage, handleActiveChange, member_id, tr
                                             mode={offer.mode}
                                             transactionTerms={transactionTerms}
                                             location={offer.location}
+                                        members={members}
                                         />
                                     }
                                 </p>
