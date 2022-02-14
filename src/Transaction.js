@@ -8,7 +8,8 @@ const Transaction = ({seller_id, mode, handleActiveChange, buyer_id, transaction
         buyer_id: buyer_id,
         seller_confirmed: mode === 'buying' ? false : true,
         buyer_confirmed: mode === 'selling' ? false : true,
-        status: 'pending',
+        status: 'complete',
+        // status: 'pending',
         location: location,
     })
 
