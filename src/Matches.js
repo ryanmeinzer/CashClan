@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import Transaction from './Transaction'
 
+
+// ToDo - refactor to find_or_create pending Transaction with match for either party to confirm as complete
 const Matches = ({members, offer, memberImage, handleActiveChange, member_id, transactions}) => {
 
     const [transactionTerms, setTransactionTerms] = useState()
