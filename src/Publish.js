@@ -8,6 +8,7 @@ const Publish = ({members, transactions}) => {
     const [state, setState] = useState({active: '', mode: null, amount: 10, premium: 1, location: ''})
     const {member} = useMemberContext()
     const [memberId, setMemberId] = useState()
+    const [deletePendingTransaction, setDeletePendingTransaction] = useState(false)
 
     useEffect(() => {
         member &&
@@ -46,7 +47,22 @@ const Publish = ({members, transactions}) => {
         name === 'active' && handleActiveChange(value)
     }
 
-    // ToDo - delete user's pending transaction if setting to inactive (if unpublishing)
+    // delete user's pending transaction if setting to inactive (if unpublishing)
+    useEffect(() => {
+        if (deletePendingTransaction) {
+            fetch('https://cashclan-backend.herokuapp.com/transactions')
+                .then((obj) => obj.json())
+                .then(json => json.find(transaction => transaction.status === 'pending' && (transaction.seller_id === memberId || transaction.buyer_id === memberId)))
+                .then(transaction => {
+                    fetch(`https://cashclan-backend.herokuapp.com/transactions/${transaction.id}`, {
+                        method: 'DELETE'
+                    })
+                        .then((response) => response.json())
+                        .catch(error => error)
+                })
+        }
+    })
+
     const handleActiveChange = (value, googleId) => {
         const requestOptions = {
             method: 'PUT',
@@ -60,6 +76,7 @@ const Publish = ({members, transactions}) => {
             : fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
             .then(response => response.json())
             .then(!value && setState({active: value, mode: null, amount: 10, premium: 1, location: ''}))
+                .then(!value && setDeletePendingTransaction(true))
             .catch(error => error)
     }
 
