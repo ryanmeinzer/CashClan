@@ -54,12 +54,14 @@ const Publish = ({members, transactions}) => {
                 .then((obj) => obj.json())
                 .then(json => json.find(transaction => transaction.status === 'pending' && (transaction.seller_id === memberId || transaction.buyer_id === memberId)))
                 .then(transaction => {
-                    fetch(`https://cashclan-backend.herokuapp.com/transactions/${transaction.id}`, {
+                    transaction &&
+                        fetch(`https://cashclan-backend.herokuapp.com/transactions/${transaction?.id}`, {
                         method: 'DELETE'
                     })
                         .then((response) => response.json())
                         .catch(error => error)
                 })
+                .catch(error => error)
         }
     })
 
