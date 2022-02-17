@@ -27,14 +27,15 @@ const Publish = ({members, transactions}) => {
             fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
                 .then((obj) => obj.json())
                 .then(json => setMemberId(json.id))
-    })
+    }, [member])
 
-    const memberActive = members.find(member => member.id === memberId)?.active
-    console.log('memberActive:', memberActive)
+    // ToDo - implement below or another props-based approach to refreshing for new matches
+    // const memberActive = members.find(member => member.id === memberId)?.active
+    // console.log('memberActive:', memberActive)
 
-    useEffect(() => {
-        !memberActive && handleActiveChange(false)
-    }, [memberActive])
+    // useEffect(() => {
+    //     !memberActive && handleActiveChange(false)
+    // }, [memberActive])
 
     const handleChange = (event) => {
         const target = event.target
@@ -45,6 +46,7 @@ const Publish = ({members, transactions}) => {
         name === 'active' && handleActiveChange(value)
     }
 
+    // ToDo - delete user's pending transaction if setting to inactive (if unpublishing)
     const handleActiveChange = (value, googleId) => {
         const requestOptions = {
             method: 'PUT',
@@ -89,7 +91,7 @@ const Publish = ({members, transactions}) => {
             <div align="center">
                 <div>
                     {
-                        state.active && memberActive
+                        state.active
                             ?
                             (
                                 <>
@@ -241,8 +243,8 @@ const Publish = ({members, transactions}) => {
                 }
             </div>
             {
-                state.active && memberActive
-                && <div align="left"><Matches members={members} offer={state} member_id={memberId} memberImage={member.image} handleActiveChange={handleActiveChange} transactions={transactions} /></div>
+                state.active
+                && <div align="left"><Matches members={members} offer={state} memberId={memberId} memberImage={member.image} handleActiveChange={handleActiveChange} transactions={transactions} /></div>
             }
         </>
     )
