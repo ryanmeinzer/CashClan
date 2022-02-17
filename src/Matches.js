@@ -34,9 +34,10 @@ const Matches = ({members, offer, memberImage, handleActiveChange, memberId, tra
 
     useEffect(() => {
         if (pendingTransaction) {
+            // const {id, created_at, updated_at, ...pendingTransactionWithoutId} = pendingTransaction
+            // setTransactionTerms(pendingTransactionWithoutId)
             setTransactionTerms(pendingTransaction)
-        } else
-            if (topMatch) {
+        } else if (topMatch) {
             if (offer.mode === 'buying') {
                 let averagedPremiums = topMatch && (offer.premium + topMatch.premium) / 2
                 let cost = Math.round(offer.amount * (averagedPremiums / 100))
@@ -78,7 +79,10 @@ const Matches = ({members, offer, memberImage, handleActiveChange, memberId, tra
                 })
                 // return `${Math.round(topMatch && topMatch.amount + cost)} (a ${Math.round(averagedPremiums)}% profit)`
             }
+        } else {
+            setTransactionTerms()
         }
+        // return setTransactionTerms(null)
     }, [topMatch, offer, pendingTransaction, memberId])
 
     console.log('inside Matches - transactionTerms:', transactionTerms)

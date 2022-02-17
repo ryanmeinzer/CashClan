@@ -10,6 +10,8 @@ const Publish = ({members, transactions}) => {
     const [memberId, setMemberId] = useState()
     const [deletePendingTransaction, setDeletePendingTransaction] = useState(false)
 
+    console.log('inside Publish - state.active:', state.active)
+
     useEffect(() => {
         member &&
             fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
@@ -29,14 +31,6 @@ const Publish = ({members, transactions}) => {
                 .then((obj) => obj.json())
                 .then(json => setMemberId(json.id))
     }, [member])
-
-    // ToDo - implement below or another props-based approach to refreshing for new matches and to refresh upon transaction completion
-    // const memberActive = members.find(member => member.id === memberId)?.active
-    // console.log('memberActive:', memberActive)
-
-    // useEffect(() => {
-    //     !memberActive && handleActiveChange(false)
-    // }, [memberActive])
 
     const handleChange = (event) => {
         const target = event.target
@@ -63,9 +57,12 @@ const Publish = ({members, transactions}) => {
                 })
                 .catch(error => error)
         }
-    })
+        // prevent deletePendingTransaction from running if active happens to be true
+    }, [deletePendingTransaction, !state.active])
 
     const handleActiveChange = (value, googleId) => {
+        !value && setDeletePendingTransaction(true)
+        !value && setState({active: value, mode: null, amount: 10, premium: 1, location: ''})
         const requestOptions = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
@@ -76,10 +73,10 @@ const Publish = ({members, transactions}) => {
         googleId
             ? fetch(`https://cashclan-backend.herokuapp.com/members/${googleId}`, requestOptions)
             : fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
-            .then(response => response.json())
-            .then(!value && setState({active: value, mode: null, amount: 10, premium: 1, location: ''}))
-                .then(!value && setDeletePendingTransaction(true))
-            .catch(error => error)
+                .then(response => response.json())
+                // .then(!value && setState({active: value, mode: null, amount: 10, premium: 1, location: ''}))
+                // .then(!value && setDeletePendingTransaction(true))
+                .catch(error => error)
     }
 
     const handleCancel = () => {

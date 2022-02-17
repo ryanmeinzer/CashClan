@@ -2,13 +2,19 @@ import React, {useState, useEffect} from 'react'
 
 const Transaction = ({pendingTransaction, mode, handleActiveChange, transactionTerms, members, memberImage, topMatch, sortedMatches}) => {
 
-    const [transaction] = useState(pendingTransaction
-        ? {...pendingTransaction}
-        : {...transactionTerms}
-    )
+    // ToDo - ensure correct transactionId for update and that unmatched/ursurped transactions are being deleted
+    const [transaction] = useState({...transactionTerms})
 
-    const [transactionId, setPendingTransactionId] = useState(pendingTransaction && pendingTransaction.id)
+    const [transactionId, setTransactionId] = useState(pendingTransaction ? pendingTransaction.id : transactionTerms.id)
     console.log('inside Transaction - transactionId:', transactionId)
+
+    // const [transaction] = useState(pendingTransaction
+    //     ? {...pendingTransaction}
+    //     : {...transactionTerms}
+    // )
+
+    // const [transactionId, setTransactionId] = useState(pendingTransaction && pendingTransaction.id)
+    // console.log('inside Transaction - transactionId:', transactionId)
 
     console.log('inside Transaction - transaction:', transaction)
     console.log('inside Transaction - transactionTerms:', transactionTerms)
@@ -30,7 +36,7 @@ const Transaction = ({pendingTransaction, mode, handleActiveChange, transactionT
         fetch(`https://cashclan-backend.herokuapp.com/transactions`, requestOptions)
             .then(response => response.json())
             // ensure transactionId is set correctly for transaction update
-            .then(json => setPendingTransactionId(json.id))
+            .then(json => setTransactionId(json.id))
             .catch(error => error)
     }, [transaction])
 

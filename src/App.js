@@ -11,19 +11,23 @@ const App = () => {
   const [members, setMembers] = useState([])
   const [transactions, setTransactions] = useState([])
 
-  // ToDo - implement below or another props-based approach to refreshing for new matches and to refresh upon transaction completion
-  // const [time, setTime] = useState(Date.now())
+  // ToDo - implement less memory-intensive route method to refresh for new matches and to refresh upon transaction completion
+  const [time, setTime] = useState(Date.now())
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => setTime(Date.now()), 5000)
-  //   fetch('https://cashclan-backend.herokuapp.com/members')
-  //     .then((obj) => obj.json())
-  //     .then(json => setMembers(json))
-  //     .finally(console.log('inside App - refetched'))
-  //   return () => {
-  //     clearInterval(interval)
-  //   }
-  // }, [time])
+  useEffect(() => {
+    const interval = setInterval(() => setTime(Date.now()), 5000)
+    fetch('https://cashclan-backend.herokuapp.com/members')
+      .then((obj) => obj.json())
+      .then(json => setMembers(json))
+      .finally(console.log('inside App - refetched members'))
+    fetch('https://cashclan-backend.herokuapp.com/transactions')
+      .then((obj) => obj.json())
+      .then(json => setTransactions(json))
+      .finally(console.log('inside App - refetched transactions'))
+    return () => {
+      clearInterval(interval)
+    }
+  }, [time])
 
   const refreshMembersUponFormSubmit = () => {
     fetch('https://cashclan-backend.herokuapp.com/members')
