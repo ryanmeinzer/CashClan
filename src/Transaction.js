@@ -65,7 +65,6 @@ const Transaction = ({pendingTransaction, mode, handleActiveChange, transactionT
 
     return (
         <>
-            {/* ToDo - confirmed bi-directional match with transaction is created and able to be approved and updated by either party. Also confirmed pendingTransaction supersedes any matches. Confirmed either match or pendingTransaction does not create duplicate transaction. */}
             <div>
                 <div>
                     <h3 style={{color: "green"}}>You've Matched with {topMatch.name}!</h3>
