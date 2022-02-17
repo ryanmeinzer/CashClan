@@ -30,7 +30,7 @@ const Publish = ({members, transactions}) => {
                 .then(json => setMemberId(json.id))
     }, [member])
 
-    // ToDo - implement below or another props-based approach to refreshing for new matches
+    // ToDo - implement below or another props-based approach to refreshing for new matches and to refresh upon transaction completion
     // const memberActive = members.find(member => member.id === memberId)?.active
     // console.log('memberActive:', memberActive)
 

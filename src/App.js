@@ -11,7 +11,7 @@ const App = () => {
   const [members, setMembers] = useState([])
   const [transactions, setTransactions] = useState([])
 
-  // ToDo - implement below or another props-based approach to refreshing for new matches
+  // ToDo - implement below or another props-based approach to refreshing for new matches and to refresh upon transaction completion
   // const [time, setTime] = useState(Date.now())
 
   // useEffect(() => {
