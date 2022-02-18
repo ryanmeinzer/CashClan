@@ -18,7 +18,7 @@ const Transaction = ({pendingTransaction, mode, handleActiveChange, transactionT
 
     console.log('inside Transaction - transaction:', transaction)
     console.log('inside Transaction - transactionTerms:', transactionTerms)
-    console.log('inside Transaction - mode:', mode)
+    // console.log('inside Transaction - mode:', mode)
 
     const sellerGoogleId = members.find(member => member.id === transaction.seller_id)?.googleId
     const buyerGoogleId = members.find(member => member.id === transaction.buyer_id)?.googleId

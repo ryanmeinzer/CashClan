@@ -11,11 +11,11 @@ const Matches = ({members, offer, memberImage, handleActiveChange, memberId, tra
     const pendingTransactionMatch = pendingTransaction && members.find(member => member.id !== memberId && member.id === (offer.mode === 'buying' ? pendingTransaction.seller_id : pendingTransaction.buyer_id))
     console.log('inside Matches - pendingTransactionMatch:', pendingTransactionMatch)
 
-    console.log('inside Matches - members:', members)
-    console.log('inside Matches - transactions:', transactions)
+    // console.log('inside Matches - members:', members)
+    // console.log('inside Matches - transactions:', transactions)
     console.log('inside Matches - memberId:', memberId)
 
-    const nonmatchedMembers = members.filter(member => member.id !== memberId && !transactions.find(transaction => transaction.status === 'pending' && (transaction.seller_id || transaction.buyer_id) === member.id))
+    const nonmatchedMembers = members.filter(member => member.id !== memberId && member.active === true && !transactions.find(transaction => (transaction.seller_id || transaction.buyer_id) === member.id))
     console.log('inside Matches - nonmatchedMembers:', nonmatchedMembers)
 
     const matches = nonmatchedMembers && nonmatchedMembers.filter(member => offer.mode === 'buying' ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location)
