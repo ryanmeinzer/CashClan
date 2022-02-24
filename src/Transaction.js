@@ -2,29 +2,32 @@ import React, {useState, useEffect} from 'react'
 
 const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches, pendingTransaction}) => {
 
+    // ensure superfluous transaction is not created if pendingTransaction exists
+    const transaction = pendingTransaction ? {...pendingTransaction} : transactionTerms
+    console.log('inside Transaction - transaction:', transaction)
+
     // ensure transactionId is set for future transaction update
     const [transactionId, setTransactionId] = useState()
-
-    // ensure superfluous transaction is not created if pendingTransaction exists
-    const [transaction] = useState(pendingTransaction
-        ? {...pendingTransaction}
-        : {...transactionTerms}
-    )
+    console.log('inside Transaction - transactionId:', transactionId)
 
     // create pending transaction with matches for either party to confirm/update as complete
     useEffect(() => {
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({...transaction, status: 'pending'})
+        // ensure new transaction is created only if it's a new transaction and to be extra thorough, if the match is active
+        if (!pendingTransaction && match.active) {
+            const requestOptions = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({...transaction, status: 'pending'})
+            }
+            fetch(`https://cashclan-backend.herokuapp.com/transactions`, requestOptions)
+                .then(response => response.json())
+                // ensure transactionId is set correctly for future transaction update
+                .then(json => setTransactionId(json.id))
+                .catch(error => error)
+        } else {
+            setTransactionId(pendingTransaction.id)
         }
-        fetch(`https://cashclan-backend.herokuapp.com/transactions`, requestOptions)
-            .then(response => response.json())
-            // ensure transactionId is set correctly for future transaction update
-            .then(json => setTransactionId(json.id))
-            .catch(error => error)
-        // ensure new transaction is created only if it's a new transaction and to be extra thorough, if the match is active ()
-    }, [!pendingTransaction, match.active])
+    }, [pendingTransaction, match.active, transaction])
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -48,11 +51,11 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches,
         }
         fetch(`https://cashclan-backend.herokuapp.com/transactions/${transactionId}`, requestOptions)
             .then(response => response.json())
-            // ToDo - handle this in Transaction - set both matches to inactive after transaction is complete; potentially handle from BE
-            // .then(handleActiveChange(false, sellerGoogleId))
-            // .then(handleActiveChange(false, buyerGoogleId))
             .finally(alert('Thanks for using CashClan!'))
             .catch(error => error)
+        // BE is setting both parties statuses to inactive after transaction is complete
+        // ToDo - swap below with logic to refresh both parties' window states upon transaction completion
+        window.location.reload(true)
     }
 
     // // ToDo - figure out why an additional transaction is being created on the user who's transaction is being deleted by the other users' unpublishing
