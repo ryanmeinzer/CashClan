@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {useMemberContext} from './providers/member'
 
 const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches, pendingTransaction}) => {
 
@@ -9,6 +10,13 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches,
     // ensure transactionId is set for future transaction update
     const [transactionId, setTransactionId] = useState()
     console.log('inside Transaction - transactionId:', transactionId)
+
+    const {member} = useMemberContext()
+    console.log('inside Transaction - member:', member)
+
+    console.log('inside Transaction - match:', match)
+
+    const [time, setTime] = useState(Date.now())
 
     // create pending transaction with matches for either party to confirm/update as complete
     useEffect(() => {
@@ -28,6 +36,24 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches,
             setTransactionId(pendingTransaction.id)
         }
     }, [pendingTransaction, match.active, transaction])
+
+    // ToDo - implement less memory-intensive route method to refresh both parties' window states upon transaction completion
+    // ToDo - delete transaction if either party unpublishes
+    useEffect(() => {
+        const interval = setInterval(() => setTime(Date.now()), 5000)
+        // fetch(`https://cashclan-backend.herokuapp.com/members/${match?.googleId}`)
+        fetch(`https://cashclan-backend.herokuapp.com/members/55555`)
+            .then((obj) => obj.json())
+            .then(json => !json.active ? window.location.reload(true) : console.log('inside Transaction - checked match.active:', json.active))
+            .catch(error => error)
+        fetch(`https://cashclan-backend.herokuapp.com/members/${member?.googleId}`)
+            .then((obj) => obj.json())
+            .then(json => !json.active ? window.location.reload(true) : console.log('inside Transaction - checked member.active:', json.active))
+            .catch(error => error)
+        return () => {
+            clearInterval(interval)
+        }
+    }, [time, match, member])
 
     const handleSubmit = (event) => {
         event.preventDefault()

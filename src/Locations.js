@@ -21,7 +21,7 @@ const Locations = ({state, handleChange}) => {
                 <option value="R Bar">R Bar</option>
                 <option value="Decodance">Decodance</option>
                 <option value="Jackalope">Jackalope</option>
-                <option value="Edinburgh Castle Pub">Edinburh Castle Pub</option>
+                <option value="Edinburgh Castle Pub">Edinburgh Castle Pub</option>
             </optgroup>
             <optgroup label="Mission District">
                 <option value="Zeitgeist">Zeitgeist</option>
