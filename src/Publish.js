@@ -3,34 +3,40 @@ import {useMemberContext} from './providers/member'
 import Matches from './Matches'
 import Locations from './Locations'
 
-const Publish = ({members, transactions}) => {
+const Publish = () => {
 
-    const [state, setState] = useState({active: '', mode: null, amount: 10, premium: 1, location: ''})
+    // ToDo - align all default and set states
+    const [state, setState] = useState({active: false, mode: '', amount: 10, premium: 1, location: ''})
     const {member} = useMemberContext()
     const [memberId, setMemberId] = useState()
-    const [deletePendingTransaction, setDeletePendingTransaction] = useState(false)
 
-    console.log('inside Publish - state.active:', state.active)
+    console.log('inside Publish - state:', state)
+    console.log('inside Publish - member:', member)
+    console.log('inside Publish - memberId:', memberId)
 
     useEffect(() => {
-        member &&
+        member
+            && fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
+                .then((obj) => obj.json())
+                .then(json => setMemberId(json.id))
             fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
                 .then((obj) => obj.json())
                 .then(json => setState(
-                    json.active && json.active
+                    json.active === true
                         ?
                         {active: json.active, mode: json.mode, amount: json.amount, premium: json.premium, location: json.location}
                         :
-                        {active: false, mode: null, amount: 10, premium: 1, location: ''}
+                        {active: false, mode: '', amount: 10, premium: 1, location: ''}
                 ))
     }, [member])
 
-    useEffect(() => {
-        member &&
-            fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
-                .then((obj) => obj.json())
-                .then(json => setMemberId(json.id))
-    }, [member])
+    // ToDo - although the below successfully unpublishes the other match upon transaction confirmation, it intermittently clears out the form fields during an offer submittal. Figure out how to unpublish the other match upon transaction confirmation.
+    // useEffect(() => {
+    //     member &&
+    //         fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
+    //             .then((obj) => obj.json())
+    //             .then(json => json.active === false && setState({active: false, mode: null, amount: 10, premium: 1, location: ''}))
+    // }, [members])
 
     const handleChange = (event) => {
         const target = event.target
@@ -41,65 +47,35 @@ const Publish = ({members, transactions}) => {
         name === 'active' && handleActiveChange(value)
     }
 
-    // delete user's pending transaction if setting to inactive (if unpublishing)
-    useEffect(() => {
-        if (deletePendingTransaction) {
-            fetch('https://cashclan-backend.herokuapp.com/transactions')
-                .then((obj) => obj.json())
-                .then(json => json.find(transaction => transaction.status === 'pending' && (transaction.seller_id === memberId || transaction.buyer_id === memberId)))
-                .then(transaction => {
-                    transaction &&
-                        fetch(`https://cashclan-backend.herokuapp.com/transactions/${transaction?.id}`, {
-                        method: 'DELETE'
-                    })
-                        .then((response) => response.json())
-                        .catch(error => error)
-                })
-                .catch(error => error)
-        }
-        // prevent deletePendingTransaction from running if active happens to be true
-    }, [deletePendingTransaction, !state.active])
-
-    const handleActiveChange = (value, googleId) => {
-        !value && setDeletePendingTransaction(true)
-        !value && setState({active: value, mode: null, amount: 10, premium: 1, location: ''})
+    const handleActiveChange = (value) => {
         const requestOptions = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-            // if inactive, set mode & location to null and amount to 0 for extra BE clarity
-            body: JSON.stringify(value ? {active: value} : {active: value, mode: null, amount: 0, premium: 0, location: null})
+            // if inactive, set mode & location to '' and amount & premium to 0 on BE for extra clarity
+            body: JSON.stringify(value === true ? {...state, active: true} : {active: false, mode: '', amount: 0, premium: 0, location: ''})
         }
-        //! use googleId instead of id, but it is unsecure
-        googleId
-            ? fetch(`https://cashclan-backend.herokuapp.com/members/${googleId}`, requestOptions)
-            : fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
-                .then(response => response.json())
-                // .then(!value && setState({active: value, mode: null, amount: 10, premium: 1, location: ''}))
-                // .then(!value && setDeletePendingTransaction(true))
-                .catch(error => error)
+        fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
+            .then(response => response.json())
+            .catch(error => error)
+        value === false && setState({active: false, mode: '', amount: 10, premium: 1, location: ''})
     }
 
     const handleCancel = () => {
-        setState({...state, mode: null, amount: 10, premium: 1, location: ''})
+        setState({active: false, mode: '', amount: 10, premium: 1, location: ''})
     }
 
     const handleSubmit = (event) => {
-        if (state.mode) {
-            event.preventDefault()
-            const requestOptions = {
-                method: 'PUT',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({...state, active: true})
-            }
-            //! use googleId instead of id, but it is unsecure
-            fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
-                .then(response => response.json())
-                .then(setState({...state, active: true}))
-                .catch(error => error)
-        } else {
-            event.preventDefault()
-            alert('To Publish, please choose to Buy or Sell Cash.')
+        event.preventDefault()
+        const requestOptions = {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({...state, active: true})
         }
+        //! use googleId instead of id, but it is unsecure
+        fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
+            .then(response => response.json())
+            .catch(error => error)
+        setState({...state, active: true})
     }
 
     return (
@@ -260,7 +236,7 @@ const Publish = ({members, transactions}) => {
             </div>
             {
                 state.active
-                && <div align="left"><Matches members={members} offer={state} memberId={memberId} memberImage={member.image} handleActiveChange={handleActiveChange} transactions={transactions} /></div>
+                && <div align="left"><Matches offer={state} memberId={memberId} memberImage={member.image} /></div>
             }
         </>
     )

@@ -5,7 +5,7 @@ import Logout from './Logout'
 import {useMemberContext} from './providers/member'
 // import {Link} from "react-router-dom"
 
-const Home = ({members, refreshMembersUponSignUp, transactions}) => {
+const Home = ({refreshMembersUponSignUp}) => {
 
     const {member} = useMemberContext()
 
@@ -29,7 +29,7 @@ const Home = ({members, refreshMembersUponSignUp, transactions}) => {
                     <hr width="50%" />
                     <br />
                     <div align="center">
-                        <Publish members={members} transactions={transactions} />
+                        <Publish />
                     </div>
                     {/* <br />
                     <br />

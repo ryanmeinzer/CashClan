@@ -1,30 +1,15 @@
 import React, {useState, useEffect} from 'react'
 
-const Transaction = ({pendingTransaction, mode, handleActiveChange, transactionTerms, members, memberImage, topMatch, sortedMatches}) => {
+const Transaction = ({mode, transactionTerms, memberImage, topMatch, sortedMatches, pendingTransaction}) => {
 
-    // ToDo - ensure correct transactionId for update and that unmatched/ursurped transactions are being deleted
-    const [transaction] = useState({...transactionTerms})
+    // ensure transactionId is set for future transaction update
+    const [transactionId, setTransactionId] = useState()
 
-    const [transactionId, setTransactionId] = useState(pendingTransaction ? pendingTransaction.id : transactionTerms.id)
-    console.log('inside Transaction - transactionId:', transactionId)
-
-    // const [transaction] = useState(pendingTransaction
-    //     ? {...pendingTransaction}
-    //     : {...transactionTerms}
-    // )
-
-    // const [transactionId, setTransactionId] = useState(pendingTransaction && pendingTransaction.id)
-    // console.log('inside Transaction - transactionId:', transactionId)
-
-    console.log('inside Transaction - transaction:', transaction)
-    console.log('inside Transaction - transactionTerms:', transactionTerms)
-    // console.log('inside Transaction - mode:', mode)
-
-    const sellerGoogleId = members.find(member => member.id === transaction.seller_id)?.googleId
-    const buyerGoogleId = members.find(member => member.id === transaction.buyer_id)?.googleId
-
-    // const sellerName = members.find(member => member.id === seller_id)?.name
-    // const buyerName = members.find(member => member.id === buyer_id)?.name
+    // ensure superfluous transaction is not created if pendingTransaction exists
+    const [transaction] = useState(pendingTransaction
+        ? {...pendingTransaction}
+        : {...transactionTerms}
+    )
 
     // create pending transaction with matches for either party to confirm/update as complete
     useEffect(() => {
@@ -35,10 +20,11 @@ const Transaction = ({pendingTransaction, mode, handleActiveChange, transactionT
         }
         fetch(`https://cashclan-backend.herokuapp.com/transactions`, requestOptions)
             .then(response => response.json())
-            // ensure transactionId is set correctly for transaction update
+            // ensure transactionId is set correctly for future transaction update
             .then(json => setTransactionId(json.id))
             .catch(error => error)
-    }, [transaction])
+        // ensure new transaction is created only if it's a new transaction and to be extra thorough, if the topMatch is active ()
+    }, [!pendingTransaction, topMatch.active])
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -62,12 +48,32 @@ const Transaction = ({pendingTransaction, mode, handleActiveChange, transactionT
         }
         fetch(`https://cashclan-backend.herokuapp.com/transactions/${transactionId}`, requestOptions)
             .then(response => response.json())
-            // .then(handleActiveChange(false))
-            .then(handleActiveChange(false, sellerGoogleId))
-            .then(handleActiveChange(false, buyerGoogleId))
+            // ToDo - handle this in Transaction - set both matches to inactive after transaction is complete; potentially handle from BE
+            // .then(handleActiveChange(false, sellerGoogleId))
+            // .then(handleActiveChange(false, buyerGoogleId))
             .finally(alert('Thanks for using CashClan!'))
             .catch(error => error)
     }
+
+    // // ToDo - figure out why an additional transaction is being created on the user who's transaction is being deleted by the other users' unpublishing
+    // // delete user's pending transaction if setting to inactive (if unpublishing); potentially handle from BE
+    // useEffect(() => {
+    //     if (deletePendingTransaction) {
+    //         fetch('https://cashclan-backend.herokuapp.com/transactions')
+    //             .then((obj) => obj.json())
+    //             .then(json => json.find(transaction => transaction.status === 'pending' && (transaction.seller_id === memberId || transaction.buyer_id === memberId)))
+    //             .then(transaction => {
+    //                 transaction &&
+    //                     fetch(`https://cashclan-backend.herokuapp.com/transactions/${transaction?.id}`, {
+    //                         method: 'DELETE'
+    //                     })
+    //                         .then((response) => response.json())
+    //                         .catch(error => error)
+    //             })
+    //             .catch(error => error)
+    //     }
+    //     // prevent deletePendingTransaction from running if active happens to be true
+    // }, [deletePendingTransaction, !state.active])
 
     return (
         <>

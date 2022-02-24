@@ -1,22 +1,31 @@
 import React, {useState, useEffect} from 'react'
 import Transaction from './Transaction'
 
-const Matches = ({members, offer, memberImage, handleActiveChange, memberId, transactions}) => {
+const Matches = ({offer, memberImage, memberId}) => {
+
+    const [members, setMembers] = useState([])
+    const [transactions, setTransactions] = useState([])
 
     const [transactionTerms, setTransactionTerms] = useState()
 
-    const pendingTransaction = transactions.find(transaction => transaction.status === 'pending' && (transaction.seller_id === memberId || transaction.buyer_id === memberId))
+    console.log('inside Matches - members:', members)
+    // console.log('inside Matches - transactions:', transactions)
+    console.log('inside Matches - memberId:', memberId)
+
+    const activeMembers = members.filter(member => member.active === true)
+    console.log('inside Matches - activeMembers:', activeMembers)
+    const pendingTransactions = transactions.filter(transaction => transaction.status === 'pending')
+    console.log('inside Matches - pendingTransactions:', pendingTransactions)
+    const activeNoPendingTransactionsMembers = activeMembers.filter(member => !pendingTransactions.find(transaction => transaction.seller_id === member.id || transaction.buyer_id === member.id))
+    console.log('inside Matches - activeNoPendingTransactionsMembers:', activeNoPendingTransactionsMembers)
+    const nonmatchedMembers = activeNoPendingTransactionsMembers.filter(member => member.id !== memberId)
+    console.log('inside Matches - nonmatchedMembers:', nonmatchedMembers)
+
+    const pendingTransaction = transactions.find(transaction => transaction.status === 'pending' && (transaction.seller_id === memberId || transaction.buyer_id === memberId) && activeMembers.find(member => member.id !== memberId && (member.id === transaction.seller_id || member.id === transaction.buyer_id)))
     console.log('inside Matches - pendingTransaction:', pendingTransaction)
 
     const pendingTransactionMatch = pendingTransaction && members.find(member => member.id !== memberId && member.id === (offer.mode === 'buying' ? pendingTransaction.seller_id : pendingTransaction.buyer_id))
     console.log('inside Matches - pendingTransactionMatch:', pendingTransactionMatch)
-
-    // console.log('inside Matches - members:', members)
-    // console.log('inside Matches - transactions:', transactions)
-    console.log('inside Matches - memberId:', memberId)
-
-    const nonmatchedMembers = members.filter(member => member.id !== memberId && member.active === true && !transactions.find(transaction => (transaction.seller_id || transaction.buyer_id) === member.id))
-    console.log('inside Matches - nonmatchedMembers:', nonmatchedMembers)
 
     const matches = nonmatchedMembers && nonmatchedMembers.filter(member => offer.mode === 'buying' ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location)
     console.log('inside Matches - matches:', matches)
@@ -31,6 +40,18 @@ const Matches = ({members, offer, memberImage, handleActiveChange, memberId, tra
 
     const topMatch = pendingTransaction ? pendingTransactionMatch : sortedMatches()[0]
     console.log('inside Matches - topMatch:', topMatch)
+
+    useEffect(() => {
+        fetch('https://cashclan-backend.herokuapp.com/members')
+            .then((obj) => obj.json())
+            .then(json => setMembers(json))
+    }, [])
+
+    useEffect(() => {
+        fetch('https://cashclan-backend.herokuapp.com/transactions')
+            .then((obj) => obj.json())
+            .then(json => setTransactions(json))
+    }, [])
 
     useEffect(() => {
         if (pendingTransaction) {
@@ -96,9 +117,8 @@ const Matches = ({members, offer, memberImage, handleActiveChange, memberId, tra
                         pendingTransaction={pendingTransaction}
                         mode={offer.mode}
                         transactionTerms={transactionTerms}
-                        handleActiveChange={handleActiveChange}
                         // location={offer.location}
-                        members={members}
+                        // members={members}
                         memberImage={memberImage}
                         topMatch={topMatch}
                         sortedMatches={sortedMatches()}
