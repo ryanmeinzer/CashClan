@@ -58,8 +58,7 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches,
         window.location.reload(true)
     }
 
-    // // ToDo - figure out why an additional transaction is being created on the user who's transaction is being deleted by the other users' unpublishing
-    // // delete user's pending transaction if setting to inactive (if unpublishing); potentially handle from BE
+    // // delete user's pending transaction if setting to inactive (if unpublishing); potentially handle from BE; ensure other published party is rematched with another transaction created
     // useEffect(() => {
     //     if (deletePendingTransaction) {
     //         fetch('https://cashclan-backend.herokuapp.com/transactions')
