@@ -5,13 +5,22 @@ const Matches = ({offer, memberImage, memberId}) => {
 
     const [members, setMembers] = useState([])
     const [transactions, setTransactions] = useState([])
-
-    const [transactionTerms, setTransactionTerms] = useState()
+    const [transactionTerms, setTransactionTerms] = useState({})
 
     console.log('inside Matches - members:', members)
-    // console.log('inside Matches - transactions:', transactions)
+    console.log('inside Matches - transactions:', transactions)
+    console.log('inside Matches - transactionTerms', transactionTerms)
+    console.log('inside Matches - offer', offer)
     console.log('inside Matches - memberId:', memberId)
 
+    // Pending Transaction (don't match)
+    const pendingTransaction = transactions.find(transaction => transaction.status === 'pending' && (transaction.seller_id === memberId || transaction.buyer_id === memberId))
+    // && activeMembers.find(member => member.id !== memberId && (member.id === transaction.seller_id || member.id === transaction.buyer_id))
+    console.log('inside Matches - pendingTransaction:', pendingTransaction)
+    const pendingTransactionMatch = pendingTransaction && members.find(member => member.id !== memberId && member.id === (offer.mode === 'buying' ? pendingTransaction.seller_id : pendingTransaction.buyer_id))
+    console.log('inside Matches - pendingTransactionMatch:', pendingTransactionMatch)
+
+    // Match
     const activeMembers = members.filter(member => member.active === true)
     console.log('inside Matches - activeMembers:', activeMembers)
     const pendingTransactions = transactions.filter(transaction => transaction.status === 'pending')
@@ -20,16 +29,13 @@ const Matches = ({offer, memberImage, memberId}) => {
     console.log('inside Matches - activeNoPendingTransactionsMembers:', activeNoPendingTransactionsMembers)
     const nonmatchedMembers = activeNoPendingTransactionsMembers.filter(member => member.id !== memberId)
     console.log('inside Matches - nonmatchedMembers:', nonmatchedMembers)
-
-    const pendingTransaction = transactions.find(transaction => transaction.status === 'pending' && (transaction.seller_id === memberId || transaction.buyer_id === memberId) && activeMembers.find(member => member.id !== memberId && (member.id === transaction.seller_id || member.id === transaction.buyer_id)))
-    console.log('inside Matches - pendingTransaction:', pendingTransaction)
-
-    const pendingTransactionMatch = pendingTransaction && members.find(member => member.id !== memberId && member.id === (offer.mode === 'buying' ? pendingTransaction.seller_id : pendingTransaction.buyer_id))
-    console.log('inside Matches - pendingTransactionMatch:', pendingTransactionMatch)
-
-    const matches = nonmatchedMembers && nonmatchedMembers.filter(member => offer.mode === 'buying' ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location)
+    const matches = nonmatchedMembers && nonmatchedMembers.filter(member =>
+        offer.mode === 'buying'
+            ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location
+            : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location
+    )
     console.log('inside Matches - matches:', matches)
-
+    // ToDo - potentially make the below sorting algorithm smarter based on net cost/profit
     function sortedMatches() {
         if (offer.mode === 'buying') {
             return matches.sort(function (a, b) {return a.premium - b.premium})
@@ -37,9 +43,11 @@ const Matches = ({offer, memberImage, memberId}) => {
             return matches.sort(function (a, b) {return b.premium - a.premium})
         }
     }
-
-    const topMatch = pendingTransaction ? pendingTransactionMatch : sortedMatches()[0]
+    console.log('inside Matches - sortedMatches:', sortedMatches())
+    const topMatch = sortedMatches()[0]
     console.log('inside Matches - topMatch:', topMatch)
+    const match = pendingTransaction ? pendingTransactionMatch : topMatch
+    console.log('inside Matches - match:', match)
 
     useEffect(() => {
         fetch('https://cashclan-backend.herokuapp.com/members')
@@ -55,24 +63,24 @@ const Matches = ({offer, memberImage, memberId}) => {
 
     useEffect(() => {
         if (pendingTransaction) {
-            // const {id, created_at, updated_at, ...pendingTransactionWithoutId} = pendingTransaction
-            // setTransactionTerms(pendingTransactionWithoutId)
+            console.log('inside Matches -  if (pendingTransaction)')
             setTransactionTerms(pendingTransaction)
-        } else if (topMatch) {
+        } else if (match) {
+            console.log('inside Matches -  if (match)')
             if (offer.mode === 'buying') {
-                let averagedPremiums = topMatch && (offer.premium + topMatch.premium) / 2
+                let averagedPremiums = (offer.premium + match.premium) / 2
                 let cost = Math.round(offer.amount * (averagedPremiums / 100))
                 setTransactionTerms({
                     amount: Math.round(offer.amount + cost),
                     premium: Math.round(averagedPremiums),
                     cost: cost,
                     profit: cost,
-                    savings: (4.44 - cost.toFixed(2)).toFixed(2),
+                    savings: Number((5 - cost).toFixed(2)),
                     buyer_offer_amount: offer.amount,
                     buyer_offer_premium: offer.premium,
-                    seller_offer_amount: topMatch.amount,
-                    seller_offer_premium: topMatch.premium,
-                    seller_id: topMatch && topMatch.id,
+                    seller_offer_amount: match.amount,
+                    seller_offer_premium: match.premium,
+                    seller_id: match.id,
                     buyer_id: memberId,
                     location: offer.location,
                     buyer_confirmed: false,
@@ -80,38 +88,35 @@ const Matches = ({offer, memberImage, memberId}) => {
                 })
                 // return `${Math.round(offer.amount + cost)} (a ${Math.round(averagedPremiums)}% cost)`
             } else if (offer.mode === 'selling') {
-                let averagedPremiums = topMatch && (topMatch.premium + offer.premium) / 2
-                let cost = Math.round(topMatch && topMatch.amount * (averagedPremiums / 100))
+                let averagedPremiums = (match.premium + offer.premium) / 2
+                let cost = Math.round(match.amount * (averagedPremiums / 100))
                 setTransactionTerms({
-                    amount: Math.round(topMatch.amount + cost),
+                    amount: Math.round(match.amount + cost),
                     premium: Math.round(averagedPremiums),
                     cost: cost,
                     profit: cost,
-                    savings: (4.44 - cost.toFixed(2)).toFixed(2),
-                    buyer_offer_amount: topMatch && topMatch.amount,
-                    buyer_offer_premium: topMatch && topMatch.premium,
+                    savings: Number((5 - cost).toFixed(2)),
+                    buyer_offer_amount: match.amount,
+                    buyer_offer_premium: match.premium,
                     seller_offer_amount: offer.amount,
                     seller_offer_premium: offer.premium,
                     seller_id: memberId,
-                    buyer_id: topMatch && topMatch.id,
+                    buyer_id: match.id,
                     location: offer.location,
                     buyer_confirmed: false,
                     seller_confirmed: false,
                 })
-                // return `${Math.round(topMatch && topMatch.amount + cost)} (a ${Math.round(averagedPremiums)}% profit)`
             }
         } else {
-            setTransactionTerms()
+            setTransactionTerms({})
         }
-        // return setTransactionTerms(null)
-    }, [topMatch, offer, pendingTransaction, memberId])
-
+    }, [match, offer, pendingTransaction, memberId])
     console.log('inside Matches - transactionTerms:', transactionTerms)
 
     return (
         <>
             {
-                topMatch && transactionTerms
+                match && transactionTerms
                     ?
                     <Transaction
                         pendingTransaction={pendingTransaction}
@@ -120,7 +125,7 @@ const Matches = ({offer, memberImage, memberId}) => {
                         // location={offer.location}
                         // members={members}
                         memberImage={memberImage}
-                        topMatch={topMatch}
+                        match={match}
                         sortedMatches={sortedMatches()}
                     />
                     :

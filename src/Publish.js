@@ -5,14 +5,9 @@ import Locations from './Locations'
 
 const Publish = () => {
 
-    // ToDo - align all default and set states
     const [state, setState] = useState({active: false, mode: '', amount: 10, premium: 1, location: ''})
     const {member} = useMemberContext()
     const [memberId, setMemberId] = useState()
-
-    console.log('inside Publish - state:', state)
-    console.log('inside Publish - member:', member)
-    console.log('inside Publish - memberId:', memberId)
 
     useEffect(() => {
         member
@@ -222,7 +217,7 @@ const Publish = () => {
                         style={{
                             color: (!state.active ? 'green' : 'lightGray')
                         }}
-                    ><em>You'll save at least ${(5 - (state.amount * (state.premium / 100))).toFixed(2)} buying at least ${state.amount} cash for up to a {state.premium}% cost through Venmo from a CashClan member instead of the ATM.</em>
+                    ><em>You'll save at least ${(5 - (state.amount * (state.premium / 100))).toFixed(2)} buying at least ${state.amount} cash for up to a {state.premium}% cost through Venmo from a CashClan member at {state.location} instead of at the ATM.</em>
                     </p>
                 }
                 {state.mode === 'selling'
@@ -230,7 +225,7 @@ const Publish = () => {
                         style={{
                             color: (!state.active ? 'green' : 'lightGray')
                         }}
-                    ><em>You'll make at least ${(state.amount * (state.premium / 100)).toFixed(2)} ({state.premium}% profit) selling up to ${state.amount} of your cash through Venmo to a CashClan member.</em>
+                    ><em>You'll make at least ${(state.amount * (state.premium / 100)).toFixed(2)} ({state.premium}% profit) selling up to ${state.amount} of your cash through Venmo to a CashClan member at {state.location}.</em>
                     </p>
                 }
             </div>

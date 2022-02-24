@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-const Transaction = ({mode, transactionTerms, memberImage, topMatch, sortedMatches, pendingTransaction}) => {
+const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches, pendingTransaction}) => {
 
     // ensure transactionId is set for future transaction update
     const [transactionId, setTransactionId] = useState()
@@ -23,8 +23,8 @@ const Transaction = ({mode, transactionTerms, memberImage, topMatch, sortedMatch
             // ensure transactionId is set correctly for future transaction update
             .then(json => setTransactionId(json.id))
             .catch(error => error)
-        // ensure new transaction is created only if it's a new transaction and to be extra thorough, if the topMatch is active ()
-    }, [!pendingTransaction, topMatch.active])
+        // ensure new transaction is created only if it's a new transaction and to be extra thorough, if the match is active ()
+    }, [!pendingTransaction, match.active])
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -79,19 +79,19 @@ const Transaction = ({mode, transactionTerms, memberImage, topMatch, sortedMatch
         <>
             <div>
                 <div>
-                    <h3 style={{color: "green"}}>You've Matched with {topMatch.name}!</h3>
+                    <h3 style={{color: "green"}}>You've Matched with {match.name}!</h3>
                     {
-                        topMatch.image
+                        match.image
                         &&
                         <span>
                             <img src={memberImage} alt="profile" style={{borderRadius: "50%"}} />
                             <span style={{fontSize: '5rem'}}>🤝</span>
-                            <img src={topMatch.image} alt="profile" style={{borderRadius: "50%"}} />
+                                <img src={match.image} alt="profile" style={{borderRadius: "50%"}} />
                         </span>
                     }
                 </div>
                 <p>
-                    Meet now at the ATM inside of {transaction.location}. Say "CashClan" while asking for {topMatch.name} who {topMatch.mode === 'buying' && 'will buy'} {topMatch.mode === 'selling' && 'will sell'} ${mode === 'buying' && transaction.amount - transaction.cost}{mode === 'selling' && transaction.amount - transaction.profit} cash {topMatch.mode === 'buying' && 'from you'} {topMatch.mode === 'selling' && 'to you'} through Venmo for ${transaction.amount} (a {transaction.premium}% {mode === 'buying' ? 'cost' : 'profit'}).
+                    Meet now at the ATM inside of {transaction.location}. Say "CashClan" while asking for {match.name} who {match.mode === 'buying' && 'will buy'} {match.mode === 'selling' && 'will sell'} ${mode === 'buying' && transaction.amount - transaction.cost}{mode === 'selling' && transaction.amount - transaction.profit} cash {match.mode === 'buying' && 'from you'} {match.mode === 'selling' && 'to you'} through Venmo for ${transaction.amount} (a {transaction.premium}% {mode === 'buying' ? 'cost' : 'profit'}).
                 </p>
             </div>
             <button onClick={handleSubmit}>Transaction Completed</button>
