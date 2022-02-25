@@ -47,7 +47,7 @@ const Matches = ({offer, memberImage, memberId}) => {
     const topMatch = sortedMatches()[0]
     console.log('inside Matches - topMatch:', topMatch)
     const match = pendingTransaction ? pendingTransactionMatch : topMatch
-    console.log('inside Matches - match:', match)
+    console.log('inside Matches useEffect - match:', match)
 
     useEffect(() => {
         fetch('https://cashclan-backend.herokuapp.com/members')
@@ -119,7 +119,7 @@ const Matches = ({offer, memberImage, memberId}) => {
                 match && transactionTerms
                     ?
                     <Transaction
-                        pendingTransaction={pendingTransaction}
+                        // pendingTransaction={pendingTransaction}
                         mode={offer.mode}
                         transactionTerms={transactionTerms}
                         // location={offer.location}

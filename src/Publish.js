@@ -42,6 +42,7 @@ const Publish = () => {
         name === 'active' && handleActiveChange(value)
     }
 
+    // BE is deleting member's pending transaction(s) if they unpublish their offer
     const handleActiveChange = (value) => {
         const requestOptions = {
             method: 'PUT',

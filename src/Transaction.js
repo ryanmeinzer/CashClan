@@ -1,59 +1,54 @@
 import React, {useState, useEffect} from 'react'
 import {useMemberContext} from './providers/member'
 
-const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches, pendingTransaction}) => {
-
-    // ensure superfluous transaction is not created if pendingTransaction exists
-    const transaction = pendingTransaction ? {...pendingTransaction} : transactionTerms
-    console.log('inside Transaction - transaction:', transaction)
+const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}) => {
 
     // ensure transactionId is set for future transaction update
-    const [transactionId, setTransactionId] = useState()
+    const [transactionId, setTransactionId] = useState(transactionTerms.id && transactionTerms.id)
     console.log('inside Transaction - transactionId:', transactionId)
+
+    console.log('inside Transaction - transactionTerms.id', transactionTerms.id)
 
     const {member} = useMemberContext()
     console.log('inside Transaction - member:', member)
 
     console.log('inside Transaction - match:', match)
 
-    const [time, setTime] = useState(Date.now())
-
     // create pending transaction with matches for either party to confirm/update as complete
     useEffect(() => {
-        // ensure new transaction is created only if it's a new transaction and to be extra thorough, if the match is active
-        if (!pendingTransaction && match.active) {
+        // ensure new transaction is created only if it's a new transaction (also handled on BE) and to be extra thorough, if the match is active
+        if (!transactionTerms.id && match.active) {
             const requestOptions = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({...transaction, status: 'pending'})
+                body: JSON.stringify({...transactionTerms, status: 'pending'})
             }
             fetch(`https://cashclan-backend.herokuapp.com/transactions`, requestOptions)
                 .then(response => response.json())
                 // ensure transactionId is set correctly for future transaction update
                 .then(json => setTransactionId(json.id))
                 .catch(error => error)
-        } else {
-            setTransactionId(pendingTransaction.id)
+        } else if (transactionTerms.id) {
+            setTransactionId(transactionTerms.id)
         }
-    }, [pendingTransaction, match.active, transaction])
+    }, [transactionTerms, match])
 
     // ToDo - implement less memory-intensive route method to refresh both parties' window states upon transaction completion
-    // ToDo - delete transaction if either party unpublishes
-    useEffect(() => {
-        const interval = setInterval(() => setTime(Date.now()), 5000)
-        // fetch(`https://cashclan-backend.herokuapp.com/members/${match?.googleId}`)
-        fetch(`https://cashclan-backend.herokuapp.com/members/55555`)
-            .then((obj) => obj.json())
-            .then(json => !json.active ? window.location.reload(true) : console.log('inside Transaction - checked match.active:', json.active))
-            .catch(error => error)
-        fetch(`https://cashclan-backend.herokuapp.com/members/${member?.googleId}`)
-            .then((obj) => obj.json())
-            .then(json => !json.active ? window.location.reload(true) : console.log('inside Transaction - checked member.active:', json.active))
-            .catch(error => error)
-        return () => {
-            clearInterval(interval)
-        }
-    }, [time, match, member])
+    // const [time, setTime] = useState(Date.now())
+    // useEffect(() => {
+    //     const interval = setInterval(() => setTime(Date.now()), 5000)
+    //     fetch(`https://cashclan-backend.herokuapp.com/members/${match?.googleId}`)
+    //         .then((obj) => obj.json())
+    //         .then(json => !json.active ? window.location.reload(true) : console.log('inside Transaction - checked match.active:', json.active))
+    //         .catch(error => error)
+    //     fetch(`https://cashclan-backend.herokuapp.com/members/${member?.googleId}`)
+    //         .then((obj) => obj.json())
+    //         .then(json => !json.active ? window.location.reload(true) : console.log('inside Transaction - checked member.active:', json.active))
+    //         .catch(error => error)
+    //     return () => {
+    //         clearInterval(interval)
+    //     }
+    // }, [time, match, member])
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -63,13 +58,13 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches,
             body: JSON.stringify(mode === 'selling'
                 ?
                 {
-                    ...transaction,
+                    ...transactionTerms,
                     status: 'complete',
                     seller_confirmed: 'true'
                 }
                 :
                 {
-                    ...transaction,
+                    ...transactionTerms,
                     status: 'complete',
                     buyer_confirmed: 'true'
                 }
@@ -83,25 +78,6 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches,
         // ToDo - swap below with logic to refresh both parties' window states upon transaction completion
         window.location.reload(true)
     }
-
-    // // delete user's pending transaction if setting to inactive (if unpublishing); potentially handle from BE; ensure other published party is rematched with another transaction created
-    // useEffect(() => {
-    //     if (deletePendingTransaction) {
-    //         fetch('https://cashclan-backend.herokuapp.com/transactions')
-    //             .then((obj) => obj.json())
-    //             .then(json => json.find(transaction => transaction.status === 'pending' && (transaction.seller_id === memberId || transaction.buyer_id === memberId)))
-    //             .then(transaction => {
-    //                 transaction &&
-    //                     fetch(`https://cashclan-backend.herokuapp.com/transactions/${transaction?.id}`, {
-    //                         method: 'DELETE'
-    //                     })
-    //                         .then((response) => response.json())
-    //                         .catch(error => error)
-    //             })
-    //             .catch(error => error)
-    //     }
-    //     // prevent deletePendingTransaction from running if active happens to be true
-    // }, [deletePendingTransaction, !state.active])
 
     return (
         <>
@@ -119,7 +95,7 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches,
                     }
                 </div>
                 <p>
-                    Meet now at the ATM inside of {transaction.location}. Say "CashClan" while asking for {match.name} who {match.mode === 'buying' && 'will buy'} {match.mode === 'selling' && 'will sell'} ${mode === 'buying' && transaction.amount - transaction.cost}{mode === 'selling' && transaction.amount - transaction.profit} cash {match.mode === 'buying' && 'from you'} {match.mode === 'selling' && 'to you'} through Venmo for ${transaction.amount} (a {transaction.premium}% {mode === 'buying' ? 'cost' : 'profit'}).
+                    Meet now at the ATM inside of {transactionTerms.location}. Say "CashClan" while asking for {match.name} who {match.mode === 'buying' && 'will buy'} {match.mode === 'selling' && 'will sell'} ${mode === 'buying' && transactionTerms.amount - transactionTerms.cost}{mode === 'selling' && transactionTerms.amount - transactionTerms.profit} cash {match.mode === 'buying' && 'from you'} {match.mode === 'selling' && 'to you'} through Venmo for ${transactionTerms.amount} (a {transactionTerms.premium}% {mode === 'buying' ? 'cost' : 'profit'}).
                 </p>
             </div>
             <button onClick={handleSubmit}>Transaction Completed</button>
