@@ -23,23 +23,6 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}
         }
     }, [transactionTerms])
 
-    // ToDo - implement less memory-intensive route method to refresh both parties' window states upon transaction completion
-    // const [time, setTime] = useState(Date.now())
-    // useEffect(() => {
-    //     const interval = setInterval(() => setTime(Date.now()), 5000)
-    //     fetch(`https://cashclan-backend.herokuapp.com/members/${match?.googleId}`)
-    //         .then((obj) => obj.json())
-    //         .then(json => !json.active ? window.location.reload(true) : console.log('inside Transaction - checked match.active:', json.active))
-    //         .catch(error => error)
-    //     fetch(`https://cashclan-backend.herokuapp.com/members/${member?.googleId}`)
-    //         .then((obj) => obj.json())
-    //         .then(json => !json.active ? window.location.reload(true) : console.log('inside Transaction - checked member.active:', json.active))
-    //         .catch(error => error)
-    //     return () => {
-    //         clearInterval(interval)
-    //     }
-    // }, [time, match, member])
-
     const handleSubmit = (event) => {
         event.preventDefault()
         const requestOptions = {
@@ -98,7 +81,6 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}
                     )}
                 </ul>
             </div>
-
         </>
     )
 }

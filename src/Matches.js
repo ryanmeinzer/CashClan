@@ -46,19 +46,38 @@ const Matches = ({offer, memberImage, memberId}) => {
     const topMatch = sortedMatches()[0]
     console.log('inside Matches - topMatch:', topMatch)
     const match = pendingTransaction ? pendingTransactionMatch : topMatch
-    console.log('inside Matches useEffect - match:', match)
+    console.log('inside Matches - match:', match)
 
+    // ToDo - implement logic to scan for new matches post-offer publishing
     useEffect(() => {
         fetch('https://cashclan-backend.herokuapp.com/members')
             .then((obj) => obj.json())
             .then(json => setMembers(json))
-    }, [])
-
-    useEffect(() => {
         fetch('https://cashclan-backend.herokuapp.com/transactions')
             .then((obj) => obj.json())
             .then(json => setTransactions(json))
     }, [])
+
+    const [time, setTime] = useState(Date.now())
+    useEffect(() => {
+        const interval = setInterval(() => setTime(Date.now()), 5000)
+        // implement a hard refresh if match is inactive (covers them unpublishing or confirming the mutual transaction)
+        if (match) {
+            fetch(`https://cashclan-backend.herokuapp.com/members/${match.googleId}`)
+                .then((obj) => obj.json())
+                .then(json => !json.active && window.location.reload(true))
+                .catch(error => console.log('error:', error))
+            // ToDo - implement a hard refresh if pendingTransaction still exists, as it'd be deleted if unmatched (covers instance of a new match). Validate this works and is even necessary given the above hard refresh logic.
+        } else if (pendingTransaction) {
+            fetch(`https://cashclan-backend.herokuapp.com/transactions/${pendingTransaction.id}`)
+                .then((obj) => obj.json())
+                .then(json => !json && window.location.reload(true))
+                .catch(error => console.log('error:', error))
+        }
+        return () => {
+            clearInterval(interval)
+        }
+    }, [time, match, pendingTransaction])
 
     useEffect(() => {
         if (pendingTransaction) {
