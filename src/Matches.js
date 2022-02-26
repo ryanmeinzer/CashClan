@@ -20,15 +20,15 @@ const Matches = ({offer, memberImage, memberId}) => {
     console.log('inside Matches - pendingTransactionMatch:', pendingTransactionMatch)
 
     // Match
-    const activeMembers = members.filter(member => member.active === true)
+    const activeMembers = members.filter(member => member.active === true && member.id !== memberId)
     console.log('inside Matches - activeMembers:', activeMembers)
     const pendingTransactions = transactions.filter(transaction => transaction.status === 'pending')
     console.log('inside Matches - pendingTransactions:', pendingTransactions)
     const activeNoPendingTransactionsMembers = activeMembers.filter(member => !pendingTransactions.find(transaction => transaction.seller_id === member.id || transaction.buyer_id === member.id))
     console.log('inside Matches - activeNoPendingTransactionsMembers:', activeNoPendingTransactionsMembers)
-    const nonmatchedMembers = activeNoPendingTransactionsMembers.filter(member => member.id !== memberId)
-    console.log('inside Matches - nonmatchedMembers:', nonmatchedMembers)
-    const matches = nonmatchedMembers && nonmatchedMembers.filter(member =>
+    // const nonmatchedMembers = activeNoPendingTransactionsMembers.filter(member => member.id !== memberId)
+    // console.log('inside Matches - nonmatchedMembers:', nonmatchedMembers)
+    const matches = activeNoPendingTransactionsMembers.filter(member =>
         offer.mode === 'buying'
             ? member.mode === 'selling' && member.amount >= offer.amount && member.premium <= offer.premium && member.location === offer.location
             : member.mode === 'buying' && member.amount <= offer.amount && member.premium >= offer.premium && member.location === offer.location
