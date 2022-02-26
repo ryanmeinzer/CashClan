@@ -15,7 +15,6 @@ const Matches = ({offer, memberImage, memberId}) => {
 
     // Pending Transaction (don't match)
     const pendingTransaction = transactions.find(transaction => transaction.status === 'pending' && (transaction.seller_id === memberId || transaction.buyer_id === memberId))
-    // && activeMembers.find(member => member.id !== memberId && (member.id === transaction.seller_id || member.id === transaction.buyer_id))
     console.log('inside Matches - pendingTransaction:', pendingTransaction)
     const pendingTransactionMatch = pendingTransaction && members.find(member => member.id !== memberId && member.id === (offer.mode === 'buying' ? pendingTransaction.seller_id : pendingTransaction.buyer_id))
     console.log('inside Matches - pendingTransactionMatch:', pendingTransactionMatch)

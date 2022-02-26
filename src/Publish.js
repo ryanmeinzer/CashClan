@@ -25,14 +25,6 @@ const Publish = () => {
                 ))
     }, [member])
 
-    // ToDo - although the below successfully unpublishes the other match upon transaction confirmation, it intermittently clears out the form fields during an offer submittal. Figure out how to unpublish the other match upon transaction confirmation.
-    // useEffect(() => {
-    //     member &&
-    //         fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
-    //             .then((obj) => obj.json())
-    //             .then(json => json.active === false && setState({active: false, mode: null, amount: 10, premium: 1, location: ''}))
-    // }, [members])
-
     const handleChange = (event) => {
         const target = event.target
         let value = target.value === 'true' ? true : target.value === 'false' ? false : target.value

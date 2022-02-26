@@ -1,13 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {useMemberContext} from './providers/member'
 
 const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}) => {
-
-    // ensure transactionId is set for future transaction update
-    const [transactionId, setTransactionId] = useState(transactionTerms.id && transactionTerms.id)
-    console.log('inside Transaction - transactionId:', transactionId)
-
-    console.log('inside Transaction - transactionTerms.id', transactionTerms.id)
 
     const {member} = useMemberContext()
     console.log('inside Transaction - member:', member)
@@ -16,8 +10,8 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}
 
     // create pending transaction with matches for either party to confirm/update as complete
     useEffect(() => {
-        // ensure new transaction is created only if it's a new transaction (also handled on BE) and to be extra thorough, if the match is active
-        if (!transactionTerms.id && match.active) {
+        // ensure new transaction is created only if it's a new transaction (also handled on BE)
+        if (!transactionTerms.id) {
             const requestOptions = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -25,13 +19,9 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}
             }
             fetch(`https://cashclan-backend.herokuapp.com/transactions`, requestOptions)
                 .then(response => response.json())
-                // ensure transactionId is set correctly for future transaction update
-                .then(json => setTransactionId(json.id))
                 .catch(error => error)
-        } else if (transactionTerms.id) {
-            setTransactionId(transactionTerms.id)
         }
-    }, [transactionTerms, match])
+    }, [transactionTerms])
 
     // ToDo - implement less memory-intensive route method to refresh both parties' window states upon transaction completion
     // const [time, setTime] = useState(Date.now())
@@ -70,7 +60,8 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}
                 }
             )
         }
-        fetch(`https://cashclan-backend.herokuapp.com/transactions/${transactionId}`, requestOptions)
+        // rid the need for a unique transactionId, for the BE to find accordingly
+        fetch(`https://cashclan-backend.herokuapp.com/transactions/${transactionTerms.buyer_id}`, requestOptions)
             .then(response => response.json())
             .finally(alert('Thanks for using CashClan!'))
             .catch(error => error)
