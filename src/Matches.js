@@ -62,12 +62,14 @@ const Matches = ({offer, memberImage, memberId}) => {
     useEffect(() => {
         const interval = setInterval(() => setTime(Date.now()), 5000)
         // implement a hard refresh if match is inactive (covers them unpublishing or confirming the mutual transaction)
+        // ToDo - QA with all six steps. 
         if (match) {
             fetch(`https://cashclan-backend.herokuapp.com/members/${match.googleId}`)
                 .then((obj) => obj.json())
                 .then(json => !json.active && window.location.reload(true))
                 .catch(error => console.log('error:', error))
-            // ToDo - implement a hard refresh if pendingTransaction still exists, as it'd be deleted if unmatched (covers instance of a new match). Validate this works and is even necessary given the above hard refresh logic.
+            // ToDo - implement a hard refresh if pendingTransaction still exists, as it'd be deleted if unmatched (covers instance of a new match). Validate this works and is even necessary given the above hard refresh logic. 
+            // ToDo - QA with all six steps. 
         } else if (pendingTransaction) {
             fetch(`https://cashclan-backend.herokuapp.com/transactions/${pendingTransaction.id}`)
                 .then((obj) => obj.json())
