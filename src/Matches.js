@@ -48,38 +48,29 @@ const Matches = ({offer, memberImage, memberId}) => {
     const match = pendingTransaction ? pendingTransactionMatch : topMatch
     console.log('inside Matches - match:', match)
 
-    // ToDo - implement logic to scan for new matches post-offer publishing
+    // intermittently scan for new matches
+    const [time, setTime] = useState(Date.now())
     useEffect(() => {
+        const interval = setInterval(() => setTime(Date.now()), 5000)
         fetch('https://cashclan-backend.herokuapp.com/members')
             .then((obj) => obj.json())
             .then(json => setMembers(json))
         fetch('https://cashclan-backend.herokuapp.com/transactions')
             .then((obj) => obj.json())
             .then(json => setTransactions(json))
-    }, [])
-
-    const [time, setTime] = useState(Date.now())
-    useEffect(() => {
-        const interval = setInterval(() => setTime(Date.now()), 5000)
-        // implement a hard refresh if match is inactive (covers them unpublishing or confirming the mutual transaction)
-        // ToDo - QA with all six steps. 
+        // hard refresh if match is inactive (covers them unpublishing or confirming the mutual transaction)
+        // ToDo - QA with all six steps.
         if (match) {
             fetch(`https://cashclan-backend.herokuapp.com/members/${match.googleId}`)
                 .then((obj) => obj.json())
-                .then(json => !json.active && window.location.reload(true))
-                .catch(error => console.log('error:', error))
-            // ToDo - implement a hard refresh if pendingTransaction still exists, as it'd be deleted if unmatched (covers instance of a new match). Validate this works and is even necessary given the above hard refresh logic. 
-            // ToDo - QA with all six steps. 
-        } else if (pendingTransaction) {
-            fetch(`https://cashclan-backend.herokuapp.com/transactions/${pendingTransaction.id}`)
-                .then((obj) => obj.json())
-                .then(json => !json && window.location.reload(true))
+                .then(json => json && !json.active && window.location.reload(true))
                 .catch(error => console.log('error:', error))
         }
         return () => {
             clearInterval(interval)
         }
-    }, [time, match, pendingTransaction])
+        // eslint-disable-next-line
+    }, [time])
 
     useEffect(() => {
         if (pendingTransaction) {
