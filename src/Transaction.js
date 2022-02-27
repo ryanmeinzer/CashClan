@@ -1,12 +1,6 @@
 import React, {useEffect} from 'react'
-import {useMemberContext} from './providers/member'
 
 const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}) => {
-
-    const {member} = useMemberContext()
-    console.log('inside Transaction - member:', member)
-
-    console.log('inside Transaction - match:', match)
 
     // create pending transaction with matches for either party to confirm/update as complete
     useEffect(() => {
