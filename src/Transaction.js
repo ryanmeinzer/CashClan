@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 
 const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}) => {
 
@@ -55,11 +56,26 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}
                     {
                         match.image
                         &&
-                        <span>
-                            <img src={memberImage} alt="profile" style={{borderRadius: "50%"}} />
-                            <span style={{fontSize: '5rem'}}>🤝</span>
+                        <div>
+                            <div align="center">
+                                <img src={memberImage} alt="profile" style={{borderRadius: "50%"}} />
+                                <span style={{fontSize: '5rem'}}>🤝</span>
                                 <img src={match.image} alt="profile" style={{borderRadius: "50%"}} />
-                        </span>
+                                    <CountdownCircleTimer
+                                        isPlaying
+                                        duration={90}
+                                        colors={['#089000', '#F7B801', '#A30000', '#A30000']}
+                                        colorsTime={[90, 60, 30, 0]}
+                                        size={100}
+                                        onComplete={() => {
+                                            alert("Please don't make your match wait!")
+                                            return {shouldRepeat: true, delay: 1.5}
+                                        }}
+                                    >
+                                        {({remainingTime}) => remainingTime}
+                                    </CountdownCircleTimer>
+                                </div>
+                            </div>
                     }
                 </div>
                 <p>
