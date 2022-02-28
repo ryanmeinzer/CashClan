@@ -1,17 +1,13 @@
 import React, {useState, useEffect} from "react"
 import {useMemberContext} from './providers/member'
 import {Link, useNavigate} from "react-router-dom";
+import MemberTransactions from './MemberTransactions'
 
-const EditProfile = ({refreshMembersUponFormSubmit}) => {
+const EditProfile = ({refreshMembersUponFormSubmit, transactions, members}) => {
 
     const {member} = useMemberContext()
     const [state, setState] = useState()
     const navigate = useNavigate()
-
-    useEffect(() => {
-        console.log('inside EditProfile - member:', member)
-        console.log('inside EditProfile - state:', state)
-    })
 
     useEffect(() => {
         member &&
@@ -75,6 +71,7 @@ const EditProfile = ({refreshMembersUponFormSubmit}) => {
                 <Link to="/"><button>Cancel</button></Link>
                 <button type="submit">Update Your Member Profile</button>
             </form>
+            < MemberTransactions transactions={transactions} members={members} />
         </div>
     )
 }

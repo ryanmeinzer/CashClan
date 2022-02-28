@@ -3,7 +3,6 @@ import SignUp from './SignUp'
 import Profile from './Profile'
 import Logout from './Logout'
 import {useMemberContext} from './providers/member'
-// import {Link} from "react-router-dom"
 
 const Home = ({refreshMembersUponSignUp}) => {
 
