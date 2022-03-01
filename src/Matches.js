@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import Transaction from './Transaction'
+import {useMemberContext} from './providers/member'
 
 const Matches = ({offer, memberImage, memberId}) => {
 
+    const {member} = useMemberContext()
+    const [state, setState] = useState()
     const [members, setMembers] = useState([])
     const [transactions, setTransactions] = useState([])
     const [transactionTerms, setTransactionTerms] = useState({})
@@ -106,6 +109,34 @@ const Matches = ({offer, memberImage, memberId}) => {
         }
     }, [match, offer, pendingTransaction, memberId])
 
+    useEffect(() => {
+        member &&
+            fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
+                .then((obj) => obj.json())
+                .then(json => setState(json))
+    }, [member])
+
+    const handleChange = (event) => {
+        const target = event.target
+        const value = target.type === 'checkbox' ? target.checked : target.value
+        const name = target.name
+        setState({...state, [name]: value})
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        const requestOptions = {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(state)
+        }
+        // ! use googleId instead of id, but it is unsecure
+        fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
+            .then(response => response.json())
+            .finally(alert('Thanks for updating your phone!'))
+            .catch(error => error)
+    }
+
     return (
         <>
             {
@@ -122,7 +153,23 @@ const Matches = ({offer, memberImage, memberId}) => {
                         sortedMatches={sortedMatches()}
                     />
                     :
-                    <h3 style={{color: "red"}}>Your offer has no current matches in the CashClan.</h3>
+                    <div>
+                        <h3 style={{color: "red"}}>There aren't any matches with your offer, but we'll text you once there is!</h3>
+                        <form onSubmit={handleSubmit}>
+                            <input
+                                type="number"
+                                // type="tel"
+                                // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                name="phone"
+                                value={state && state.phone}
+                                placeholder="Your Phone"
+                                onChange={handleChange}
+                                required
+                            />
+                            <button type="submit">Update Your Phone</button>
+                        </form>
+                        < br />
+                    </div>
             }
         </>
     )
