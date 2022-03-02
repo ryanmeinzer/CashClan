@@ -37,7 +37,6 @@ const SignUp = (props) => {
     return (
         !isLoggedIn &&
         <GoogleLogin
-            // clientId="495182513894-qpo5gbo9ppe0gucfq6oq0vrkr4mmlpvb.apps.googleusercontent.com"
             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
             buttonText="Sign Up / Login with Google"
             onSuccess={onSuccess}

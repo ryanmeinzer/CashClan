@@ -16,7 +16,6 @@ function Logout() {
     return (
         isLoggedIn &&
         <GoogleLogout
-            // clientId="495182513894-qpo5gbo9ppe0gucfq6oq0vrkr4mmlpvb.apps.googleusercontent.com"
             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
             buttonText="Logout"
             onLogoutSuccess={responseGoogle}
