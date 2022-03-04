@@ -13,7 +13,7 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
             const requestOptions = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({...transactionTerms, status: 'pending'})
+                body: JSON.stringify({...transactionTerms})
             }
             fetch(`https://cashclan-backend.herokuapp.com/transactions`, requestOptions)
                 .then(response => response.json())

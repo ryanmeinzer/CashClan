@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Transaction from './Transaction'
 import {useMemberContext} from './providers/member'
+import _ from 'lodash'
 
 const Matches = ({offer}) => {
 
@@ -82,6 +83,7 @@ const Matches = ({offer}) => {
                     location: offer.location,
                     buyer_confirmed: false,
                     seller_confirmed: false,
+                    status: 'pending',
                 })
             } else if (offer.mode === 'selling') {
                 let averagedPremiums = (match.premium + offer.premium) / 2
@@ -101,11 +103,13 @@ const Matches = ({offer}) => {
                     location: offer.location,
                     buyer_confirmed: false,
                     seller_confirmed: false,
+                    status: 'pending',
                 })
             }
-        } else {
-            setTransactionTerms({})
         }
+        // else {
+        //     setTransactionTerms({})
+        // }
     }, [match, offer, pendingTransaction, member])
 
     useEffect(() => {
@@ -138,7 +142,7 @@ const Matches = ({offer}) => {
     return (
         <>
             {
-                match && transactionTerms
+                match && !_.isEmpty(transactionTerms)
                     ?
                     <Transaction
                         mode={offer.mode}
