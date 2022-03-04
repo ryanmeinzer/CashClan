@@ -119,7 +119,7 @@ const Publish = () => {
                         name="amount"
                         min={10}
                         max={300}
-                        step={5}
+                        step={10}
                         value={state.amount}
                         onChange={handleChange}
                         disabled={state.active || state.mode === null}
