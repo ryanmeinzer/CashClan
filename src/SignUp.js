@@ -13,24 +13,24 @@ const SignUp = (props) => {
         console.log('inside SignUp', res)
     }
 
-    // ToDo - securely authenticate & validate with BE via user ID token (https://developers.google.com/identity/sign-in/web/backend-auth)
-    const findOrCreateMember = (googleId, name, email, imageUrl) => {
+    // securely authenticate & validate with BE via user ID token
+    const findOrCreateMember = (tokenId) => {
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({googleId: googleId, name: name, email: email, image: imageUrl})
+            body: JSON.stringify({tokenId: tokenId})
         }
         fetch('https://cashclan-backend.herokuapp.com/members', requestOptions)
             .then(response => response.json())
-            .catch(error => error)
-            .then(setMember({googleId: googleId, name: name, email: email, image: imageUrl}))
+            .then(json => setMember({googleId: json.googleId, name: json.name, email: json.email, image: json.image, id: json.id}))
             .finally(props.refresh)
+            .catch(error => error)
     }
 
     const onSuccess = (res) => {
-        findOrCreateMember(res.profileObj.googleId, res.profileObj.name, res.profileObj.email, res.profileObj.imageUrl)
+        findOrCreateMember(res.tokenId)
         setIsLoggedIn(true)
-        // refresh tokenId (every hour it expires) to access data and authenticate users
+        // refresh tokenId (every hour it expires) to access data and authenticate user
         refreshTokenSetup(res)
     }
 
@@ -42,7 +42,7 @@ const SignUp = (props) => {
             onSuccess={onSuccess}
             onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}
-            // disable the below if using Login component
+            // keep user logged in after page refresh, unless they logout
             isSignedIn={true}
         />
     )

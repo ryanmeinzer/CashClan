@@ -9,6 +9,8 @@ const Publish = () => {
     const {member} = useMemberContext()
     const [memberId, setMemberId] = useState()
 
+    console.log('inside Publish - member:', member)
+
     useEffect(() => {
         member
             && fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)

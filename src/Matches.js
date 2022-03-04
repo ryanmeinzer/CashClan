@@ -9,6 +9,7 @@ const Matches = ({offer, memberImage, memberId}) => {
     const [members, setMembers] = useState([])
     const [transactions, setTransactions] = useState([])
     const [transactionTerms, setTransactionTerms] = useState({})
+    const [hasPhone, setHasPhone] = useState()
 
     // Pending Transaction (don't match)
     const pendingTransaction = transactions.find(transaction => transaction.status === 'pending' && (transaction.seller_id === memberId || transaction.buyer_id === memberId))
@@ -113,7 +114,7 @@ const Matches = ({offer, memberImage, memberId}) => {
         member &&
             fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
                 .then((obj) => obj.json())
-                .then(json => setState(json))
+            .then(json => json.phone ? (setState(json), setHasPhone(true)) : setState(json))
     }, [member])
 
     const handleChange = (event) => {
@@ -133,7 +134,7 @@ const Matches = ({offer, memberImage, memberId}) => {
         // ! use googleId instead of id, but it is unsecure
         fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
             .then(response => response.json())
-            .finally(alert('Thanks for updating your phone!'))
+            .finally(alert('Thanks for updating your phone!'), setHasPhone(true))
             .catch(error => error)
     }
 
@@ -155,20 +156,25 @@ const Matches = ({offer, memberImage, memberId}) => {
                     :
                     <div>
                         <h3 style={{color: "red"}}>There aren't any matches with your offer, but we'll text you once there is!</h3>
-                        <form onSubmit={handleSubmit}>
-                            <input
-                                type="number"
-                                // type="tel"
-                                // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                name="phone"
-                                value={state && state.phone}
-                                placeholder="Your Phone"
-                                onChange={handleChange}
-                                required
-                            />
-                            <button type="submit">Update Your Phone</button>
-                        </form>
-                        < br />
+                        {state && !hasPhone
+                            &&
+                            <div>
+                                <form onSubmit={handleSubmit}>
+                                    <input
+                                        type="number"
+                                        // type="tel"
+                                        // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                        name="phone"
+                                        value={state && state.phone}
+                                        placeholder="Your Phone"
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                    <button type="submit">Update Your Phone</button>
+                                </form>
+                                < br />
+                            </div>
+                        }
                     </div>
             }
         </>
