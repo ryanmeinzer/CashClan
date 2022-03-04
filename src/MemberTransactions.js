@@ -17,7 +17,7 @@ const MemberTransactions = ({transactions, members}) => {
     }, [member, transactions])
 
     const findName = (id) => {
-        return members && members.find(member => member.id === id).name
+        return members && members.find(member => member.id === id) ? members.find(member => member.id === id).name : '[terminated member]'
     }
 
     return (
