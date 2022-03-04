@@ -2,9 +2,6 @@ import React, {useEffect, useState} from 'react'
 import Profile from './Profile'
 import EditProfile from './EditProfile'
 import Home from './Home'
-// uncommenting the below, used merely for testing and development purposes
-// import Members from './Members'
-// import Transactions from './Transactions'
 import {Routes, Route} from "react-router-dom"
 
 const App = () => {
@@ -42,9 +39,6 @@ const App = () => {
         <Route path="/" element={<Home refreshMembersUponSignUp={refreshMembersUponSignUp} />} />
         <Route path="profile" element={<Profile />} />
         <Route path="editprofile" element={<EditProfile refreshMembersUponFormSubmit={refreshMembersUponFormSubmit} transactions={transactions} members={members} />} />
-        {/* uncommenting the below, used merely for testing and development purposes */}
-        {/* <Route path="members" element={<Members members={members} />} />
-        <Route path="transactions" element={<Transactions transactions={transactions} />} /> */}
       </Routes>
     </>
   )

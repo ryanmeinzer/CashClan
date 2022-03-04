@@ -185,7 +185,7 @@ const Publish = () => {
                             <>
                                 <button
                                     type="reset"
-                                    // have to do extra work to reset range input
+                                    // reset range input
                                     onClick={handleCancel}
                                     disabled={state.active || state.mode === null}
                                     hidden={!state.mode}

@@ -1,5 +1,4 @@
 import {GoogleLogin} from 'react-google-login'
-// refresh tokenId
 import {refreshTokenSetup} from './utils/refreshToken'
 import {useMemberContext} from './providers/member'
 

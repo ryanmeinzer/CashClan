@@ -83,7 +83,6 @@ const Matches = ({offer}) => {
                     buyer_confirmed: false,
                     seller_confirmed: false,
                 })
-                // return `${Math.round(offer.amount + cost)} (a ${Math.round(averagedPremiums)}% cost)`
             } else if (offer.mode === 'selling') {
                 let averagedPremiums = (match.premium + offer.premium) / 2
                 let cost = Math.round(match.amount * (averagedPremiums / 100))
@@ -142,11 +141,8 @@ const Matches = ({offer}) => {
                 match && transactionTerms
                     ?
                     <Transaction
-                        // pendingTransaction={pendingTransaction}
                         mode={offer.mode}
                         transactionTerms={transactionTerms}
-                        // location={offer.location}
-                        // members={members}
                         match={match}
                         sortedMatches={sortedMatches()}
                     />
@@ -159,8 +155,6 @@ const Matches = ({offer}) => {
                                 <form onSubmit={handleSubmit}>
                                     <input
                                         type="number"
-                                        // type="tel"
-                                        // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                         name="phone"
                                         value={state && state.phone}
                                         placeholder="Your Phone"

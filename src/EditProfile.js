@@ -33,7 +33,6 @@ const EditProfile = ({refreshMembersUponFormSubmit, transactions, members}) => {
         fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
-            // .then(setState(state))
             .then(refreshMembersUponFormSubmit)
             .finally(navigate("/"))
     }
@@ -57,8 +56,6 @@ const EditProfile = ({refreshMembersUponFormSubmit, transactions, members}) => {
                 />
                 <input
                     type="number"
-                    // type="tel"
-                    // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     name="phone"
                     value={state && state.phone}
                     placeholder="Your Phone"
