@@ -83,7 +83,6 @@ const Matches = ({offer}) => {
                     location: offer.location,
                     buyer_confirmed: false,
                     seller_confirmed: false,
-                    status: 'pending',
                 })
             } else if (offer.mode === 'selling') {
                 let averagedPremiums = (match.premium + offer.premium) / 2
@@ -103,7 +102,6 @@ const Matches = ({offer}) => {
                     location: offer.location,
                     buyer_confirmed: false,
                     seller_confirmed: false,
-                    status: 'pending',
                 })
             }
         }
