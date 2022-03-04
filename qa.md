@@ -4,11 +4,13 @@
 	a - transaction deleted
 	b - seller’s offer is unpublished
 	c - buyer’s offer remains published
+	d - both parties received sms
 
 2 - buyer unpublishes after match
 	a - transaction deleted
 	b - buyer’s offer is unpublished
 	c - seller’s offer remains published
+	d - both parties received sms
 
 3 - seller confirms transaction
 	a - transaction complete
