@@ -21,7 +21,7 @@ const MemberTransactions = ({transactions, members}) => {
     }
 
     return (
-        memberTransactions
+        memberTransactions.length > 0
             ?
             <div>
                 <h1>Transactions:</h1>
@@ -34,7 +34,10 @@ const MemberTransactions = ({transactions, members}) => {
                 </ul>
             </div>
             :
-            null
+            <div>
+                <h1>Transactions:</h1>
+                <p>You do not have any transactions yet.</p>
+            </div>
     )
 }
 
