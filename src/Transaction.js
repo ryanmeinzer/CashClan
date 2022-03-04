@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react'
+import {useMemberContext} from './providers/member'
 import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 
-const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}) => {
+const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
+
+    const {member} = useMemberContext()
 
     // create pending transaction with matches for either party to confirm/update as complete
     useEffect(() => {
@@ -43,8 +46,7 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}
             .then(response => response.json())
             .finally(alert('Thanks for using CashClan!'))
             .catch(error => error)
-        // BE is setting both parties statuses to inactive after transaction is complete
-        // ToDo - swap below with logic to refresh both parties' window states upon transaction completion
+        // BE is also setting both parties statuses to inactive after transaction is complete for hard refresh logic in Matches.js
         window.location.reload(true)
     }
 
@@ -58,7 +60,7 @@ const Transaction = ({mode, transactionTerms, memberImage, match, sortedMatches}
                         &&
                         <div>
                             <div align="center">
-                                <img src={memberImage} alt="profile" style={{borderRadius: "50%"}} />
+                                    <img src={member.image} alt="profile" style={{borderRadius: "50%"}} />
                                 <span style={{fontSize: '5rem'}}>🤝</span>
                                 <img src={match.image} alt="profile" style={{borderRadius: "50%"}} />
                                     <CountdownCircleTimer

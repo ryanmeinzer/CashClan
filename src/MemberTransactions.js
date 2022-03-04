@@ -9,7 +9,7 @@ const MemberTransactions = ({transactions, members}) => {
 
     useEffect(() => {
         member
-            && fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
+            && fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`)
                 .then((obj) => obj.json())
                 .then(json => transactions.filter(transaction => transaction.status === 'complete' && (transaction.seller_id === json.id || transaction.buyer_id === json.id), setMemberId(json.id)))
                 .then(memberTransactions => setMemberTransactions(memberTransactions.sort(function (a, b) {return a.created_at - b.created_at})))

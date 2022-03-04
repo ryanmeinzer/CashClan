@@ -7,16 +7,10 @@ const Publish = () => {
 
     const [state, setState] = useState({active: false, mode: '', amount: 10, premium: 1, location: ''})
     const {member} = useMemberContext()
-    const [memberId, setMemberId] = useState()
-
-    console.log('inside Publish - member:', member)
 
     useEffect(() => {
         member
-            && fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
-                .then((obj) => obj.json())
-                .then(json => setMemberId(json.id))
-            fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
+            && fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`)
                 .then((obj) => obj.json())
                 .then(json => setState(
                     json.active === true
@@ -44,7 +38,7 @@ const Publish = () => {
             // if inactive, set mode & location to '' and amount & premium to 0 on BE for extra clarity
             body: JSON.stringify(value === true ? {...state, active: true} : {active: false, mode: '', amount: 0, premium: 0, location: ''})
         }
-        fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
+        fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
         value === false && setState({active: false, mode: '', amount: 10, premium: 1, location: ''})
@@ -61,8 +55,7 @@ const Publish = () => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({...state, active: true})
         }
-        //! use googleId instead of id, but it is unsecure
-        fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
+        fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
         setState({...state, active: true})
@@ -226,7 +219,7 @@ const Publish = () => {
             </div>
             {
                 state.active
-                && <div align="left"><Matches offer={state} memberId={memberId} memberImage={member.image} /></div>
+                && <div align="left"><Matches offer={state} /></div>
             }
         </>
     )

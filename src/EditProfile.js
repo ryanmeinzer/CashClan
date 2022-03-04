@@ -11,7 +11,7 @@ const EditProfile = ({refreshMembersUponFormSubmit, transactions, members}) => {
 
     useEffect(() => {
         member &&
-            fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`)
+            fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`)
                 .then((obj) => obj.json())
                 .then(json => setState(json))
     }, [member])
@@ -30,8 +30,7 @@ const EditProfile = ({refreshMembersUponFormSubmit, transactions, members}) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(state)
         }
-        // ! use googleId instead of id, but it is unsecure
-        fetch(`https://cashclan-backend.herokuapp.com/members/${member.googleId}`, requestOptions)
+        fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
             // .then(setState(state))
