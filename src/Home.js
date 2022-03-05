@@ -30,14 +30,6 @@ const Home = ({refreshMembersUponSignUp}) => {
                     <div align="center">
                         <Publish />
                     </div>
-                    {/* <br />
-                    <br />
-                    <div>
-                        <Link to="/members">Members</Link>
-                    </div>
-                    <div>
-                        <Link to="/transactions">Transactions</Link>
-                    </div> */}
                 </div>
             }
         </>
