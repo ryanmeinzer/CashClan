@@ -175,10 +175,14 @@ const Publish = () => {
                         state.active
                             ?
                             <button
+                                type="submit"
                                 name="active"
-                                type="button"
+                                // type="button"
                                 value={false}
                                 onClick={handleChange}
+                                style={{
+                                    color: ('blue')
+                                }}
                             > Unpublish or Update
                             </button>
                             :
