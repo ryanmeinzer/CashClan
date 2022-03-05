@@ -67,7 +67,7 @@ const EditProfile = ({refreshMembersUponFormSubmit, transactions, members}) => {
                 <Link to="/"><button>Cancel</button></Link>
                 <button type="submit">Update Your Member Profile</button>
             </form>
-            < MemberTransactions transactions={transactions} members={members} />
+            < MemberTransactions transactions={transactions} />
         </div>
     )
 }
