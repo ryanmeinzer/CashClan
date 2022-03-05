@@ -180,9 +180,6 @@ const Publish = () => {
                                 // type="button"
                                 value={false}
                                 onClick={handleChange}
-                                style={{
-                                    color: ('blue')
-                                }}
                             > Unpublish or Update
                             </button>
                             :
