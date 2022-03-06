@@ -36,10 +36,9 @@ const Matches = ({offer}) => {
     const topMatch = sortedMatches()[0]
     const match = pendingTransaction ? pendingTransactionMatch : topMatch
 
-    // hard refresh from server (vs. from cache) if member has left app/page and returns
+    // load new page from browser with new history entry if member has left and returned to app/page
     const onVisibilityChange = () => {
         if (document.visibilityState === 'visible') {
-            // window.location.reload(true)
             window.location.href = 'https://reverent-saha-216b51.netlify.app/'
         }
     }
@@ -61,7 +60,7 @@ const Matches = ({offer}) => {
                 .then((obj) => obj.json())
                 .then(json => setTransactions(json))
                 .catch(error => console.log('error:', error))
-            // hard refresh from server (vs. from cache) if match is inactive (covers them unpublishing or confirming the mutual transaction)
+            // hard refresh from server (vs. from cache) if match is inactive (covers them unpublishing or confirming the mutual transaction), unnecessary to load new page (and validate google ID token) from browser as member hasn't left and returned to app/page
             if (match) {
                 fetch(`https://cashclan-backend.herokuapp.com/members/${match.id}`)
                     .then((obj) => obj.json())
