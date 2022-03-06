@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useLayoutEffect} from 'react'
 import Transaction from './Transaction'
 import {useMemberContext} from './providers/member'
 import _ from 'lodash'
@@ -36,27 +36,40 @@ const Matches = ({offer}) => {
     const topMatch = sortedMatches()[0]
     const match = pendingTransaction ? pendingTransactionMatch : topMatch
 
-    // intermittently scan for new matches
+    // hard refresh if member has left app/page and returns
+    const onVisibilityChange = () => {
+        if (document.visibilityState === 'visible') {
+            window.location.reload(true)
+        }
+    }
+    useLayoutEffect(() => {
+        document.addEventListener("visibilitychange", onVisibilityChange)
+        return () => document.removeEventListener("visibilitychange", onVisibilityChange)
+    }, [])
+
+    // intermittently scan for new matches only if the member is viewing app/page
     const [time, setTime] = useState(Date.now())
     useEffect(() => {
-        const interval = setInterval(() => setTime(Date.now()), 5000)
-        fetch('https://cashclan-backend.herokuapp.com/members')
-            .then((obj) => obj.json())
-            .then(json => setMembers(json))
-            .catch(error => console.log('error:', error))
-        fetch('https://cashclan-backend.herokuapp.com/transactions')
-            .then((obj) => obj.json())
-            .then(json => setTransactions(json))
-            .catch(error => console.log('error:', error))
-        // hard refresh if match is inactive (covers them unpublishing or confirming the mutual transaction)
-        if (match) {
-            fetch(`https://cashclan-backend.herokuapp.com/members/${match.id}`)
+        if (document.visibilityState === 'visible') {
+            const interval = setInterval(() => setTime(Date.now()), 5000)
+            fetch('https://cashclan-backend.herokuapp.com/members')
                 .then((obj) => obj.json())
-                .then(json => json && !json.active && window.location.reload(true))
+                .then(json => setMembers(json))
                 .catch(error => console.log('error:', error))
-        }
-        return () => {
-            clearInterval(interval)
+            fetch('https://cashclan-backend.herokuapp.com/transactions')
+                .then((obj) => obj.json())
+                .then(json => setTransactions(json))
+                .catch(error => console.log('error:', error))
+            // hard refresh if match is inactive (covers them unpublishing or confirming the mutual transaction)
+            if (match) {
+                fetch(`https://cashclan-backend.herokuapp.com/members/${match.id}`)
+                    .then((obj) => obj.json())
+                    .then(json => json && !json.active && window.location.reload(true))
+                    .catch(error => console.log('error:', error))
+            }
+            return () => {
+                clearInterval(interval)
+            }
         }
         // eslint-disable-next-line
     }, [time])
