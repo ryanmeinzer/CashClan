@@ -36,16 +36,16 @@ const Matches = ({offer}) => {
     const topMatch = sortedMatches()[0]
     const match = pendingTransaction ? pendingTransactionMatch : topMatch
 
-    // // hard refresh if member has left app/page and returns
-    // const onVisibilityChange = () => {
-    //     if (document.visibilityState === 'visible') {
-    //         window.location.reload(true)
-    //     }
-    // }
-    // useLayoutEffect(() => {
-    //     document.addEventListener("visibilitychange", onVisibilityChange)
-    //     return () => document.removeEventListener("visibilitychange", onVisibilityChange)
-    // }, [])
+    // hard refresh if member has left app/page and returns
+    const onVisibilityChange = () => {
+        if (document.visibilityState === 'visible') {
+            window.location.reload(true)
+        }
+    }
+    useLayoutEffect(() => {
+        document.addEventListener("visibilitychange", onVisibilityChange)
+        return () => document.removeEventListener("visibilitychange", onVisibilityChange)
+    }, [])
 
     // intermittently scan for new matches only if the member is viewing app/page
     const [time, setTime] = useState(Date.now())
