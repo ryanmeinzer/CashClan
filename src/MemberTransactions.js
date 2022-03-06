@@ -1,10 +1,17 @@
 import React, {useState, useEffect} from "react"
 import {useMemberContext} from './providers/member'
 
-const MemberTransactions = ({transactions}) => {
+const MemberTransactions = () => {
 
+    const [transactions, setTransactions] = useState([])
     const {member} = useMemberContext()
     const [memberTransactions, setMemberTransactions] = useState([])
+
+    useEffect(() => {
+        fetch('https://cashclan-backend.herokuapp.com/transactions')
+            .then((obj) => obj.json())
+            .then(json => setTransactions(json))
+    }, [])
 
     useEffect(() => {
         member

@@ -3,7 +3,7 @@ import {useMemberContext} from './providers/member'
 import {Link, useNavigate} from "react-router-dom";
 import MemberTransactions from './MemberTransactions'
 
-const EditProfile = ({refreshMembersUponFormSubmit, transactions, members}) => {
+const EditProfile = () => {
 
     const {member} = useMemberContext()
     const [state, setState] = useState()
@@ -34,7 +34,6 @@ const EditProfile = ({refreshMembersUponFormSubmit, transactions, members}) => {
         fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
-            .then(refreshMembersUponFormSubmit)
             .finally(navigate("/"))
     }
 
@@ -68,7 +67,7 @@ const EditProfile = ({refreshMembersUponFormSubmit, transactions, members}) => {
                 <Link to="/"><button>Cancel</button></Link>
                 <button type="submit">Update Your Member Profile</button>
             </form>
-            < MemberTransactions transactions={transactions} />
+            < MemberTransactions />
         </div>
     )
 }
