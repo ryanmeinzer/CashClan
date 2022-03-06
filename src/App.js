@@ -7,15 +7,15 @@ import {Routes, Route} from "react-router-dom"
 const App = () => {
 
   // hard refresh if member has left app/page and returns
-  // const onVisibilityChange = () => {
-  //   if (document.visibilityState === 'visible') {
-  //     window.location.reload(true)
-  //   }
-  // }
-  // useLayoutEffect(() => {
-  //   document.addEventListener("visibilitychange", onVisibilityChange)
-  //   return () => document.removeEventListener("visibilitychange", onVisibilityChange)
-  // }, [])
+  const onVisibilityChange = () => {
+    if (document.visibilityState === 'visible') {
+      window.location.reload(true)
+    }
+  }
+  useLayoutEffect(() => {
+    document.addEventListener("visibilitychange", onVisibilityChange)
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange)
+  }, [])
 
   return (
     <>
