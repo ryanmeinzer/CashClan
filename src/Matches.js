@@ -39,7 +39,7 @@ const Matches = ({offer}) => {
     // hard refresh if member has left app/page and returns
     const onVisibilityChange = () => {
         if (document.visibilityState === 'visible') {
-            window.location.reload()
+            window.location.reload(true)
         }
     }
     useLayoutEffect(() => {
