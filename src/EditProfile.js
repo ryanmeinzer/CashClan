@@ -14,7 +14,7 @@ const EditProfile = ({refreshMembersUponFormSubmit, transactions, members}) => {
             const requestOptions = {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(state.name)
+                body: JSON.stringify(state)
             }
             fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
                 .then((obj) => obj.json())
