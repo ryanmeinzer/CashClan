@@ -36,10 +36,11 @@ const Matches = ({offer}) => {
     const topMatch = sortedMatches()[0]
     const match = pendingTransaction ? pendingTransactionMatch : topMatch
 
-    // hard refresh if member has left app/page and returns
+    // hard refresh from server (vs. from cache) if member has left app/page and returns
     const onVisibilityChange = () => {
         if (document.visibilityState === 'visible') {
-            window.location.reload(true)
+            // window.location.reload(true)
+            window.location.href = 'https://reverent-saha-216b51.netlify.app/'
         }
     }
     useLayoutEffect(() => {
@@ -60,7 +61,7 @@ const Matches = ({offer}) => {
                 .then((obj) => obj.json())
                 .then(json => setTransactions(json))
                 .catch(error => console.log('error:', error))
-            // hard refresh if match is inactive (covers them unpublishing or confirming the mutual transaction)
+            // hard refresh from server (vs. from cache) if match is inactive (covers them unpublishing or confirming the mutual transaction)
             if (match) {
                 fetch(`https://cashclan-backend.herokuapp.com/members/${match.id}`)
                     .then((obj) => obj.json())
