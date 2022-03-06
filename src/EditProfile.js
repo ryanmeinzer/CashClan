@@ -12,7 +12,7 @@ const EditProfile = ({refreshMembersUponFormSubmit, transactions, members}) => {
     useEffect(() => {
         if (member) {
             const requestOptions = {
-                method: 'PUT',
+                method: 'GET',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(state.name)
             }
