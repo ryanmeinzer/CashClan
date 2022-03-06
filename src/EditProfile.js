@@ -11,17 +11,11 @@ const EditProfile = ({refreshMembersUponFormSubmit, transactions, members}) => {
 
     useEffect(() => {
         if (member) {
-            const requestOptions = {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(member.image)
-            }
-            fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
+            fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`)
                 .then((obj) => obj.json())
                 .then(json => setState(json))
-
         }
-    }, [member, state])
+    }, [member])
 
     const handleChange = (event) => {
         const target = event.target
