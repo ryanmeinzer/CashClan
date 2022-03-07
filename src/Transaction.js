@@ -56,7 +56,7 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
             .finally(alert('Thanks for using CashClan!'))
             .catch(error => error)
         // BE is also setting both parties statuses to inactive after transaction is complete for hard refresh logic in Matches.js
-        window.location.reload(true)
+        window.location.href = 'https://reverent-saha-216b51.netlify.app/'
     }
 
     return (
