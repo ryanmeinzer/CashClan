@@ -64,7 +64,8 @@ const Matches = ({offer}) => {
             if (match) {
                 fetch(`https://cashclan-backend.herokuapp.com/members/${match.id}`)
                     .then((obj) => obj.json())
-                    .then(json => json && !json.active && window.location.reload(true))
+                    // .then(json => json && !json.active && window.location.reload(true))
+                    .then(json => json && !json.active && window.location.reload())
                     .catch(error => console.log('error:', error))
             }
             return () => {
