@@ -65,7 +65,7 @@ const Matches = ({offer}) => {
                 fetch(`https://cashclan-backend.herokuapp.com/members/${match.id}`)
                     .then((obj) => obj.json())
                     // .then(json => json && !json.active && window.location.reload(true))
-                    .then(json => json && !json.active && window.location.reload())
+                    .then(json => json && !json.active && (window.location.href = 'https://reverent-saha-216b51.netlify.app/'))
                     .catch(error => console.log('error:', error))
             }
             return () => {
