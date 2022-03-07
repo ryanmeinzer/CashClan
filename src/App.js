@@ -1,4 +1,3 @@
-import React, {useLayoutEffect} from 'react'
 import Profile from './Profile'
 import EditProfile from './EditProfile'
 import Home from './Home'

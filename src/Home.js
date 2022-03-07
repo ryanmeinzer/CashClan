@@ -11,7 +11,7 @@ const Home = ({refreshMembersUponSignUp}) => {
     return (
         <>
             <h1 align="center">CashClan 🤑</h1>
-            <h3 align="center">The Human ATM Network</h3>
+            <h3 align="center">The Cash Exchange Market (P2P DeFi)</h3>
             <div align="center">
                 <SignUp refresh={refreshMembersUponSignUp} />
             </div>
