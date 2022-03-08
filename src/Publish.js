@@ -208,7 +208,7 @@ const Publish = () => {
                         }}
                     >
                         <em>
-                            You'll {(state.amount * (state.premium / 100)) < 5.50 ? 'save' : 'spend'} {Math.abs((5.50 - (state.amount * (state.premium / 100))) / 5.50 * 100).toFixed()}% {(state.amount * (state.premium / 100)) > 5.50 && 'more'} compared to the $5.50 average total ATM + bank fees by buying ${state.amount} cash through Venmo from a CashClan member{state.location && ` at ${state.location}`}. {(state.amount * (state.premium / 100)) > 5.50 ? "However, that would be" : "That'd also be"} saving you {20 - state.premium}% compared to the ~20% average credit card rate in the USA.
+                            You'll {(state.amount * (state.premium / 100)) < 5.50 ? 'save' : 'spend'} {Math.abs((5.50 - (state.amount * (state.premium / 100))) / 5.50 * 100).toFixed()}% {(state.amount * (state.premium / 100)) > 5.50 && 'more'} compared to the $5.50 average total ATM + bank fees by buying ${state.amount} cash through Venmo from a CashClan member{state.location && ` at ${state.location}`}.
                         </em>
                     </p>
                 }
@@ -219,7 +219,7 @@ const Publish = () => {
                         }}
                     >
                         <em>
-                            You'll earn {Math.abs(state.premium - .5)}% {state.premium > .5 ? 'more' : 'less'} than the 0.5% average bank rate in the USA by selling up to ${state.amount} of your cash through Venmo to a CashClan member{state.location && ` at ${state.location}`}. {state.premium > 7 && `That'd also be earning you ${Math.abs(state.premium - 7)}% more than the 7% average stock market rate in the USA.`}
+                            You'll earn {Math.abs(state.premium - .5)}% {state.premium > .5 ? 'more' : 'less'} than the 0.5% average bank rate in the USA by selling up to ${state.amount} of your cash through Venmo to a CashClan member{state.location && ` at ${state.location}`}.
                         </em>
                     </p>
                 }

@@ -30,9 +30,9 @@ const Home = ({refreshMembersUponSignUp}) => {
                 :
                 <div>
                     <h1 align="center">CashClan</h1>
-                    <p align="center" style={{fontSize: "3rem"}}>🏧🙅🏦</p>
-                    <h3 align="center">Buy Cash to save. Sell Cash to earn.</h3>
-                    <p align="center" style={{fontSize: "3rem"}}>💵🤝💳</p>
+                    <p align="center" style={{fontSize: "3rem"}}>🏧 🙅 🏦</p>
+                    <h3 align="center">The Cash Exchange (IRL P2P DeFi)</h3>
+                    <p align="center" style={{fontSize: "3rem"}}>💵 🤝 <img src="https://cdn1.venmo.com/marketing/images/branding/venmo-icon.svg" alt="venmo logo" style={{width: "2.25rem"}} /></p>
                     <div align="center">
                         <SignUp refresh={refreshMembersUponSignUp} />
                     </div>

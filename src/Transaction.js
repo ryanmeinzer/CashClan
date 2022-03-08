@@ -71,9 +71,15 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
                                 &&
                                 <div>
                                     <div align="center">
-                                        <img src={member.image} alt="profile" style={{borderRadius: "50%"}} />
-                                        <span style={{fontSize: '5rem'}}>🤝</span>
-                                        <img src={matchPrivates.image} alt="profile" style={{borderRadius: "50%"}} />
+                                            <span style={{position: "relative"}}>
+                                                <img src={member.image} alt="profile" style={{borderRadius: "50%"}} />
+                                                <span style={{position: "absolute", top: -75, right: 0}}>✅</span>
+                                            </span>
+                                            <span style={{fontSize: '5rem'}}> 🤝 </span>
+                                            <span style={{position: "relative"}}>
+                                                <img src={matchPrivates.image} alt="profile" style={{borderRadius: "50%"}} />
+                                                <span style={{position: "absolute", top: -75, right: 0}}>✅</span>
+                                            </span>
                                         <CountdownCircleTimer
                                             isPlaying
                                             duration={90}
@@ -96,14 +102,6 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
                         </p>
                     </div>
                     <button type="submit" onClick={handleSubmit}>Transaction Completed</button>
-                    <div style={{color: 'lightGray'}}>
-                        <h4>All Matches (you're meeting with your best):</h4>
-                        <ul>
-                            {sortedMatches.map(member =>
-                                <li key={member.id}>{member.name} {member.mode === 'buying' && 'will buy'} {member.mode === 'selling' && 'will sell up to'} {member.amount !== 0 && member.amount !== null && `$${member.amount}`} {member.mode === 'buying' && 'from you'} {member.mode === 'selling' && 'to you'} for {member.mode === 'buying' ? 'up to' : 'at least'} a {member.premium !== 0 && member.premium !== null && `${member.premium}%`} {member.mode === 'buying' && 'profit'} {member.mode === 'selling' && 'cost'} {member.location && `at ${member.location}`}</li>
-                            )}
-                        </ul>
-                    </div>
                 </div>
             }
         </>

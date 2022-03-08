@@ -1,6 +1,6 @@
 # CashClan
 
-Buy Cash to save. Sell Cash to earn.
+The Cash Exchange (IRL P2P DeFi)
 
 ## Use
 
