@@ -8,6 +8,7 @@ const Profile = () => {
     return (
         member &&
         <div style={{display: 'inline-block'}}>
+                <h1 align="center">CashClan</h1>
                 <img src={member.image} alt="profile" style={{borderRadius: "50%"}} />
                 <div>
                     <Link to="/editprofile">Profile</Link>

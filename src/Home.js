@@ -9,15 +9,9 @@ const Home = ({refreshMembersUponSignUp}) => {
     const {member} = useMemberContext()
 
     return (
-        <>
-            <h1 align="center">CashClan</h1>
-            <p align="center" style={{fontSize: "3rem"}}>🏧🙅🏦</p>
-            <h3 align="center">Buy Cash to save. Sell Cash to earn.</h3>
-            <p align="center" style={{fontSize: "3rem"}}>💵🤝💳</p>
-            <div align="center">
-                <SignUp refresh={refreshMembersUponSignUp} />
-            </div>
-            {member &&
+        <> 
+            {member
+                ?
                 <div>
                     <div align="center">
                         <Profile />
@@ -31,6 +25,16 @@ const Home = ({refreshMembersUponSignUp}) => {
                     <br />
                     <div align="center">
                         <Publish />
+                    </div>
+                </div>
+                :
+                <div>
+                    <h1 align="center">CashClan</h1>
+                    <p align="center" style={{fontSize: "3rem"}}>🏧🙅🏦</p>
+                    <h3 align="center">Buy Cash to save. Sell Cash to earn.</h3>
+                    <p align="center" style={{fontSize: "3rem"}}>💵🤝💳</p>
+                    <div align="center">
+                        <SignUp refresh={refreshMembersUponSignUp} />
                     </div>
                 </div>
             }
