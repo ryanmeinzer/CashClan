@@ -5,7 +5,7 @@ import Locations from './Locations'
 
 const Publish = () => {
 
-    const [state, setState] = useState({active: false, mode: '', amount: 10, premium: 1, location: ''})
+    const [state, setState] = useState({active: false, mode: '', amount: 60, premium: 5, location: ''})
     const {member} = useMemberContext()
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const Publish = () => {
                         ?
                         {active: json.active, mode: json.mode, amount: json.amount, premium: json.premium, location: json.location}
                         :
-                        {active: false, mode: '', amount: 10, premium: 1, location: ''}
+                        {active: false, mode: '', amount: 60, premium: 5, location: ''}
                 ))
     }, [member])
 
@@ -41,11 +41,11 @@ const Publish = () => {
         fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
-        value === false && setState({active: false, mode: '', amount: 10, premium: 1, location: ''})
+        value === false && setState({active: false, mode: '', amount: 60, premium: 5, location: ''})
     }
 
     const handleCancel = () => {
-        setState({active: false, mode: '', amount: 10, premium: 1, location: ''})
+        setState({active: false, mode: '', amount: 60, premium: 5, location: ''})
     }
 
     const handleSubmit = (event) => {
@@ -208,7 +208,7 @@ const Publish = () => {
                         }}
                     >
                         <em>
-                            You'll {(state.amount * (state.premium / 100)) < 5.50 ? 'save' : 'spend'} {Math.abs((5.50 - (state.amount * (state.premium / 100))) / 5.50 * 100).toFixed()}% {(state.amount * (state.premium / 100)) > 5.50 && 'more'} compared to the $5.50 average overall ATM + Bank fees by buying at least ${state.amount} cash through Venmo from a CashClan member{state.location && ` at ${state.location}`}. {(state.amount * (state.premium / 100)) > 5.50 ? "However, that would be" : "That'd also be"} saving you {20 - state.premium}% compared to the ~20% average credit card rate in the USA.
+                            You'll {(state.amount * (state.premium / 100)) < 5.50 ? 'save' : 'spend'} {Math.abs((5.50 - (state.amount * (state.premium / 100))) / 5.50 * 100).toFixed()}% {(state.amount * (state.premium / 100)) > 5.50 && 'more'} compared to the $5.50 average total ATM + bank fees by buying at least ${state.amount} cash through Venmo from a CashClan member{state.location && ` at ${state.location}`}. {(state.amount * (state.premium / 100)) > 5.50 ? "However, that would be" : "That'd also be"} saving you {20 - state.premium}% compared to the ~20% average credit card rate in the USA.
                         </em>
                     </p>
                 }
