@@ -1,6 +1,6 @@
 # CashClan
 
-The Human ATM Network. Buy cash, save money. Sell cash, earn money.
+The Cash Exchange Market (P2P DeFi).
 
 ## Use
 

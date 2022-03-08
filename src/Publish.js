@@ -206,7 +206,10 @@ const Publish = () => {
                         style={{
                             color: (!state.active ? 'green' : 'lightGray')
                         }}
-                    ><em>You'll save at least ${(5 - (state.amount * (state.premium / 100))).toFixed(2)} buying at least ${state.amount} cash for up to a {state.premium}% cost through Venmo from a CashClan member at {state.location} instead of at the ATM.</em>
+                    ><em>
+                            {/* You'll save at least ${(5.50 - (state.amount * (state.premium / 100))).toFixed(2)} buying at least ${state.amount} cash for up to a {state.premium}% cost through Venmo from a CashClan member at {state.location} instead of at the ATM. */}
+                            You'll {(state.amount * (state.premium / 100)) < 5.50 ? 'save' : 'spend'} {Math.abs((5.50 - (state.amount * (state.premium / 100))) / 5.50 * 100).toFixed()}% {(state.amount * (state.premium / 100)) > 5.50 && 'more'} compared to the $5.50 average overall ATM + Bank fees by buying at least ${state.amount} cash through Venmo from a CashClan member{state.location && ` at ${state.location}`}. {(state.amount * (state.premium / 100)) > 5.50 ? "However, that would be" : "That'd also be"} saving you {20 - state.premium}% compared to the ~20% average credit card rate in the USA.
+                        </em>
                     </p>
                 }
                 {state.mode === 'selling'
@@ -214,7 +217,10 @@ const Publish = () => {
                         style={{
                             color: (!state.active ? 'green' : 'lightGray')
                         }}
-                    ><em>You'll make at least ${(state.amount * (state.premium / 100)).toFixed(2)} ({state.premium}% profit) selling up to ${state.amount} of your cash through Venmo to a CashClan member at {state.location}.</em>
+                    ><em>
+                            {/* You'll make at least ${(state.amount * (state.premium / 100)).toFixed(2)} ({state.premium}% profit) selling up to ${state.amount} of your cash through Venmo to a CashClan member at {state.location}. */}
+                            You'll earn {Math.abs(state.premium - 3.5)}% {state.premium > 3.5 ? 'more' : 'less'} than the 3.5% average interest (bank) rate in the USA by selling up to ${state.amount} of your cash through Venmo to a CashClan member{state.location && ` at ${state.location}`}. {state.premium > 7 && `That'd also be earning you ${Math.abs(state.premium - 7)}% more than the 7% average stock market rate in the USA.`}
+                        </em>
                     </p>
                 }
             </div>
