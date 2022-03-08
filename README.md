@@ -1,6 +1,6 @@
 # CashClan
 
-The Cash Exchange Market (P2P DeFi).
+Buy Cash to save. Sell Cash to earn.
 
 ## Use
 

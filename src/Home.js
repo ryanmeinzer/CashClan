@@ -10,8 +10,10 @@ const Home = ({refreshMembersUponSignUp}) => {
 
     return (
         <>
-            <h1 align="center">CashClan 🤑</h1>
-            <h3 align="center">The Cash Exchange Market (P2P DeFi)</h3>
+            <h1 align="center">CashClan</h1>
+            <p align="center" style={{fontSize: "3rem"}}>🏧🙅🏦</p>
+            <h3 align="center">Buy Cash to save. Sell Cash to earn.</h3>
+            <p align="center" style={{fontSize: "3rem"}}>💵🤝💳</p>
             <div align="center">
                 <SignUp refresh={refreshMembersUponSignUp} />
             </div>
