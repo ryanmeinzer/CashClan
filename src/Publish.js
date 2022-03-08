@@ -219,7 +219,7 @@ const Publish = () => {
                         }}
                     >
                         <em>
-                            You'll earn {Math.abs(state.premium - 3.5)}% {state.premium > 3.5 ? 'more' : 'less'} than the 3.5% average interest (bank) rate in the USA by selling up to ${state.amount} of your cash through Venmo to a CashClan member{state.location && ` at ${state.location}`}. {state.premium > 7 && `That'd also be earning you ${Math.abs(state.premium - 7)}% more than the 7% average stock market rate in the USA.`}
+                            You'll earn {Math.abs(state.premium - .5)}% {state.premium > .5 ? 'more' : 'less'} than the 0.5% average bank rate in the USA by selling up to ${state.amount} of your cash through Venmo to a CashClan member{state.location && ` at ${state.location}`}. {state.premium > 7 && `That'd also be earning you ${Math.abs(state.premium - 7)}% more than the 7% average stock market rate in the USA.`}
                         </em>
                     </p>
                 }
