@@ -72,7 +72,7 @@ const Publish = () => {
                                 <>
                                     You are actively publishing your below offer to the CashClan.
                                     <p>
-                                        {state.mode === 'buying' && 'You will buy at least'} {state.mode === 'selling' && 'You will sell up to'} ${state.amount !== 0 && state.amount !== null && `${state.amount}`} {state.mode === 'buying' && 'and will pay up to a '} {state.mode === 'selling' && 'and must make at least a '} {state.premium !== 0 && state.premium !== null && `${state.premium}%`} {state.mode === 'buying' && 'cost'} {state.mode === 'selling' && 'profit'} {state.location && `at ${state.location}.`}
+                                        {state.mode === 'buying' && 'You will buy'} {state.mode === 'selling' && 'You will sell up to'} ${state.amount !== 0 && state.amount !== null && `${state.amount}`} {state.mode === 'buying' && 'and will pay up to a '} {state.mode === 'selling' && 'and must make at least a '} {state.premium !== 0 && state.premium !== null && `${state.premium}%`} {state.mode === 'buying' && 'cost'} {state.mode === 'selling' && 'profit'} {state.location && `at ${state.location}.`}
                                     </p>
                                 </>
                             )
@@ -135,7 +135,7 @@ const Publish = () => {
                         }}
                         hidden={!state.mode}
                     >
-                        {state.mode === 'buying' && 'will buy at least '}
+                        {state.mode === 'buying' && 'will buy '}
                         {state.mode === 'selling' && 'will sell up to '}
                         ${state.amount}
                     </span>
@@ -208,7 +208,7 @@ const Publish = () => {
                         }}
                     >
                         <em>
-                            You'll {(state.amount * (state.premium / 100)) < 5.50 ? 'save' : 'spend'} {Math.abs((5.50 - (state.amount * (state.premium / 100))) / 5.50 * 100).toFixed()}% {(state.amount * (state.premium / 100)) > 5.50 && 'more'} compared to the $5.50 average total ATM + bank fees by buying at least ${state.amount} cash through Venmo from a CashClan member{state.location && ` at ${state.location}`}. {(state.amount * (state.premium / 100)) > 5.50 ? "However, that would be" : "That'd also be"} saving you {20 - state.premium}% compared to the ~20% average credit card rate in the USA.
+                            You'll {(state.amount * (state.premium / 100)) < 5.50 ? 'save' : 'spend'} {Math.abs((5.50 - (state.amount * (state.premium / 100))) / 5.50 * 100).toFixed()}% {(state.amount * (state.premium / 100)) > 5.50 && 'more'} compared to the $5.50 average total ATM + bank fees by buying ${state.amount} cash through Venmo from a CashClan member{state.location && ` at ${state.location}`}. {(state.amount * (state.premium / 100)) > 5.50 ? "However, that would be" : "That'd also be"} saving you {20 - state.premium}% compared to the ~20% average credit card rate in the USA.
                         </em>
                     </p>
                 }
