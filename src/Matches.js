@@ -6,7 +6,7 @@ import _ from 'lodash'
 const Matches = ({offer}) => {
 
     const {member} = useMemberContext()
-    const [state, setState] = useState()
+    const [phoneObj, setPhoneObj] = useState()
     const [members, setMembers] = useState([])
     const [transactions, setTransactions] = useState([])
     const [transactionTerms, setTransactionTerms] = useState({})
@@ -118,23 +118,20 @@ const Matches = ({offer}) => {
                 })
             }
         }
-        // else {
-        //     setTransactionTerms({})
-        // }
     }, [match, offer, pendingTransaction, member])
 
     useEffect(() => {
         member &&
             fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`)
                 .then((obj) => obj.json())
-            .then(json => json.phone ? (setState(json), setHasPhone(true)) : setState(json))
+            .then(json => json.phone ? (setPhoneObj(json), setHasPhone(true)) : setPhoneObj(json))
     }, [member])
 
     const handleChange = (event) => {
         const target = event.target
-        const value = target.type === 'checkbox' ? target.checked : target.value
+        const value = target.value
         const name = target.name
-        setState({...state, [name]: value})
+        setPhoneObj({...phoneObj, [name]: value})
     }
 
     const handleSubmit = (event) => {
@@ -142,7 +139,7 @@ const Matches = ({offer}) => {
         const requestOptions = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(state)
+            body: JSON.stringify(phoneObj)
         }
         fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
             .then(response => response.json())
@@ -164,14 +161,14 @@ const Matches = ({offer}) => {
                     :
                     <div>
                         <h3 style={{color: "red"}}>There aren't any matches with your offer, but we'll text you once there is!</h3>
-                        {state && !hasPhone
+                        {phoneObj && !hasPhone
                             &&
                             <div>
                                 <form onSubmit={handleSubmit}>
                                     <input
                                         type="number"
                                         name="phone"
-                                        value={state && state.phone}
+                                        value={phoneObj && phoneObj.phone}
                                         placeholder="Your Phone"
                                         onChange={handleChange}
                                         required
