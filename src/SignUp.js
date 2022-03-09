@@ -21,7 +21,7 @@ const SignUp = (props) => {
         }
         fetch('https://cashclan-backend.herokuapp.com/members', requestOptions)
             .then(response => response.json())
-            .then(json => setMember({id: json.id, image: json.image}))
+            .then(json => setMember({id: json.id, image: json.image, tokenId: tokenId}))
             .finally(props.refresh)
             .catch(error => error)
     }
