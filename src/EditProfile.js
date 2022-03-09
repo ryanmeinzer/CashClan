@@ -10,24 +10,8 @@ const EditProfile = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch('https://cashclan-backend.herokuapp.com', {credentials: 'include'})
-    }, [])
-
-    function getCSRFToken() {
-        return decodeURI(document.cookie.split('=')[1])
-    }
-
-    useEffect(() => {
         if (member) {
-            const requestOptions = {
-                method: 'GET',
-                credentials: 'include',
-                headers: {
-                    'X-CSRF-Token': getCSRFToken(),
-                    'Content-Type': 'application/json'
-                }
-            }
-            fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
+            fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`)
                 .then((obj) => obj.json())
                 .then(json => setState(json))
         }
