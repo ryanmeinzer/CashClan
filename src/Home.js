@@ -29,7 +29,7 @@ const Home = ({refreshMembersUponSignUp}) => {
                     </div>
                     <br />
                     <div align="center">
-                        <Link to="/about">About</Link>
+                        <Link refresh={refreshMembersUponSignUp} to="/about">learn more</Link>
                     </div>
                 </div>
                 :
