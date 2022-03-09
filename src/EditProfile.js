@@ -11,12 +11,7 @@ const EditProfile = () => {
 
     useEffect(() => {
         if (member) {
-            const requestOptions = {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(member)
-            }
-            fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
+            fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`)
                 .then((obj) => obj.json())
                 .then(json => setState(json))
         }
