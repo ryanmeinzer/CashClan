@@ -14,7 +14,7 @@ const EditProfile = () => {
     }, [])
 
     function getCSRFToken() {
-        return unescape(document.cookie.split('=')[1])
+        return decodeURI(document.cookie.split('=')[1])
     }
 
     useEffect(() => {

@@ -18,7 +18,7 @@ const SignUp = (props) => {
     }, [])
 
     function getCSRFToken() {
-        return unescape(document.cookie.split('=')[1])
+        return decodeURI(document.cookie.split('=')[1])
     }
 
     // securely authenticate & validate with BE via user ID token
