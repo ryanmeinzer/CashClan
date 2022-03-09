@@ -4,13 +4,13 @@ The Cash Exchange (IRL P2P DeFi)
 
 ## Use
 
-Go to www.CashClan.com [ TEMPORARY SPLASH PAGE ]
+Go to www.CashClan.com
 
 Code Repository - https://github.com/ryanmeinzer/cashclan
 
 ## Features
 
-[ COMING SOON ]
+Buy cash - save money. Sell cash - earn money.
 
 ## Build Log & Future Updates
 
