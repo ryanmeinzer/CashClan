@@ -1,6 +1,7 @@
 import {GoogleLogin} from 'react-google-login'
 import {refreshTokenSetup} from './utils/refreshToken'
 import {useMemberContext} from './providers/member'
+import {useEffect} from 'react'
 
 const SignUp = (props) => {
 
@@ -12,11 +13,23 @@ const SignUp = (props) => {
         console.log('inside SignUp', res)
     }
 
+    useEffect(() => {
+        fetch('https://cashclan-backend.herokuapp.com', {credentials: 'include'})
+    }, [])
+
+    function getCSRFToken() {
+        return unescape(document.cookie.split('=')[1])
+    }
+
     // securely authenticate & validate with BE via user ID token
     const findOrCreateMember = (tokenId) => {
         const requestOptions = {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+            headers: {
+                'X-CSRF-Token': getCSRFToken(),
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({tokenId: tokenId})
         }
         fetch('https://cashclan-backend.herokuapp.com/members', requestOptions)
