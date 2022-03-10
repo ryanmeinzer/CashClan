@@ -11,8 +11,6 @@ const Matches = ({offer}) => {
     const [transactions, setTransactions] = useState([])
     const [transactionTerms, setTransactionTerms] = useState({})
 
-    console.log('phoneObj:', phoneObj)
-
     // Pending Transaction (don't match)
     const pendingTransaction = transactions.find(transaction => transaction.status === 'pending' && (transaction.seller_id === member.id || transaction.buyer_id === member.id))
     const pendingTransactionMatch = pendingTransaction && members.find(member => member.id === (offer.mode === 'buying' ? pendingTransaction.seller_id : pendingTransaction.buyer_id))
