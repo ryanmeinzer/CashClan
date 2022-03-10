@@ -1,6 +1,6 @@
 # CashClan
 
-The Cash Exchange (IRL P2P DeFi)
+The Cash Exchange (IRL P2P DeFi).
 
 ## Use
 
