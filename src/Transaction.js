@@ -53,7 +53,6 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
         // rid the need for a unique transactionId, for the BE to find accordingly
         fetch(`https://cashclan-backend.herokuapp.com/transactions/${transactionTerms.buyer_id}`, requestOptions)
             .then(response => response.json())
-            .finally(alert('Thanks for using CashClan!'))
             .catch(error => error)
         // BE is also setting both parties statuses to inactive after transaction is complete for hard refresh logic in Matches.js; load new page from browser with new history entry if member confirms transaction
         window.location.href = 'https://reverent-saha-216b51.netlify.app/'
@@ -86,8 +85,7 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
                                             colors={['#089000', '#F7B801', '#A30000', '#A30000']}
                                             colorsTime={[90, 60, 30, 0]}
                                             size={100}
-                                            onComplete={() => {
-                                                alert("Please don't make your match wait!")
+                                                onComplete={() => {
                                                 return {shouldRepeat: true, delay: 1.5}
                                             }}
                                         >

@@ -135,7 +135,7 @@ const Matches = ({offer}) => {
         }
         fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
             .then(response => response.json())
-            .finally(alert('Thanks for updating your phone!'), handleTogglePhoneForm())
+            .finally(handleTogglePhoneForm())
             .catch(error => error)
     }
 
