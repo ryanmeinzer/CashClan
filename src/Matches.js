@@ -38,7 +38,7 @@ const Matches = ({offer}) => {
     // load new page from browser with new history entry if member has left and returned to app/page
     const onVisibilityChange = () => {
         if (document.visibilityState === 'visible') {
-            window.location.href = 'https://cashclan.com'
+            window.location.href = 'https://cashclan.com/'
         }
     }
     useLayoutEffect(() => {
