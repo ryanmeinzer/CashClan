@@ -28,10 +28,10 @@
 
 5 - seller is matched
 	a - transaction created
-	b - another seller’s would-be matching offer is not created
-	c - another seller’s would-be matching offer does not override 
+	b - another seller’s would-be matching offer does not override
+	c - seller unpublishes, transation is deleted and would-be matching offer is matched with new transaction
 
 6 - buyer is matched
 	a - transaction created
-	b - another buyer’s would-be matching offer is not created
-	c - another buyer’s would-be matching offer does not override 
+	b - another buyer’s would-be matching offer does not override
+	c - buyer unpublishes, transation is deleted and would-be matching offer is matched with new transaction
