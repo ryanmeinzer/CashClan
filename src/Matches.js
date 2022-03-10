@@ -168,7 +168,7 @@ const Matches = ({offer}) => {
                     :
                     <div>
                         <h3 style={{color: "red"}}>There aren't any matches with your offer, but we'll text you once there is!</h3>
-                        <div id="phoneForm" style={{display: "none"}}>
+                        {/* <div id="phoneForm" style={{display: "none"}}>
                             <form onSubmit={handleSubmit}>
                                 <input
                                     type="number"
@@ -182,7 +182,7 @@ const Matches = ({offer}) => {
                                 <button type="submit">Confirm Phone</button>
                             </form>
                         </div>
-                        <button id="phoneFormButton" onClick={handleTogglePhoneForm} style={{display: "block"}} >Update Phone</button>
+                        <button id="phoneFormButton" onClick={handleTogglePhoneForm} style={{display: "block"}} >Update Phone</button> */}
                     </div>
             }
         </>
