@@ -182,7 +182,7 @@ const Matches = ({offer}) => {
                                 <button type="submit">Confirm Phone</button>
                             </form>
                         </div>
-                        <button id="phoneFormButton" onClick={handleTogglePhoneForm} style={{display: "block"}} >Update Phone</button>
+                        <button type="submit" id="phoneFormButton" onClick={handleTogglePhoneForm} style={{display: "block"}} >Update Phone</button>
                     </div>
             }
         </>
