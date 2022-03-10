@@ -31,7 +31,7 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
     }, [match])
 
     const handleSubmit = (event) => {
-        event.preventDefault()
+        // event.preventDefault()
         const requestOptions = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
@@ -55,7 +55,7 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
             .then(response => response.json())
             .catch(error => error)
         // BE is also setting both parties statuses to inactive after transaction is complete for hard refresh logic in Matches.js; load new page from browser with new history entry if member confirms transaction
-        window.location.href = 'https://cashclan.com/'
+        // window.location.href = 'https://cashclan.com/'
     }
 
     return (
