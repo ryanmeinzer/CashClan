@@ -99,7 +99,7 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
                             Meet now at the ATM inside of {transactionTerms.location}. Say "CashClan" while asking for {matchPrivates.name} who {match.mode === 'buying' && 'will buy'} {match.mode === 'selling' && 'will sell'} ${mode === 'buying' && transactionTerms.amount - transactionTerms.cost}{mode === 'selling' && transactionTerms.amount - transactionTerms.profit} cash {match.mode === 'buying' && 'from you'} {match.mode === 'selling' && 'to you'} through Venmo for ${transactionTerms.amount} (a {transactionTerms.premium}% {mode === 'buying' ? 'cost' : 'profit'}).
                         </p>
                     </div>
-                    <button onClick={handleSubmit}>Transaction Completed</button>
+                    <button type="submit" onClick={handleSubmit}>Transaction Completed</button>
                 </div>
             }
         </>
