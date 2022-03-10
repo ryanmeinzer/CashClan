@@ -59,7 +59,7 @@ const Matches = ({offer}) => {
                 .then((obj) => obj.json())
                 .then(json => setTransactions(json))
                 .catch(error => console.log('error:', error))
-            // hard refresh from server (vs. from cache) if match is inactive (covers them unpublishing or confirming the mutual transaction), unnecessary to load new page (and validate google ID token) from browser as member hasn't left and returned to app/page
+            // load new page from browser with new history entry if match is inactive (covers them unpublishing or confirming the mutual transaction)
             if (match) {
                 fetch(`https://cashclan-backend.herokuapp.com/members/${match.id}`)
                     .then((obj) => obj.json())

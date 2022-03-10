@@ -30,8 +30,8 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
                 .then(json => setMatchPrivates(json))
     }, [match])
 
-    const handleSubmit = (event) => {
-        // event.preventDefault()
+    // Uphold default behavior of the submit DOM object event to refresh browser if member confirms transaction (ie do not use event.preventDefault()). BE is also setting both parties' statuses to inactive after transaction is complete for hard refresh logic if still inside Matches.js.
+    const handleSubmit = () => {
         const requestOptions = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
@@ -54,8 +54,6 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
         fetch(`https://cashclan-backend.herokuapp.com/transactions/${transactionTerms.buyer_id}`, requestOptions)
             .then(response => response.json())
             .catch(error => error)
-        // BE is also setting both parties statuses to inactive after transaction is complete for hard refresh logic in Matches.js; load new page from browser with new history entry if member confirms transaction
-        // window.location.href = 'https://cashclan.com/'
     }
 
     return (
