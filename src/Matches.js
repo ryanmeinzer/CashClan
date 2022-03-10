@@ -6,11 +6,12 @@ import _ from 'lodash'
 const Matches = ({offer}) => {
 
     const {member} = useMemberContext()
-    const [phoneObj, setPhoneObj] = useState()
+    const [phoneObj, setPhoneObj] = useState({phone: ''})
     const [members, setMembers] = useState([])
     const [transactions, setTransactions] = useState([])
     const [transactionTerms, setTransactionTerms] = useState({})
-    const [hasPhone, setHasPhone] = useState()
+
+    console.log('phoneObj:', phoneObj)
 
     // Pending Transaction (don't match)
     const pendingTransaction = transactions.find(transaction => transaction.status === 'pending' && (transaction.seller_id === member.id || transaction.buyer_id === member.id))
@@ -86,7 +87,7 @@ const Matches = ({offer}) => {
                     premium: Math.round(averagedPremiums),
                     cost: cost,
                     profit: cost,
-                    savings: Number((5 - cost).toFixed(2)),
+                    savings: Number((5.50 - cost).toFixed(2)),
                     buyer_offer_amount: offer.amount,
                     buyer_offer_premium: offer.premium,
                     seller_offer_amount: match.amount,
@@ -105,7 +106,7 @@ const Matches = ({offer}) => {
                     premium: Math.round(averagedPremiums),
                     cost: cost,
                     profit: cost,
-                    savings: Number((5 - cost).toFixed(2)),
+                    savings: Number((5.50 - cost).toFixed(2)),
                     buyer_offer_amount: match.amount,
                     buyer_offer_premium: match.premium,
                     seller_offer_amount: offer.amount,
@@ -119,13 +120,6 @@ const Matches = ({offer}) => {
             }
         }
     }, [match, offer, pendingTransaction, member])
-
-    useEffect(() => {
-        member &&
-            fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`)
-                .then((obj) => obj.json())
-            .then(json => json.phone ? (setPhoneObj(json), setHasPhone(true)) : setPhoneObj(json))
-    }, [member])
 
     const handleChange = (event) => {
         const target = event.target
@@ -143,8 +137,23 @@ const Matches = ({offer}) => {
         }
         fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
             .then(response => response.json())
-            .finally(alert('Thanks for updating your phone!'), setHasPhone(true))
+            .finally(alert('Thanks for updating your phone!'), handleTogglePhoneForm())
             .catch(error => error)
+    }
+
+    const handleTogglePhoneForm = () => {
+        const phoneFormDiv = document.getElementById("phoneForm")
+        if (phoneFormDiv.style.display !== "none") {
+            phoneFormDiv.style.display = "none"
+        } else {
+            phoneFormDiv.style.display = "block"
+        }
+        const phoneFormButtonDiv = document.getElementById("phoneFormButton")
+        if (phoneFormButtonDiv.style.display !== "none") {
+            phoneFormButtonDiv.style.display = "none"
+        } else {
+            phoneFormButtonDiv.style.display = "block"
+        }
     }
 
     return (
@@ -161,23 +170,21 @@ const Matches = ({offer}) => {
                     :
                     <div>
                         <h3 style={{color: "red"}}>There aren't any matches with your offer, but we'll text you once there is!</h3>
-                        {phoneObj && !hasPhone
-                            &&
-                            <div>
-                                <form onSubmit={handleSubmit}>
-                                    <input
-                                        type="number"
-                                        name="phone"
-                                        value={phoneObj && phoneObj.phone}
-                                        placeholder="Your Phone"
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                    <button type="submit">Update Your Phone</button>
-                                </form>
-                                < br />
-                            </div>
-                        }
+                        <div id="phoneForm" style={{display: "none"}}>
+                            <form onSubmit={handleSubmit}>
+                                <input
+                                    type="number"
+                                    name="phone"
+                                    value={phoneObj.phone}
+                                    placeholder="Your Phone"
+                                    onChange={handleChange}
+                                    required
+                                />
+                                <button type="button" onClick={handleTogglePhoneForm}>Cancel</button>
+                                <button type="submit">Confirm Phone</button>
+                            </form>
+                        </div>
+                        <button id="phoneFormButton" onClick={handleTogglePhoneForm} style={{display: "block"}} >Update Phone</button>
                     </div>
             }
         </>
