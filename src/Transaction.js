@@ -53,7 +53,6 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
         // rid the need for a unique transactionId, for the BE to find accordingly
         fetch(`https://cashclan-backend.herokuapp.com/transactions/${transactionTerms.buyer_id}`, requestOptions)
             .then(response => response.json())
-            .finally(window.location.href = 'https://cashclan.com/')
             .catch(error => error)
         // BE is also setting both parties statuses to inactive after transaction is complete for hard refresh logic in Matches.js; load new page from browser with new history entry if member confirms transaction
         // window.location.href = 'https://cashclan.com/'
