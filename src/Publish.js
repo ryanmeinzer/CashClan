@@ -175,9 +175,9 @@ const Publish = () => {
                         state.active
                             ?
                             <button
-                                type="submit"
+                                // type="submit"
                                 name="active"
-                                // type="button"
+                                type="button"
                                 value={false}
                                 onClick={handleChange}
                             > Unpublish or Update
