@@ -29,6 +29,7 @@
 5 - seller is matched
 	a - transaction created
 	b - another seller’s would-be matching offer does not override
+	<!-- ToDo - prevent double/duplicate transaction from being created on mobile QA 5c -->
 	c - seller unpublishes, transation is deleted and would-be matching offer is matched with new transaction
 
 6 - buyer is matched
