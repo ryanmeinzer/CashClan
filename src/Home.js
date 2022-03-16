@@ -4,6 +4,9 @@ import Profile from './Profile'
 import Logout from './Logout'
 import {useMemberContext} from './providers/member'
 import {Link} from "react-router-dom";
+// ToDo - uncomment once splash page is finished
+// import Splash from './Splash'
+// import MenuAppBar from './MenuAppBar'
 
 const Home = ({refreshMembersUponSignUp}) => {
 
@@ -11,8 +14,10 @@ const Home = ({refreshMembersUponSignUp}) => {
 
     return (
         <> 
+            {/* <MenuAppBar /> */}
             {member
                 ?
+                // ToDo - move to new component, design and uncomment once finished
                 <div>
                     <div align="center">
                         <Profile />
@@ -33,6 +38,8 @@ const Home = ({refreshMembersUponSignUp}) => {
                     </div>
                 </div>
                 :
+                // ToDo - uncomment once splash page is finished
+                // < Splash refresh={refreshMembersUponSignUp} />
                 <div>
                     <h1 align="center">CashClan</h1>
                     <p align="center" style={{fontSize: "3rem"}}>🏧 🙅 🏦</p>
