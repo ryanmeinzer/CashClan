@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import {useTheme} from '@mui/material/styles'
 import Partners from './components/Partners'
-// import HowItWorks from './components/HowItWorks'
+import HowItWorks from './components/HowItWorks'
 
 const Splash = (props) => {
 
@@ -19,9 +19,9 @@ const Splash = (props) => {
                     <Partners />
                 </Container>
             </Box>
-            {/* <Container sx={{mt: 4}} >
+            <Container sx={{mt: 8}} >
                 <HowItWorks />
-            </Container> */}
+            </Container>
         </Box>
     )
 }

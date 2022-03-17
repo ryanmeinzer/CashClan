@@ -4,6 +4,9 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
 import Grid from '@mui/material/Grid'
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople'
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact'
+import HandshakeIcon from '@mui/icons-material/Handshake'
 
 const HowItWorks = () => {
   const theme = useTheme()
@@ -34,69 +37,27 @@ const HowItWorks = () => {
       <Grid container spacing={4}>
         {[
           {
-            title: 'Fill out your intro survey',
+            title: 'Submit your offer.',
             subtitle:
-              'We start with a short 3-step online survey to help us determine the best banking solution for your specific startup.',
+              "Let the CashClan know how much (aka the 'premium') you're willing to buy or sell cash for.",
             icon: (
-              <svg
-                width={24}
-                height={24}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
+              <EmojiPeopleIcon />
             ),
           },
           {
-            title: 'We build a banking stack.',
+            title: 'Get matched.',
             subtitle:
-              'From your information, we generate a banking stack well suited to your company’s personalized needs.',
+              "Your offer will be optimally matched based on location and the best bang (savings or earnings) for your buck.",
             icon: (
-              <svg
-                width={24}
-                height={24}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-                />
-              </svg>
+              <ConnectWithoutContactIcon />
             ),
           },
           {
-            title: 'Registration and filings',
+            title: 'Meet to exchange cash.',
             subtitle:
-              'We handle the creation of your actual account including registering with the financial and government agencies.',
+              "With verified names and pictures, securely give/get cash to/from your match for the specified receipt/payment through Venmo.",
             icon: (
-              <svg
-                width={24}
-                height={24}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+              <HandshakeIcon />
             ),
           },
         ].map((item, i) => (
@@ -105,7 +66,7 @@ const HowItWorks = () => {
               component={Avatar}
               marginBottom={2}
               variant="rounded"
-              bgcolor={theme.palette.primary.main}
+              bgcolor={theme.palette.primary.dark}
             >
               <Box>{item.icon}</Box>
             </Box>
