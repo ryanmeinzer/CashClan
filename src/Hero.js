@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid'
 import {ReactComponent as CashTransferSvg} from './CashTransfer.svg'
 import SignUp from './SignUp'
 
-const Hero = () => {
+const Hero = (props) => {
   const theme = useTheme()
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
@@ -90,7 +90,7 @@ const Hero = () => {
             flexDirection={{xs: 'column', sm: 'row'}}
             alignItems={{xs: 'stretched', sm: 'flex-start'}}
           >
-            <SignUp heroOrigin={true} isMd={isMd} />
+            <SignUp refresh={props.refresh} heroOrigin={true} isMd={isMd} />
           </Box>
         </Box>
       </Grid>

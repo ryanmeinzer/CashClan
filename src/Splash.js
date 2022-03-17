@@ -9,11 +9,8 @@ const Splash = (props) => {
     return (
         <Box sx={{mt: 12}}>
             <Container>
-                <Hero />
+                <Hero refresh={props.refresh} />
             </Container >
-            <div align="center">
-                <SignUp refresh={props.refreshMembersUponSignUp} />
-            </div>
             <br />
             <br />
             <br />

@@ -10,7 +10,7 @@ import {useMemberContext} from './providers/member'
 import SignUp from './SignUp'
 import Logout from './Logout'
 
-const MenuAppBar = () => {
+const MenuAppBar = (props) => {
 
     const {member} = useMemberContext()
     const {isLoggedIn} = useMemberContext()
@@ -57,7 +57,7 @@ const MenuAppBar = () => {
                         </div>)
                         :
                         (<div>
-                            <SignUp menuAppBarOrigin={true} />
+                            <SignUp refresh={props.refresh} menuAppBarOrigin={true} />
                         </div>)
                     }
                 </Toolbar>

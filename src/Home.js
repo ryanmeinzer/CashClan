@@ -12,7 +12,7 @@ const Home = ({refreshMembersUponSignUp}) => {
     return (
         <> 
             <Container>
-                <MenuAppBar />
+                <MenuAppBar refresh={refreshMembersUponSignUp} />
             </Container>
             {member
                 ?
