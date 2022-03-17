@@ -4,6 +4,7 @@ import Splash from './Splash'
 import MenuAppBar from './MenuAppBar'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
 
 const Home = ({refreshMembersUponSignUp}) => {
 
@@ -13,6 +14,7 @@ const Home = ({refreshMembersUponSignUp}) => {
         <> 
             <Container>
                 <MenuAppBar refresh={refreshMembersUponSignUp} />
+                <Toolbar />
             </Container>
             {member
                 ?

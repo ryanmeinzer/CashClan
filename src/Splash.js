@@ -4,13 +4,14 @@ import Container from '@mui/material/Container'
 import {useTheme} from '@mui/material/styles'
 import Partners from './components/Partners'
 import HowItWorks from './components/HowItWorks'
+import Divider from '@mui/material/Divider'
 
 const Splash = (props) => {
 
     const theme = useTheme()
 
     return (
-        <Box sx={{mt: 16}}>
+        <Box sx={{mt: 6}}>
             <Container>
                 <Hero refresh={props.refresh} />
             </Container >
@@ -22,6 +23,7 @@ const Splash = (props) => {
             <Container sx={{mt: 8}} >
                 <HowItWorks />
             </Container>
+            <Divider sx={{mt: 6, mb: 6}} />
         </Box>
     )
 }

@@ -1,32 +1,36 @@
-import React, {useState} from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+// ToDo - uncomment below once re - enabling Profile / Transactions page
 // import MenuItem from '@mui/material/MenuItem'
 import Menu from '@mui/material/Menu'
 import Avatar from '@mui/material/Avatar'
 import {useMemberContext} from './providers/member'
 import SignUp from './SignUp'
 import Logout from './Logout'
+import useScrollTrigger from '@mui/material/useScrollTrigger'
+import Slide from '@mui/material/Slide'
+import PopupState, {bindTrigger, bindMenu} from 'material-ui-popup-state'
 
 const MenuAppBar = (props) => {
 
+    function HideOnScroll({children}) {
+        const trigger = useScrollTrigger()
+        return (
+            <Slide appear={false} direction="down" in={!trigger}>
+                {children}
+            </Slide>
+        )
+    }
+
     const {member} = useMemberContext()
     const {isLoggedIn} = useMemberContext()
-    const [anchorEl, setAnchorEl] = useState(null)
-
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget)
-    }
-
-    const handleClose = () => {
-        setAnchorEl(null)
-    }
 
     return (
         <Box sx={{flexGrow: 1}}>
-            <AppBar position="absolute" color="transparent">
+            <HideOnScroll >
+                <AppBar position="fixed" sx={{backgroundColor: "#ffffff"}}>
                 <Toolbar>
                     <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
                         🤑
@@ -34,26 +38,18 @@ const MenuAppBar = (props) => {
                     {member && isLoggedIn
                         ?
                         (<div>
-                            <Avatar alt="profile picture" src={member.image} onClick={handleMenu} />
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                            >
-                                {/* // ToDo - uncomment below once re-enabling Profile/Transactions page */}
-                                {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
-                                <Logout handleClose={handleClose} />
-                            </Menu>
+                                <PopupState variant="popover" popupId="demo-popup-menu">
+                                    {(popupState) => (
+                                        <div>
+                                            <Avatar alt="profile picture" src={member.image} {...bindTrigger(popupState)} />
+                                            <Menu {...bindMenu(popupState)}>
+                                                {/* // ToDo - uncomment below once re-enabling Profile/Transactions page */}
+                                                {/* <MenuItem onClick={popupState.close}>Profile</MenuItem> */}
+                                                <Logout onClick={popupState.close} handleClose={popupState.close} />
+                                            </Menu>
+                                        </div>
+                                    )}
+                                </PopupState>
                         </div>)
                         :
                         (<div>
@@ -62,6 +58,7 @@ const MenuAppBar = (props) => {
                     }
                 </Toolbar>
             </AppBar>
+            </HideOnScroll>
         </Box>
     )
 }
