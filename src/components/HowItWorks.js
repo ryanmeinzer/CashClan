@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
 import Grid from '@mui/material/Grid'
-import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople'
+import SendToMobileIcon from '@mui/icons-material/SendToMobile'
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact'
 import HandshakeIcon from '@mui/icons-material/Handshake'
 
@@ -39,9 +39,9 @@ const HowItWorks = () => {
           {
             title: 'Submit your offer.',
             subtitle:
-              "Let the CashClan know how much (aka the 'premium') you're willing to buy or sell cash for.",
+              "Let the CashClan know how much (aka the 'premium') you're willing to buy/sell cash for in-person, for digital payment/receipt by phone.",
             icon: (
-              <EmojiPeopleIcon />
+              <SendToMobileIcon />
             ),
           },
           {
@@ -55,7 +55,7 @@ const HowItWorks = () => {
           {
             title: 'Meet to exchange cash.',
             subtitle:
-              "With verified names and pictures, securely give/get cash to/from your match for the specified receipt/payment through Venmo.",
+              "With verified names and pictures, securely get/give cash from/to your match for the specified digital payment/receipt.",
             icon: (
               <HandshakeIcon />
             ),
