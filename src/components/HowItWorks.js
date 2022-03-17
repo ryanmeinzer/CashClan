@@ -55,7 +55,7 @@ const HowItWorks = () => {
           {
             title: 'Meet to exchange cash.',
             subtitle:
-              "With verified names and pictures, securely get/give cash from/to your match for the specified digital payment/receipt.",
+              "With verified names and pictures, securely get/give cash from/to your match for the specified digital payment/receipt by phone.",
             icon: (
               <HandshakeIcon />
             ),
