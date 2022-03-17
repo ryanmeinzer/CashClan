@@ -1,6 +1,9 @@
 import {GoogleLogin} from 'react-google-login'
 import {refreshTokenSetup} from './utils/refreshToken'
 import {useMemberContext} from './providers/member'
+import Button from '@mui/material/Button'
+import AccountCircle from '@mui/icons-material/AccountCircle'
+import Box from '@mui/material/Box'
 
 const SignUp = (props) => {
 
@@ -37,7 +40,31 @@ const SignUp = (props) => {
         !isLoggedIn &&
         <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            buttonText="Sign Up / Login with Google"
+            render={renderProps => (
+                props.menuAppBarOrigin
+                    ?
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        endIcon={<AccountCircle />}
+                        onClick={renderProps.onClick}
+                        disabled={renderProps.disabled}
+                    >LOG IN</Button>
+                    : props.heroOrigin
+                        ?
+                        <Box
+                            component={Button}
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            onClick={renderProps.onClick}
+                            disabled={renderProps.disabled}
+                            fullWidth={!props.isMd}
+                        >
+                            Sign Up
+                        </Box>
+                        : null
+            )}
             onSuccess={onSuccess}
             onFailure={responseGoogle}
             cookiePolicy={'single_host_origin'}

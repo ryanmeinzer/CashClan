@@ -3,10 +3,11 @@ import Typed from 'typed.js'
 import {useTheme} from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
-import CreditCardsIllustration from './CreditCards'
+// import {ReactComponent as CashSvg} from './Cash.svg'
+import {ReactComponent as CashTransferSvg} from './CashTransfer.svg'
+import SignUp from './SignUp'
 
 const Hero = () => {
   const theme = useTheme()
@@ -49,7 +50,7 @@ const Hero = () => {
                 fontWeight: 700,
               }}
             >
-              Easily{' '}
+              Lets{' '}
               <Typography
                 variant="h2"
                 component={'span'}
@@ -81,7 +82,7 @@ const Hero = () => {
           </Box>
           <Box marginBottom={3}>
             <Typography variant="h6" component="p" color="textSecondary">
-              No more high ATM fees. Way more interest. Welcome to the new era of CashClan - The Cash Exchange (IRL P2P DeFi).
+              No more fees. Way more interest. By the people, for the people. Welcome to the CashClan.
             </Typography>
           </Box>
           <Box
@@ -89,15 +90,7 @@ const Hero = () => {
             flexDirection={{xs: 'column', sm: 'row'}}
             alignItems={{xs: 'stretched', sm: 'flex-start'}}
           >
-            <Box
-              component={Button}
-              variant="contained"
-              color="primary"
-              size="large"
-              fullWidth={!isMd}
-            >
-              Sign Up
-            </Box>
+            <SignUp heroOrigin={true} isMd={isMd} />
           </Box>
         </Box>
       </Grid>
@@ -114,7 +107,8 @@ const Hero = () => {
             width={'100%'}
             maxWidth={{xs: 500, md: '100%'}}
           >
-            <CreditCardsIllustration width={'100%'} height={'100%'} />
+            {/* <CashSvg width={'100%'} height={'100%'} /> */}
+            <CashTransferSvg width={'100%'} height={'100%'} />
           </Box>
         </Box>
       </Grid>

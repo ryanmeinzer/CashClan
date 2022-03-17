@@ -1,16 +1,13 @@
 import SignUp from './SignUp'
 import {Link} from "react-router-dom"
-import MenuAppBar from './MenuAppBar'
+// import MenuAppBar from './MenuAppBar'
 import Hero from './Hero'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 
 const Splash = (props) => {
     return (
-        <Box>
-            <Container>
-                <MenuAppBar />
-            </Container>
+        <Box sx={{mt: 12}}>
             <Container>
                 <Hero />
             </Container >
