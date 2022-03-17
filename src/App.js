@@ -1,5 +1,4 @@
 import Home from './Home'
-import Profile from './Profile'
 import {Routes, Route} from "react-router-dom"
 
 const App = () => {
@@ -8,7 +7,6 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="profile" element={<Profile />} />
       </Routes>
     </>
   )

@@ -1,9 +1,9 @@
-import {Link} from "react-router-dom"
 import Hero from './components/Hero'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import {useTheme} from '@mui/material/styles'
 import Partners from './components/Partners'
+// import HowItWorks from './components/HowItWorks'
 
 const Splash = (props) => {
 
@@ -19,12 +19,9 @@ const Splash = (props) => {
                     <Partners />
                 </Container>
             </Box>
-            <br />
-            <br />
-            <br />
-            <div align="center">
-                <Link to="/about">learn more</Link>
-            </div>
+            {/* <Container sx={{mt: 4}} >
+                <HowItWorks />
+            </Container> */}
         </Box>
     )
 }
