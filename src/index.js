@@ -33,7 +33,7 @@ ReactDOM.render(
     <BrowserRouter>
       <MemberProvider>
         <ThemeProvider theme={theme}>
-        <App />
+          <App />
         </ThemeProvider>
       </MemberProvider>
     </BrowserRouter>
