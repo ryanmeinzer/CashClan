@@ -26,7 +26,7 @@ const Splash = (props) => {
             </Container>
             <Divider sx={{mt: 8, mb: 8}} />
             <Container>
-                <Who />
+                <Who refresh={props.refresh} />
             </Container>
             <Divider sx={{mt: 8, mb: 8}} />
         </Box>

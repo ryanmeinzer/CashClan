@@ -1,5 +1,6 @@
 import React from 'react'
 import {alpha, useTheme} from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
@@ -7,9 +8,15 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Avatar from '@mui/material/Avatar'
 import SvgIcon from '@mui/material/SvgIcon'
+import SignUp from '../SignUp'
 
-const Who = () => {
+const Who = (props) => {
+
   const theme = useTheme()
+  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+    defaultMatches: true,
+  })
+
   return (
     <Box>
       <Box marginBottom={4}>
@@ -146,6 +153,19 @@ const Who = () => {
           </Grid>
         ))}
       </Grid>
+      <Box
+        display="flex"
+        flexDirection={{xs: 'column', sm: 'row'}}
+        alignItems={'center'}
+        justifyContent={'center'}
+        sx={{mt: 8, mb: 8}}
+      >
+        <SignUp
+          refresh={props.refresh}
+          heroOrigin={true}
+          isMd={isMd}
+        />
+      </Box>
     </Box>
   )
 }
