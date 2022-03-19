@@ -1,7 +1,7 @@
 import React from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import Logo from '../images/cashclan_logo.png'
+import Logo from './images/cashclan_logo.png'
 
 const Footer = () => (
   <Box>

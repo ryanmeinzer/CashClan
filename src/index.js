@@ -25,14 +25,7 @@ const theme = createTheme({
       dark: '#c88819',
       contrastText: 'black',
     },
-  },
-  layout: {
-    contentWidth: 1236,
-  },
-  zIndex: {
-    appBar: 1200,
-    drawer: 1300,
-  },
+  }
 })
 
 ReactDOM.render(

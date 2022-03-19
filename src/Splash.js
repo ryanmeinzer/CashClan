@@ -6,7 +6,6 @@ import Partners from './components/Partners'
 import HowItWorks from './components/HowItWorks'
 import Divider from '@mui/material/Divider'
 import Who from './components/Who'
-import Footer from './components/Footer'
 import AOS from 'aos'
 import "aos/dist/aos.css"
 
@@ -37,10 +36,6 @@ const Splash = (props) => {
             <Divider sx={{mt: 8, mb: 8}} />
             <Container>
                 <Who refresh={props.refresh} />
-            </Container>
-            <Divider sx={{mt: 8, mb: 4}} />
-            <Container>
-                <Footer />
             </Container>
         </Box>
     )

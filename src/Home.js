@@ -5,6 +5,8 @@ import MenuAppBar from './MenuAppBar'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
+import Footer from './Footer'
+import Divider from '@mui/material/Divider'
 
 const Home = ({refreshMembersUponSignUp}) => {
 
@@ -31,6 +33,10 @@ const Home = ({refreshMembersUponSignUp}) => {
                     </Container>
                 </Box>
             }
+            <Divider sx={{mt: 8, mb: 4}} />
+            <Container>
+                <Footer />
+            </Container>
         </>
     )
 }
