@@ -101,7 +101,7 @@ const Hero = (props) => {
           justifyContent={'center'}
           data-aos={'fade-left'}
           mt={isMd ? -4 : -2}
-          ml={isMd ? 4 : 0}
+          ml={isMd ? 6 : 0}
         >
           <Box
             height={'100%'}

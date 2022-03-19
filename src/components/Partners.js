@@ -20,8 +20,6 @@ const Partners = () => {
           maxWidth={100}
           ml={2}
           mr={2}
-          mt={1}
-          mb={1}
           key={i}
         >
           <Box
