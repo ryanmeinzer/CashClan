@@ -40,7 +40,7 @@ const Hero = (props) => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} md={6}>
-        <Box data-aos={'fade-right'} data-aos-anchor-placement="top-bottom">
+        <Box data-aos={'fade-right'} data-aos-anchor-placement="top-bottom" ml={isMd ? 4 : 0}>
           <Box mb={2}>
             <Typography
               variant="h2"
@@ -101,6 +101,7 @@ const Hero = (props) => {
           justifyContent={'center'}
           data-aos={'fade-left'}
           mt={isMd ? -4 : -2}
+          ml={isMd ? 4 : 0}
         >
           <Box
             height={'100%'}
