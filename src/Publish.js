@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react"
 import {useMemberContext} from './providers/member'
 import Matches from './Matches'
 import Locations from './Locations'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
 
 const Publish = () => {
 
@@ -68,18 +70,16 @@ const Publish = () => {
                     {
                         state.active
                             ?
-                            (
-                                <>
-                                    You are actively publishing your below offer to the CashClan.
-                                    <p>
-                                        {state.mode === 'buying' && 'You will buy'} {state.mode === 'selling' && 'You will sell up to'} ${state.amount !== 0 && state.amount !== null && `${state.amount}`} {state.mode === 'buying' && 'and will pay up to a '} {state.mode === 'selling' && 'and must make at least a '} {state.premium !== 0 && state.premium !== null && `${state.premium}%`} {state.mode === 'buying' && 'cost'} {state.mode === 'selling' && 'profit'} {state.location && `at ${state.location}.`}
-                                    </p>
-                                </>
-                            )
+                            <Box>
+                                <Typography color="text.secondary" align={'center'} component="p">You are actively publishing your below offer to the CashClan.</Typography>
+                                {/* <p>
+                                    {state.mode === 'buying' && 'You will buy'} {state.mode === 'selling' && 'You will sell up to'} ${state.amount !== 0 && state.amount !== null && `${state.amount}`} {state.mode === 'buying' && 'and will pay up to a '} {state.mode === 'selling' && 'and must make at least a '} {state.premium !== 0 && state.premium !== null && `${state.premium}%`} {state.mode === 'buying' && 'cost'} {state.mode === 'selling' && 'profit'} {state.location && `at ${state.location}.`}
+                                </p> */}
+                            </Box>
                             :
-                            <>
-                                <p>You are not active. Publish an offer to the CashClan below.</p>
-                            </>
+                            <Box>
+                                <Typography color="text.secondary" align={'center'} component="p">You are not active. Publish an offer to the CashClan below.</Typography>
+                            </Box>
                     }
                 </div>
                 <form
