@@ -2,7 +2,6 @@ import React, {useEffect} from 'react'
 import Hero from './components/Hero'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
-import {useTheme} from '@mui/material/styles'
 import Partners from './components/Partners'
 import HowItWorks from './components/HowItWorks'
 import Divider from '@mui/material/Divider'
@@ -12,8 +11,6 @@ import AOS from 'aos'
 import "aos/dist/aos.css"
 
 const Splash = (props) => {
-
-    const theme = useTheme()
 
     useEffect(() => {
         AOS.init({
@@ -29,7 +26,7 @@ const Splash = (props) => {
             <Container>
                 <Hero refresh={props.refresh} />
             </Container >
-            <Box maxWidth={'100%'} bgcolor={theme.palette.primary.dark} minHeight={'12rem'} sx={{display: 'flex', alignItems: 'center', mt: 4}} >
+            <Box maxWidth={'100%'} bgcolor={'primary.dark'} minHeight={'12rem'} sx={{display: 'flex', alignItems: 'center', mt: 4}} >
                 <Container >
                     <Partners />
                 </Container>

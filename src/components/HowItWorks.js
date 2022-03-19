@@ -1,5 +1,4 @@
 import React from 'react'
-import {useTheme} from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
@@ -9,7 +8,6 @@ import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact
 import HandshakeIcon from '@mui/icons-material/Handshake'
 
 const HowItWorks = () => {
-  const theme = useTheme()
 
   return (
     <Box>
@@ -66,7 +64,7 @@ const HowItWorks = () => {
               component={Avatar}
               marginBottom={2}
               variant="rounded"
-              bgcolor={theme.palette.primary.dark}
+              bgcolor={'primary.dark'}
             >
               <Box>{item.icon}</Box>
             </Box>

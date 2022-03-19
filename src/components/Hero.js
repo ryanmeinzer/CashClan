@@ -5,7 +5,6 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
-// import {ReactComponent as CashSvg} from './Cash.svg'
 import {ReactComponent as CashTransferSvg} from '../images/cash_transfer.svg'
 import SignUp from '../SignUp'
 
