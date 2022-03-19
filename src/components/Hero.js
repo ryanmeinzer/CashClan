@@ -100,13 +100,13 @@ const Hero = (props) => {
           display={'flex'}
           justifyContent={'center'}
           data-aos={isMd ? 'fade-left' : 'fade-up'}
+          marginTop={-4}
         >
           <Box
             height={'100%'}
             width={'100%'}
             maxWidth={{xs: 500, md: '100%'}}
           >
-            {/* <CashSvg width={'100%'} height={'100%'} /> */}
             <CashTransferSvg width={'100%'} height={'100%'} />
           </Box>
         </Box>
