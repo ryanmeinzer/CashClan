@@ -21,11 +21,11 @@ const Splash = (props) => {
     }, [])
 
     return (
-        <Box sx={{mt: 4}}>
+        <Box sx={{mt: 2}}>
             <Container>
                 <Hero refresh={props.refresh} />
             </Container >
-            <Box maxWidth={'100%'} bgcolor={'primary.dark'} minHeight={'10rem'} sx={{display: 'flex', alignItems: 'center'}} >
+            <Box maxWidth={'100%'} bgcolor={'primary.dark'} minHeight={'10rem'} sx={{display: 'flex', alignItems: 'center', mt: -5}} >
                 <Container >
                     <Partners />
                 </Container>
