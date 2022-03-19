@@ -40,7 +40,7 @@ const Hero = (props) => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={12} md={6}>
-        <Box data-aos={isMd ? 'fade-right' : 'fade-up'} data-aos-anchor-placement="top-bottom">
+        <Box data-aos={'fade-right'} data-aos-anchor-placement="top-bottom">
           <Box marginBottom={2}>
             <Typography
               variant="h2"
@@ -99,7 +99,8 @@ const Hero = (props) => {
           width={'100%'}
           display={'flex'}
           justifyContent={'center'}
-          data-aos={isMd ? 'fade-left' : 'fade-up'}
+          // data-aos={isMd ? 'fade-left' : 'fade-up'}
+          data-aos={'fade-left'}
           marginTop={-4}
         >
           <Box
