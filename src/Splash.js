@@ -8,8 +8,15 @@ import Divider from '@mui/material/Divider'
 import Who from './components/Who'
 import AOS from 'aos'
 import "aos/dist/aos.css"
+import {useTheme} from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 const Splash = (props) => {
+
+    const theme = useTheme()
+    const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+        defaultMatches: true,
+    })
 
     useEffect(() => {
         AOS.init({
@@ -22,7 +29,7 @@ const Splash = (props) => {
 
     return (
         <Box sx={{mt: 2}}>
-            <Container sx={{marginBottom: -5}}>
+            <Container sx={{marginBottom: isMd ? -5 : -2}}>
                 <Hero refresh={props.refresh} />
             </Container >
             <Box maxWidth={'100%'} bgcolor={'primary.dark'} minHeight={'10rem'} sx={{display: 'flex', alignItems: 'center'}} >
