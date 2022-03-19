@@ -5,6 +5,7 @@ import {useTheme} from '@mui/material/styles'
 import Partners from './components/Partners'
 import HowItWorks from './components/HowItWorks'
 import Divider from '@mui/material/Divider'
+import Who from './components/Who'
 
 const Splash = (props) => {
 
@@ -23,7 +24,11 @@ const Splash = (props) => {
             <Container sx={{mt: 8}} >
                 <HowItWorks />
             </Container>
-            <Divider sx={{mt: 6, mb: 6}} />
+            <Divider sx={{mt: 8, mb: 8}} />
+            <Container>
+                <Who />
+            </Container>
+            <Divider sx={{mt: 8, mb: 8}} />
         </Box>
     )
 }
