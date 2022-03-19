@@ -6,6 +6,7 @@ import Partners from './components/Partners'
 import HowItWorks from './components/HowItWorks'
 import Divider from '@mui/material/Divider'
 import Who from './components/Who'
+import Footer from './components/Footer'
 
 const Splash = (props) => {
 
@@ -28,7 +29,10 @@ const Splash = (props) => {
             <Container>
                 <Who refresh={props.refresh} />
             </Container>
-            <Divider sx={{mt: 8, mb: 8}} />
+            <Divider sx={{mt: 8, mb: 4}} />
+            <Container>
+                <Footer />
+            </Container>
         </Box>
     )
 }
