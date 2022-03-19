@@ -112,7 +112,7 @@ const Who = (props) => {
             ),
           }
         ].map((item, i) => (
-          <Grid item xs={12} sm={6} md={6} key={i}>
+          <Grid item xs={12} sm={6} md={6} key={i} data-aos={'zoom-in'}>
             <Box component={Card} boxShadow={3} borderRadius={4}>
               <Box
                 component={CardContent}

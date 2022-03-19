@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react'
 import Hero from './components/Hero'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
@@ -7,10 +8,21 @@ import HowItWorks from './components/HowItWorks'
 import Divider from '@mui/material/Divider'
 import Who from './components/Who'
 import Footer from './components/Footer'
+import AOS from 'aos'
+import "aos/dist/aos.css"
 
 const Splash = (props) => {
 
     const theme = useTheme()
+
+    useEffect(() => {
+        AOS.init({
+            once: true,
+            delay: 25,
+            duration: 500,
+            easing: 'ease-in-out',
+        })
+    }, [])
 
     return (
         <Box sx={{mt: 6}}>
