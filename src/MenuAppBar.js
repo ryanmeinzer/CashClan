@@ -1,7 +1,6 @@
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
 // ToDo - uncomment below once re - enabling Profile / Transactions page
 // import MenuItem from '@mui/material/MenuItem'
 import Menu from '@mui/material/Menu'
@@ -12,6 +11,7 @@ import Logout from './Logout'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
 import Slide from '@mui/material/Slide'
 import PopupState, {bindTrigger, bindMenu} from 'material-ui-popup-state'
+import Logo from './images/cashclan_logo.png'
 
 const MenuAppBar = (props) => {
 
@@ -32,9 +32,12 @@ const MenuAppBar = (props) => {
             <HideOnScroll >
                 <AppBar position="fixed" sx={{backgroundColor: "#ffffff"}}>
                 <Toolbar>
-                    <Typography variant="h4" component="div" sx={{flexGrow: 1}}>
-                        🤑
-                    </Typography>
+                        <Box
+                            component="div"
+                            sx={{flexGrow: 1}}
+                        >
+                            <img src={Logo} alt="Logo" style={{maxWidth: '2rem'}} />
+                        </Box>
                     {member && isLoggedIn
                         ?
                         (<div>
