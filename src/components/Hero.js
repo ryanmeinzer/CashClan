@@ -64,7 +64,7 @@ const Hero = (props) => {
                   component={'span'}
                   color="secondary"
                   sx={{
-                    fontWeight: 700,
+                    fontWeight: 900,
                   }}
                 >
                   <span ref={el} />
