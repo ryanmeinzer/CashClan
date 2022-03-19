@@ -99,7 +99,6 @@ const Hero = (props) => {
           width={'100%'}
           display={'flex'}
           justifyContent={'center'}
-          // data-aos={isMd ? 'fade-left' : 'fade-up'}
           data-aos={'fade-left'}
           marginTop={-4}
         >

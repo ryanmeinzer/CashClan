@@ -158,7 +158,7 @@ const Who = (props) => {
         flexDirection={{xs: 'column', sm: 'row'}}
         alignItems={'center'}
         justifyContent={'center'}
-        sx={{mt: 8, mb: 8}}
+        sx={{mt: 6, mb: 6}}
       >
         <SignUp
           refresh={props.refresh}
