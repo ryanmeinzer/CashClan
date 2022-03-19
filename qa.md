@@ -35,3 +35,4 @@
 	a - transaction created
 	b - another buyer’s would-be matching offer does not override
 	c - buyer unpublishes, transation is deleted and would-be matching offer is matched with new transaction
+	d - upon transaction confirmation, transaction (1/2) is completed and potential duplicate transaction (2/2) is deleted
