@@ -28,8 +28,8 @@ const Splash = (props) => {
     }, [])
 
     return (
-        <Box sx={{mt: 2}}>
-            <Container sx={{marginBottom: isMd ? -5 : -1}}>
+        <Box sx={{mt: isMd ? 12 : 4}}>
+            <Container sx={{mb: isMd ? 4 : 0}}>
                 <Hero refresh={props.refresh} />
             </Container >
             <Box maxWidth={'100%'} bgcolor={'primary.dark'} minHeight={'10rem'} sx={{display: 'flex', alignItems: 'center'}} >
@@ -37,10 +37,10 @@ const Splash = (props) => {
                     <Partners />
                 </Container>
             </Box>
-            <Container sx={{mt: 6}} >
+            <Container sx={{mt: 8}} >
                 <HowItWorks />
             </Container>
-            <Divider sx={{mt: 6, mb: 6}} />
+            <Divider sx={{mt: 8, mb: 8}} />
             <Container>
                 <Who refresh={props.refresh} />
             </Container>

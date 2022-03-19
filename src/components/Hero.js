@@ -41,7 +41,7 @@ const Hero = (props) => {
     <Grid container spacing={4}>
       <Grid item xs={12} md={6}>
         <Box data-aos={'fade-right'} data-aos-anchor-placement="top-bottom">
-          <Box marginBottom={2}>
+          <Box mb={2}>
             <Typography
               variant="h2"
               component={'h2'}
@@ -79,7 +79,7 @@ const Hero = (props) => {
               money together.
             </Typography>
           </Box>
-          <Box marginBottom={3}>
+          <Box mb={4}>
             <Typography variant="h6" component="p" color="textSecondary">
               No more fees. Way more interest. We are the cash exchange by the people, for the people - the CashClan.
             </Typography>
@@ -100,7 +100,7 @@ const Hero = (props) => {
           display={'flex'}
           justifyContent={'center'}
           data-aos={'fade-left'}
-          marginTop={-4}
+          mt={isMd ? -4 : -2}
         >
           <Box
             height={'100%'}

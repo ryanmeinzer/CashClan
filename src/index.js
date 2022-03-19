@@ -10,23 +10,26 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import {ThemeProvider, createTheme} from '@mui/material/styles'
+import {responsiveFontSizes} from '@mui/material';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: '#71ff9f',
-      main: '#33cc70',
-      dark: '#009a43',
-      contrastText: 'black',
-    },
-    secondary: {
-      light: '#ffea7d',
-      main: '#ffb84d',
-      dark: '#c88819',
-      contrastText: 'black',
-    },
-  }
-})
+const theme = responsiveFontSizes(
+  createTheme({
+    palette: {
+      primary: {
+        light: '#71ff9f',
+        main: '#33cc70',
+        dark: '#009a43',
+        contrastText: 'black',
+      },
+      secondary: {
+        light: '#ffea7d',
+        main: '#ffb84d',
+        dark: '#c88819',
+        contrastText: 'black',
+      },
+    }
+  })
+)
 
 ReactDOM.render(
   <React.StrictMode>

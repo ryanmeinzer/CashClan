@@ -18,10 +18,10 @@ const Partners = () => {
       ].map((item, i) => (
         <Box
           maxWidth={100}
-          marginLeft={2}
-          marginRight={2}
-          marginTop={1}
-          marginBottom={1}
+          ml={2}
+          mr={2}
+          mt={1}
+          mb={1}
           key={i}
         >
           <Box
