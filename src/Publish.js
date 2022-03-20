@@ -168,9 +168,9 @@ const Publish = () => {
                     </Typography>
                     <Slider
                         name="amount"
-                        min={10}
+                        min={20}
                         max={300}
-                        step={10}
+                        step={20}
                         value={state.amount}
                         onChange={handleChange}
                         valueLabelDisplay="auto"
