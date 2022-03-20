@@ -99,7 +99,7 @@ const Publish = () => {
                                 <Typography color="text.secondary" fontSize='1.5rem' align={'center'} component="p">You are actively publishing your offer to the CashClan.</Typography>
                             </Box>
                             :
-                            <Box sx={{mb: 2, display: state.mode !== '' && 'none'}}>
+                            <Box sx={{mt: 6, mb: 2, display: state.mode !== '' && 'none'}}>
                                 <Typography color="text.secondary" fontSize='1.5rem' align={'center'} component="p">You are not active. Publish an offer to the CashClan below.</Typography>
                             </Box>
                     }
@@ -263,13 +263,13 @@ const Publish = () => {
                 {/* </form> */}
                 {state.mode === 'buying'
                     &&
-                    <Typography color="primary.dark" fontStyle="italic" sx={{mt: 2}} width="90%">
+                    <Typography color="primary.dark" variant="h6" fontStyle="italic" sx={{mt: 4}} width="90%">
                         You'll {(state.amount * (state.premium / 100)) < 5.50 ? 'save' : 'spend'} {Math.abs((5.50 - (state.amount * (state.premium / 100))) / 5.50 * 100).toFixed()}% {(state.amount * (state.premium / 100)) > 5.50 && 'more'} compared to the $5.50 average total ATM + bank fees by buying ${state.amount} cash through Venmo from a CashClan member{state.location && ` at ${state.location}`}.
                     </Typography>
                 }
                 {state.mode === 'selling'
                     &&
-                    <Typography color="primary.dark" fontStyle="italic" sx={{mt: 2}} width="90%">
+                    <Typography color="primary.dark" variant="h6" fontStyle="italic" sx={{mt: 4}} width="90%">
                         You'll earn {Math.abs(state.premium - .5)}% {state.premium > .5 ? 'more' : 'less'} than the 0.5% average bank rate in the USA by selling up to ${state.amount} of your cash through Venmo to a CashClan member{state.location && ` at ${state.location}`}.
                     </Typography>
                 }
