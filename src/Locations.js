@@ -1,64 +1,86 @@
-const Locations = ({state, handleChange}) => {
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+import ListSubheader from '@mui/material/ListSubheader'
+import FormHelperText from '@mui/material/FormHelperText'
+
+const Locations = ({state, hasError, handleChange}) => {
+
     return (
-        <select
-            name="location"
-            value={state.location}
-            onChange={handleChange}
-            disabled={state.active || state.mode === null}
-            required
-            hidden={!state.mode}
-        >
-            <option value=''>- Select Nearest Location -</option>
-            <optgroup label="Polk District">
-                <option value="Greens Sports Bar">Greens Sports Bar</option>
-                <option value="The Buccaneer">The Buccaneer</option>
-                <option value="Nick's Crispy Tacos">Nick's Crispy Tacos</option>
-                <option value="Shanghai Kelly's">Shanghai Kelly's</option>
-                <option value="The Cinch Saloon">The Cinch Saloon</option>
-                <option value="McTeague's Saloon">McTeague's Saloon</option>
-                <option value="Mayes">Mayes</option>
-                <option value="Lush Lounge">Lush Lounge</option>
-                <option value="R Bar">R Bar</option>
-                <option value="Decodance">Decodance</option>
-                <option value="Jackalope">Jackalope</option>
-                <option value="Edinburgh Castle Pub">Edinburgh Castle Pub</option>
-            </optgroup>
-            <optgroup label="Mission District">
-                <option value="Zeitgeist">Zeitgeist</option>
-                <option value="Kilowatt">Kilowatt</option>
-                <option value="Gestalt">Gestalt</option>
-                <option value="Delirium">Delirium</option>
-                <option value="Bond Bar">Bond Bar</option>
-                <option value="Casanova Lounge">Casanova Lounge</option>
-                <option value="Slate">Slate</option>
-                <option value="The 500 Club">The 500 Club</option>
-                <option value="The Valencia Room">The Valencia Room</option>
-                <option value="The Sycamore">The Sycamore</option>
-                <option value="Beauty Bar">Beauty Bar</option>
-                <option value="The Chapel">The Chapel</option>
-                <option value="Teeth">Teeth</option>
-                <option value="Doc's Clock">Doc's Clock</option>
-                <option value="El Techo">El Techo</option>
-                <option value="Latin American Club">Latin American Club</option>
-                <option value="Make-Out Room">Make-Out Room</option>
-                <option value="Mision Bar">Mision Bar</option>
-                <option value="El Rio">El Rio</option>
-                <option value="The Royal Cuckoo">The Royal Cuckoo</option>
-            </optgroup>
-            <optgroup label="Haight District">
-                <option value="Toranado">Toranado</option>
-                <option value="Noc Noc">Noc Noc</option>
-                <option value="Molotov's">Molotov's</option>
-                <option value="Danny Coyle's">Danny Coyle's</option>
-                <option value="The Page">The Page</option>
-                <option value="Madrone Art Bar">Madrone Art Bar</option>
-                <option value="Trax">Trax</option>
-                <option value="Club Deluxe">Club Deluxe</option>
-                <option value="Hobson's Choice">Hobson's Choice</option>
-                <option value="Zam Zam">Zam Zam</option>
-                <option value="Milk Bar">Milk Bar</option>
-            </optgroup>
-        </select>
+        <FormControl error={hasError} sx={{mt: 3, mb: 3}}>
+            <InputLabel
+                id="location-select-label"
+                sx={{
+                    display: state.mode === '' ? 'none' : 'block',
+                    fontSize: '1.5rem',
+                    mt: -.5
+                }}
+            >{state.location === '' ? 'Select Nearest Location *' : 'meeting at'}</InputLabel>
+            <Select
+                labelId="location-select-label"
+                id="location-select"
+                label={state.location === '' ? 'Select Nearest Location *' : 'meeting at'}
+                name="location"
+                value={state.location}
+                onChange={handleChange}
+                disabled={state.active || state.mode === ''}
+                required
+                sx={{
+                    display: state.mode === '' ? 'none' : 'block',
+                    color: "text.secondary",
+                    fontSize: '1.5rem',
+                }}
+            >
+                <ListSubheader>Polk District</ListSubheader>
+                <MenuItem value="Greens Sports Bar">Greens Sports Bar</MenuItem>
+                <MenuItem value="The Buccaneer">The Buccaneer</MenuItem>
+                <MenuItem value="Nick's Crispy Tacos">Nick's Crispy Tacos</MenuItem>
+                <MenuItem value="Shanghai Kelly's">Shanghai Kelly's</MenuItem>
+                <MenuItem value="The Cinch Saloon">The Cinch Saloon</MenuItem>
+                <MenuItem value="McTeague's Saloon">McTeague's Saloon</MenuItem>
+                <MenuItem value="Mayes">Mayes</MenuItem>
+                <MenuItem value="Lush Lounge">Lush Lounge</MenuItem>
+                <MenuItem value="R Bar">R Bar</MenuItem>
+                <MenuItem value="Decodance">Decodance</MenuItem>
+                <MenuItem value="Jackalope">Jackalope</MenuItem>
+                <MenuItem value="Edinburgh Castle Pub">Edinburgh Castle Pub</MenuItem>
+                <ListSubheader>Mission District</ListSubheader>
+                <MenuItem value="Zeitgeist">Zeitgeist</MenuItem>
+                <MenuItem value="Kilowatt">Kilowatt</MenuItem>
+                <MenuItem value="Gestalt">Gestalt</MenuItem>
+                <MenuItem value="Delirium">Delirium</MenuItem>
+                <MenuItem value="Bond Bar">Bond Bar</MenuItem>
+                <MenuItem value="Casanova Lounge">Casanova Lounge</MenuItem>
+                <MenuItem value="Slate">Slate</MenuItem>
+                <MenuItem value="The 500 Club">The 500 Club</MenuItem>
+                <MenuItem value="The Valencia Room">The Valencia Room</MenuItem>
+                <MenuItem value="The Sycamore">The Sycamore</MenuItem>
+                <MenuItem value="Beauty Bar">Beauty Bar</MenuItem>
+                <MenuItem value="The Chapel">The Chapel</MenuItem>
+                <MenuItem value="Teeth">Teeth</MenuItem>
+                <MenuItem value="Doc's Clock">Doc's Clock</MenuItem>
+                <MenuItem value="El Techo">El Techo</MenuItem>
+                <MenuItem value="Latin American Club">Latin American Club</MenuItem>
+                <MenuItem value="Make-Out Room">Make-Out Room</MenuItem>
+                <MenuItem value="Mision Bar">Mission Bar</MenuItem>
+                <MenuItem value="El Rio">El Rio</MenuItem>
+                <MenuItem value="The Royal Cuckoo">The Royal Cuckoo</MenuItem>
+                <ListSubheader>Haight District</ListSubheader>
+                <MenuItem value="Toranado">Toranado</MenuItem>
+                <MenuItem value="Noc Noc">Noc Noc</MenuItem>
+                <MenuItem value="Molotov's">Molotov's</MenuItem>
+                <MenuItem value="Danny Coyle's">Danny Coyle's</MenuItem>
+                <MenuItem value="The Page">The Page</MenuItem>
+                <MenuItem value="Madrone Art Bar">Madrone Art Bar</MenuItem>
+                <MenuItem value="Trax">Trax</MenuItem>
+                <MenuItem value="Club Deluxe">Club Deluxe</MenuItem>
+                <MenuItem value="Hobson's Choice">Hobson's Choice</MenuItem>
+                <MenuItem value="Zam Zam">Zam Zam</MenuItem>
+                <MenuItem value="Milk Bar">Milk Bar</MenuItem>
+            </Select>
+            {hasError && <FormHelperText>This is required</FormHelperText>}
+        </FormControl>
     )
 }
 

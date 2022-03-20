@@ -4,11 +4,27 @@ import Matches from './Matches'
 import Locations from './Locations'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormControl from '@mui/material/FormControl'
+import Slider from '@mui/material/Slider'
+import Button from '@mui/material/Button'
+import {useTheme} from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 const Publish = () => {
 
+    const theme = useTheme()
+    const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+        defaultMatches: true,
+    })
+
     const [state, setState] = useState({active: false, mode: '', amount: 60, premium: 5, location: ''})
     const {member} = useMemberContext()
+    const [hasError, setHasError] = useState(false)
+
+    console.log('inside Publish - state: ', state)
 
     useEffect(() => {
         member
@@ -32,6 +48,10 @@ const Publish = () => {
         name === 'active' && handleActiveChange(value)
     }
 
+    useEffect(() => {
+        state.location !== '' && setHasError(false)
+    }, [state])
+
     // BE is deleting member's pending transaction(s) if they unpublish their offer
     const handleActiveChange = (value) => {
         const requestOptions = {
@@ -48,19 +68,24 @@ const Publish = () => {
 
     const handleCancel = () => {
         setState({active: false, mode: '', amount: 60, premium: 5, location: ''})
+        setHasError(false)
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault()
-        const requestOptions = {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({...state, active: true})
+        if (state.location !== '') {
+            event.preventDefault()
+            const requestOptions = {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({...state, active: true})
+            }
+            fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
+                .then(response => response.json())
+                .catch(error => error)
+            setState({...state, active: true})
+        } else {
+            setHasError(true)
         }
-        fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`, requestOptions)
-            .then(response => response.json())
-            .catch(error => error)
-        setState({...state, active: true})
     }
 
     return (
@@ -70,158 +95,183 @@ const Publish = () => {
                     {
                         state.active
                             ?
-                            <Box>
-                                <Typography color="text.secondary" align={'center'} component="p">You are actively publishing your below offer to the CashClan.</Typography>
-                                {/* <p>
-                                    {state.mode === 'buying' && 'You will buy'} {state.mode === 'selling' && 'You will sell up to'} ${state.amount !== 0 && state.amount !== null && `${state.amount}`} {state.mode === 'buying' && 'and will pay up to a '} {state.mode === 'selling' && 'and must make at least a '} {state.premium !== 0 && state.premium !== null && `${state.premium}%`} {state.mode === 'buying' && 'cost'} {state.mode === 'selling' && 'profit'} {state.location && `at ${state.location}.`}
-                                </p> */}
+                            <Box sx={{mb: 2}}>
+                                <Typography color="text.secondary" fontSize='1.5rem' align={'center'} component="p">You are actively publishing your offer to the CashClan.</Typography>
                             </Box>
                             :
-                            <Box>
-                                <Typography color="text.secondary" align={'center'} component="p">You are not active. Publish an offer to the CashClan below.</Typography>
+                            <Box sx={{mb: 2, display: state.mode !== '' && 'none'}}>
+                                <Typography color="text.secondary" fontSize='1.5rem' align={'center'} component="p">You are not active. Publish an offer to the CashClan below.</Typography>
                             </Box>
                     }
                 </div>
-                <form
-                    onSubmit={handleSubmit}
+                {/* native form control unnecessary */}
+                {/* <form onSubmit={handleSubmit}> */}
+                <FormControl
+                    sx={{
+                        width: "90%",
+                        display: state.active && 'none'
+                    }}
                 >
-                    <input
-                        name="mode"
-                        type="radio"
-                        value="buying"
-                        onChange={handleChange}
-                        disabled={state.active}
-                        checked={state.mode === 'buying'}
-                        required
-                    />
-                    <label
-                        style={{
-                            color: (!state.active ? 'black' : 'lightGray')
+                    <RadioGroup
+                        row
+                        sx={{
+                            justifyContent: "center",
+                            '& .MuiFormControlLabel-label': {
+                                fontSize: '1.5rem',
+                            },
+                            mb: 4
                         }}
-                    >Buy Cash</label>
-                    <input
                         name="mode"
-                        type="radio"
-                        value="selling"
+                        value={state.mode}
                         onChange={handleChange}
-                        disabled={state.active}
-                        checked={state.mode === 'selling'}
-                        required
-                    />
-                    <label
-                        style={{
-                            color: (!state.active ? 'black' : 'lightGray')
+                    >
+                        <FormControlLabel
+                            value="buying"
+                            control={<Radio
+                                sx={{
+                                    '& .MuiSvgIcon-root': {
+                                        fontSize: '1.5rem',
+                                    },
+                                }}
+                            />}
+                            label="Buy Cash"
+                            checked={state.mode === 'buying'}
+                            disabled={state.active}
+                            sx={{color: "text.secondary"}}
+                        />
+                        <FormControlLabel
+                            value="selling"
+                            control={<Radio sx={{
+                                '& .MuiSvgIcon-root': {
+                                    fontSize: '1.5rem',
+                                }
+                            }}
+                            />}
+                            label="Sell Cash"
+                            checked={state.mode === 'selling'}
+                            disabled={state.active}
+                            sx={{color: "text.secondary"}}
+                        />
+                    </RadioGroup>
+                    <Typography
+                        align="left"
+                        gutterBottom={true}
+                        sx={{
+                            color: "text.secondary", fontSize: '1.5rem',
+                            display: state.mode === '' ? 'none' : 'block'
                         }}
-                    >Sell Cash</label>
-                    <br />
-                    <input
-                        type="range"
+
+                    >
+                        {state.mode === 'buying' && 'I will buy '}
+                        {state.mode === 'selling' && 'I will sell up to '}
+                        ${state.amount}
+                    </Typography>
+                    <Slider
                         name="amount"
                         min={10}
                         max={300}
                         step={10}
                         value={state.amount}
                         onChange={handleChange}
-                        disabled={state.active || state.mode === null}
-                        required
-                        style={{
-                            color: (!state.active ? 'black' : 'lightGray')
-                        }}
-                        hidden={!state.mode}
+                        valueLabelDisplay="auto"
+                        valueLabelFormat={(value) => `$${value}`}
+                        disabled={state.active || state.mode === ''}
+                        color="primary"
+                        sx={{display: state.mode === '' ? 'none' : 'block', mt: 2, mb: 2}}
                     />
-                    <span
-                        style={{
-                            color: (!state.active && state.mode !== null ? 'black' : 'lightGray')
+                    <Typography
+                        align="left"
+                        gutterBottom={true}
+                        sx={{
+                            color: "text.secondary", fontSize: '1.5rem',
+                            display: state.mode === '' ? 'none' : 'block',
+                            mt: 2
                         }}
-                        hidden={!state.mode}
                     >
-                        {state.mode === 'buying' && 'will buy '}
-                        {state.mode === 'selling' && 'will sell up to '}
-                        ${state.amount}
-                    </span>
-                    <br />
-                    <input
-                        type="range"
+                        {state.mode === 'buying' && 'and will pay up to a '}
+                        {state.mode === 'selling' && 'and must make at least a '}
+                        {state.premium}%
+                        {state.mode === 'buying' && ' cost'}
+                        {state.mode === 'selling' && ' profit'}
+                    </Typography>
+                    <Slider
                         name="premium"
                         min={1}
                         max={10}
                         step={1}
+                        marks
                         value={parseInt(state.premium)}
                         onChange={handleChange}
-                        disabled={state.active || state.mode === null}
-                        required
-                        style={{
-                            color: (!state.active ? 'black' : 'lightGray')
-                        }}
-                        hidden={!state.mode}
+                        valueLabelDisplay="auto"
+                        valueLabelFormat={(value) => `${value}%`}
+                        disabled={state.active || state.mode === ''}
+                        color="primary"
+                        sx={{display: state.mode === '' ? 'none' : 'block', mt: 2, mb: 2}}
                     />
-                    <span
-                        style={{
-                            color: (!state.active && state.mode !== null ? 'black' : 'lightGray')
-                        }}
-                        hidden={!state.mode}
-                    >
-                        {state.mode === 'buying' && 'will pay up to a '}
-                        {state.mode === 'selling' && 'must make at least a '}
-                        {state.premium}%
-                        {state.mode === 'buying' && ' cost'}
-                        {state.mode === 'selling' && ' profit'}
-                    </span>
-                    <br />
-                    <Locations state={state} handleChange={handleChange} />
-                    <br />
-                    <br />
-                    {
-                        state.active
-                            ?
-                            <button
+                    <Locations state={state} hasError={hasError} handleChange={handleChange} />
+                </FormControl>
+                {
+                    state.active
+                        ?
+                        <Box width="90%">
+                            <Button
                                 type="submit"
                                 name="active"
-                                // type="button"
                                 value={false}
                                 onClick={handleChange}
-                            > Unpublish or Update
-                            </button>
-                            :
-                            <>
-                                <button
+                                variant="contained"
+                                color="secondary"
+                                sx={{mt: 2, mb: 2}}
+                                fullWidth={!isMd}
+                            >Unpublish or Update Offer</Button>
+                        </Box>
+                        :
+                        <>
+                            <Box width="90%">
+                                <Button
+                                // reset range input
                                     type="reset"
-                                    // reset range input
                                     onClick={handleCancel}
-                                    disabled={state.active || state.mode === null}
-                                    hidden={!state.mode}
-                                > Cancel
-                                </button>
-                                <button
+                                    disabled={state.active || state.mode === ''}
+                                    sx={{
+                                        display: state.mode === '' ? 'none' : 'block',
+                                        mt: 2,
+                                        mb: 2
+                                    }}
+                                    variant="contained"
+                                    color="secondary"
+                                    fullWidth={!isMd}
+                                >Cancel</Button>
+                                <Button
                                     type="submit"
-                                    disabled={state.active || state.mode === null}
-                                    hidden={!state.mode}
-                                > Publish to the CashClan
-                                </button>
-                            </>
-                    }
-                </form>
+                                    onClick={handleSubmit}
+                                    disabled={state.active || state.mode === ''}
+                                    sx={{
+                                        display: state.mode === '' ? 'none' : 'block',
+                                        mt: 2,
+                                        mb: 2
+                                    }}
+                                    variant="contained"
+                                    color="primary"
+                                    fullWidth={!isMd}
+                                >Publish to the CashClan</Button>
+                            </Box>
+                        </>
+                }
+                {/* FormControl unnecessary as buttons are explicit; native form control also unnecessary */}
+                {/* </FormControl> */}
+                {/* </form> */}
                 {state.mode === 'buying'
-                    && <p
-                        style={{
-                            color: (!state.active ? 'green' : 'lightGray')
-                        }}
-                    >
-                        <em>
-                            You'll {(state.amount * (state.premium / 100)) < 5.50 ? 'save' : 'spend'} {Math.abs((5.50 - (state.amount * (state.premium / 100))) / 5.50 * 100).toFixed()}% {(state.amount * (state.premium / 100)) > 5.50 && 'more'} compared to the $5.50 average total ATM + bank fees by buying ${state.amount} cash through Venmo from a CashClan member{state.location && ` at ${state.location}`}.
-                        </em>
-                    </p>
+                    &&
+                    <Typography color="primary.dark" fontStyle="italic" sx={{mt: 2}} width="90%">
+                        You'll {(state.amount * (state.premium / 100)) < 5.50 ? 'save' : 'spend'} {Math.abs((5.50 - (state.amount * (state.premium / 100))) / 5.50 * 100).toFixed()}% {(state.amount * (state.premium / 100)) > 5.50 && 'more'} compared to the $5.50 average total ATM + bank fees by buying ${state.amount} cash through Venmo from a CashClan member{state.location && ` at ${state.location}`}.
+                    </Typography>
                 }
                 {state.mode === 'selling'
-                    && <p
-                        style={{
-                            color: (!state.active ? 'green' : 'lightGray')
-                        }}
-                    >
-                        <em>
-                            You'll earn {Math.abs(state.premium - .5)}% {state.premium > .5 ? 'more' : 'less'} than the 0.5% average bank rate in the USA by selling up to ${state.amount} of your cash through Venmo to a CashClan member{state.location && ` at ${state.location}`}.
-                        </em>
-                    </p>
+                    &&
+                    <Typography color="primary.dark" fontStyle="italic" sx={{mt: 2}} width="90%">
+                        You'll earn {Math.abs(state.premium - .5)}% {state.premium > .5 ? 'more' : 'less'} than the 0.5% average bank rate in the USA by selling up to ${state.amount} of your cash through Venmo to a CashClan member{state.location && ` at ${state.location}`}.
+                    </Typography>
                 }
             </div>
             {

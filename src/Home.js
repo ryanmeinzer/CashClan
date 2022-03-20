@@ -22,9 +22,9 @@ const Home = ({refreshMembersUponSignUp}) => {
                 ?
                 <>
                     {/* // ToDo - move to new component, design and uncomment once finished */}
-                    <div align="center" style={{margin: '7rem 0 0 0'}}>
+                    <Box mt={2}>
                         <Publish />
-                    </div>
+                    </Box>
                 </>
                 :
                 <Box>
