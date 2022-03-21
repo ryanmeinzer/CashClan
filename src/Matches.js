@@ -6,7 +6,6 @@ import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
 
 const Matches = ({offer, isMd, setHasMatch}) => {
 
@@ -184,14 +183,21 @@ const Matches = ({offer, isMd, setHasMatch}) => {
                                     spacing={2}
                                     sx={{width: isMd ? "25%" : "100%"}}
                                 >
-                                    <TextField
-                                        variant="outlined"
-                                        label="Your 10-Digit Number"
+                                    {/* not using MUI TextField as it doesn't validate pattern */}
+                                    {/* <TextField */}
+                                    <input
+                                        // variant="outlined"
+                                        // label="Your 10-Digit Number"
+                                        style={{
+                                            height: '2rem',
+                                            padding: '.25rem',
+                                        }}
+                                        className="phone-input-field"
                                         type="tel"
                                         pattern="[0-9]{10}"
                                         name="phone"
                                         value={phoneObj.phone}
-                                        placeholder="Your 10-Digit Number"
+                                        placeholder="Your 10 Digit Number *"
                                         onChange={handleChange}
                                         required
                                     />
