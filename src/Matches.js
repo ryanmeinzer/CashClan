@@ -161,7 +161,7 @@ const Matches = ({offer, isMd}) => {
     }
 
     return (
-        <>
+        <Box>
             {
                 match && !_.isEmpty(transactionTerms)
                     ?
@@ -170,6 +170,7 @@ const Matches = ({offer, isMd}) => {
                         transactionTerms={transactionTerms}
                         match={match}
                         sortedMatches={sortedMatches()}
+                        isMd={isMd}
                     />
                     :
                     <Box>
@@ -181,8 +182,6 @@ const Matches = ({offer, isMd}) => {
                                     sx={{width: isMd ? "25%" : "100%"}}
                                 >
                                     <TextField
-                                        // sx={{width: "25%", alignContent: "center"}}
-                                        // fullWidth={!isMd}
                                         variant="outlined"
                                         label="Your 10-Digit Number"
                                         type="tel"
@@ -220,7 +219,7 @@ const Matches = ({offer, isMd}) => {
                         </Box>
                     </Box>
             }
-        </>
+        </Box>
     )
 }
 

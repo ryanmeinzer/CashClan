@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {useMemberContext} from './providers/member'
 import {CountdownCircleTimer} from 'react-countdown-circle-timer'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
 
-const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
+const Transaction = ({mode, transactionTerms, match, isMd}) => {
 
     const {member} = useMemberContext()
     const [matchPrivates, setMatchPrivates] = useState()
@@ -57,17 +60,18 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
     }
 
     return (
-        <>
+        <Box>
             {matchPrivates &&
-                <div>
-                    <div>
-                        <div>
-                            <h3 style={{color: "green"}}>You've Matched with {matchPrivates.name}!</h3>
+                <Box>
+                    <Box>
+                        <Box>
+                            <Typography fontSize='1.5rem' variant="subtitle1" color="text.secondary" component="p" sx={{mb: 4}}>You've Matched with <br />{matchPrivates.name}!</Typography>
                             {
                                 matchPrivates.image
                                 &&
-                                <div>
-                                    <div align="center">
+                                <Box>
+                                    <Box sx={{align: "center"}}>
+                                        <Box sx={{mb: 2}}>
                                             <span style={{position: "relative"}}>
                                                 <img src={member.image} alt="profile" style={{borderRadius: "50%"}} />
                                                 <span style={{position: "absolute", top: -75, right: 0}}>✅</span>
@@ -77,30 +81,37 @@ const Transaction = ({mode, transactionTerms, match, sortedMatches}) => {
                                                 <img src={matchPrivates.image} alt="profile" style={{borderRadius: "50%"}} />
                                                 <span style={{position: "absolute", top: -75, right: 0}}>✅</span>
                                             </span>
+                                            </Box>
                                         <CountdownCircleTimer
                                             isPlaying
                                             duration={90}
-                                            colors={['#089000', '#F7B801', '#A30000', '#A30000']}
+                                                colors={['#33cc70', '#ffb84d', '#A30000', '#A30000']}
                                             colorsTime={[90, 60, 30, 0]}
                                             size={100}
                                                 onComplete={() => {
-                                                return {shouldRepeat: true, delay: 1.5}
+                                                    return {shouldRepeat: true}
                                             }}
                                         >
-                                            {({remainingTime}) => remainingTime}
+                                                {({remainingTime}) => <Typography color="text.secondary">{remainingTime}</Typography>}
                                         </CountdownCircleTimer>
-                                    </div>
-                                </div>
+                                        </Box>
+                                    </Box>
                             }
-                        </div>
-                        <p>
+                        </Box>
+                        <Typography color="primary.dark" variant="h6" fontStyle="italic" sx={{mt: 4, mb: 3}}>
                             Meet now at the ATM inside of {transactionTerms.location}. Say "CashClan" while asking for {matchPrivates.name} who {match.mode === 'buying' && 'will buy'} {match.mode === 'selling' && 'will sell'} ${mode === 'buying' && transactionTerms.amount - transactionTerms.cost}{mode === 'selling' && transactionTerms.amount - transactionTerms.profit} cash {match.mode === 'buying' && 'from you'} {match.mode === 'selling' && 'to you'} through Venmo for ${transactionTerms.amount} (a {transactionTerms.premium}% {mode === 'buying' ? 'cost' : 'profit'}).
-                        </p>
-                    </div>
-                    <button type="submit" onClick={handleSubmit}>Transaction Completed</button>
-                </div>
+                        </Typography>
+                    </Box>
+                    <Button
+                        fullWidth={!isMd}
+                        type="submit"
+                        onClick={handleSubmit}
+                        variant="contained"
+                        color="primary"
+                    >Transaction Completed</Button>
+                </Box>
             }
-        </>
+        </Box>
     )
 }
 
