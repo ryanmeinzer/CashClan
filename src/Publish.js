@@ -13,6 +13,7 @@ import Button from '@mui/material/Button'
 import {useTheme} from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import Divider from '@mui/material/Divider'
+import Stepper from './Stepper'
 
 const Publish = () => {
 
@@ -24,6 +25,7 @@ const Publish = () => {
     const [state, setState] = useState({active: false, mode: '', amount: 60, premium: 5, location: ''})
     const {member} = useMemberContext()
     const [hasError, setHasError] = useState(false)
+    const [hasMatch, setHasMatch] = useState(false)
 
     console.log('inside Publish - state: ', state)
 
@@ -91,6 +93,7 @@ const Publish = () => {
 
     return (
         <Box sx={{textAlign: "-webkit-center"}} >
+            <Stepper state={state} hasMatch={hasMatch} />
             {
                 state.active
                     ?
@@ -98,7 +101,7 @@ const Publish = () => {
                         <Typography color="text.secondary" fontSize='1.5rem' align={'center'} component="p">You are actively publishing your offer to the CashClan.</Typography>
                     </Box>
                     :
-                    <Box sx={{mt: 6, mb: 2, display: state.mode !== '' && 'none'}}>
+                    <Box sx={{mt: 4, mb: 2, display: state.mode !== '' && 'none'}}>
                         <Typography color="text.secondary" fontSize='1.5rem' align={'center'} component="p">You are not active. Publish an offer to the CashClan below.</Typography>
                     </Box>
             }
@@ -273,7 +276,7 @@ const Publish = () => {
                 &&
                 <Box width="90%">
                     <Divider sx={{mt: 4, mb: 4}} />
-                    <Matches offer={state} isMd={isMd} />
+                    <Matches offer={state} isMd={isMd} setHasMatch={setHasMatch} />
                 </Box>
             }
         </Box>

@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 
-const Matches = ({offer, isMd}) => {
+const Matches = ({offer, isMd, setHasMatch}) => {
 
     const {member} = useMemberContext()
     const [phoneObj, setPhoneObj] = useState({phone: ''})
@@ -123,6 +123,10 @@ const Matches = ({offer, isMd}) => {
             }
         }
     }, [match, offer, pendingTransaction, member])
+
+    useEffect(() => {
+        match && setHasMatch(true)
+    }, [match, setHasMatch])
 
     const handleChange = (event) => {
         const target = event.target
