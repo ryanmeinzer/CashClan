@@ -192,7 +192,7 @@ const Matches = ({offer, isMd, setHasMatch}) => {
                                             height: '2rem',
                                             padding: '.25rem',
                                         }}
-                                        className="phone-input-field"
+                                        // className="phone-input-field"
                                         type="tel"
                                         pattern="[0-9]{10}"
                                         name="phone"
