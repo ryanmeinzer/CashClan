@@ -273,7 +273,7 @@ const Publish = () => {
                 &&
                 <Box width="90%">
                     <Divider sx={{mt: 4, mb: 4}} />
-                    <Matches offer={state} />
+                    <Matches offer={state} isMd={isMd} />
                 </Box>
             }
         </Box>

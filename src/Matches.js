@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 
-const Matches = ({offer}) => {
+const Matches = ({offer, isMd}) => {
 
     const {member} = useMemberContext()
     const [phoneObj, setPhoneObj] = useState({phone: ''})
@@ -178,9 +178,11 @@ const Matches = ({offer}) => {
                             <form onSubmit={handleSubmit}>
                                 <Stack
                                     spacing={2}
-                                // width="50%"
+                                    sx={{width: isMd ? "25%" : "100%"}}
                                 >
                                     <TextField
+                                        // sx={{width: "25%", alignContent: "center"}}
+                                        // fullWidth={!isMd}
                                         variant="outlined"
                                         label="Your 10-Digit Number"
                                         type="tel"
@@ -191,20 +193,18 @@ const Matches = ({offer}) => {
                                         onChange={handleChange}
                                         required
                                     />
-                                    {/* <Grid item> */}
                                     <Button
+                                        fullWidth={!isMd}
                                         onClick={handleTogglePhoneForm}
                                         variant="contained"
                                         color="secondary"
                                     >Cancel</Button>
-                                    {/* </Grid> */}
-                                    {/* <Grid item> */}
                                     <Button
+                                        fullWidth={!isMd}
                                         type="submit"
                                         variant="contained"
                                         color="primary"
                                     >Confirm Phone</Button>
-                                    {/* </Grid> */}
                                 </Stack>
                             </form>
                         </div>
@@ -215,6 +215,7 @@ const Matches = ({offer}) => {
                                 onClick={handleTogglePhoneForm}
                                 variant="contained"
                                 color="primary"
+                                fullWidth={!isMd}
                             >Update Phone</Button>
                         </Box>
                     </Box>
