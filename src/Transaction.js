@@ -108,7 +108,7 @@ const Transaction = ({mode, transactionTerms, match, isMd}) => {
                         onClick={handleSubmit}
                         variant="contained"
                         color="primary"
-                    >Transaction Completed</Button>
+                    >Confirm Completed Transaction</Button>
                 </Box>
             }
         </Box>
