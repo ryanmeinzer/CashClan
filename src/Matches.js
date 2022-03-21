@@ -1,7 +1,12 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import Transaction from './Transaction'
 import {useMemberContext} from './providers/member'
 import _ from 'lodash'
+import Stack from '@mui/material/Stack'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
 
 const Matches = ({offer}) => {
 
@@ -36,15 +41,16 @@ const Matches = ({offer}) => {
     const match = pendingTransaction ? pendingTransactionMatch : topMatch
 
     // load new page from browser with new history entry if member has left and returned to app/page
-    const onVisibilityChange = () => {
-        if (document.visibilityState === 'visible') {
-            window.location.href = 'https://cashclan.com/'
-        }
-    }
-    useLayoutEffect(() => {
-        document.addEventListener("visibilitychange", onVisibilityChange)
-        return () => document.removeEventListener("visibilitychange", onVisibilityChange)
-    }, [])
+    // ToDo - uncomment below, temporary for local dev
+    // const onVisibilityChange = () => {
+    //     if (document.visibilityState === 'visible') {
+    //         window.location.href = 'https://cashclan.com/'
+    //     }
+    // }
+    // useLayoutEffect(() => {
+    //     document.addEventListener("visibilitychange", onVisibilityChange)
+    //     return () => document.removeEventListener("visibilitychange", onVisibilityChange)
+    // }, [])
 
     // intermittently scan for new matches only if the member is viewing app/page
     const [time, setTime] = useState(Date.now())
@@ -166,24 +172,52 @@ const Matches = ({offer}) => {
                         sortedMatches={sortedMatches()}
                     />
                     :
-                    <div>
-                        <h3 style={{color: "red"}}>There aren't any matches with your offer, but we'll text you once there is!</h3>
+                    <Box>
+                        <Typography variant="subtitle1" color="text.secondary" component="p" sx={{mb: 2}}>There isn't currently a match with your offer, but we'll text you once there is!</Typography>
                         <div id="phoneForm" style={{display: "none"}}>
                             <form onSubmit={handleSubmit}>
-                                <input
-                                    type="number"
-                                    name="phone"
-                                    value={phoneObj.phone}
-                                    placeholder="Your Phone"
-                                    onChange={handleChange}
-                                    required
-                                />
-                                <button type="button" onClick={handleTogglePhoneForm}>Cancel</button>
-                                <button type="submit">Confirm Phone</button>
+                                <Stack
+                                    spacing={2}
+                                // width="50%"
+                                >
+                                    <TextField
+                                        variant="outlined"
+                                        label="Your 10-Digit Number"
+                                        type="tel"
+                                        pattern="[0-9]{10}"
+                                        name="phone"
+                                        value={phoneObj.phone}
+                                        placeholder="Your 10-Digit Number"
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                    {/* <Grid item> */}
+                                    <Button
+                                        onClick={handleTogglePhoneForm}
+                                        variant="contained"
+                                        color="secondary"
+                                    >Cancel</Button>
+                                    {/* </Grid> */}
+                                    {/* <Grid item> */}
+                                    <Button
+                                        type="submit"
+                                        variant="contained"
+                                        color="primary"
+                                    >Confirm Phone</Button>
+                                    {/* </Grid> */}
+                                </Stack>
                             </form>
                         </div>
-                        <button type="submit" id="phoneFormButton" onClick={handleTogglePhoneForm} style={{display: "block"}} >Update Phone</button>
-                    </div>
+                        <Box>
+                            <Button
+                                type="submit"
+                                id="phoneFormButton"
+                                onClick={handleTogglePhoneForm}
+                                variant="contained"
+                                color="primary"
+                            >Update Phone</Button>
+                        </Box>
+                    </Box>
             }
         </>
     )

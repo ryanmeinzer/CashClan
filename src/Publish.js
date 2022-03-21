@@ -12,6 +12,7 @@ import Slider from '@mui/material/Slider'
 import Button from '@mui/material/Button'
 import {useTheme} from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import Divider from '@mui/material/Divider'
 
 const Publish = () => {
 
@@ -89,21 +90,18 @@ const Publish = () => {
     }
 
     return (
-        <>
-            <div align="center">
-                <div>
-                    {
-                        state.active
-                            ?
-                            <Box sx={{mb: 2}}>
-                                <Typography color="text.secondary" fontSize='1.5rem' align={'center'} component="p">You are actively publishing your offer to the CashClan.</Typography>
-                            </Box>
-                            :
-                            <Box sx={{mt: 6, mb: 2, display: state.mode !== '' && 'none'}}>
-                                <Typography color="text.secondary" fontSize='1.5rem' align={'center'} component="p">You are not active. Publish an offer to the CashClan below.</Typography>
-                            </Box>
-                    }
-                </div>
+        <Box sx={{textAlign: "-webkit-center"}} >
+            {
+                state.active
+                    ?
+                    <Box sx={{mb: 2}}>
+                        <Typography color="text.secondary" fontSize='1.5rem' align={'center'} component="p">You are actively publishing your offer to the CashClan.</Typography>
+                    </Box>
+                    :
+                    <Box sx={{mt: 6, mb: 2, display: state.mode !== '' && 'none'}}>
+                        <Typography color="text.secondary" fontSize='1.5rem' align={'center'} component="p">You are not active. Publish an offer to the CashClan below.</Typography>
+                    </Box>
+            }
                 {/* native form control unnecessary */}
                 {/* <form onSubmit={handleSubmit}> */}
                 <FormControl
@@ -213,7 +211,7 @@ const Publish = () => {
                 {
                     state.active
                         ?
-                        <Box width="90%">
+                    <Box width="90%" sx={{textAlign: "-webkit-center"}} >
                             <Button
                                 type="submit"
                                 name="active"
@@ -226,37 +224,35 @@ const Publish = () => {
                             >Unpublish or Update Offer</Button>
                         </Box>
                         :
-                        <>
-                            <Box width="90%">
-                                <Button
+                    <Box width="90%" sx={{textAlign: "-webkit-center"}} >
+                        <Button
                                 // reset range input
-                                    type="reset"
-                                    onClick={handleCancel}
-                                    disabled={state.active || state.mode === ''}
-                                    sx={{
-                                        display: state.mode === '' ? 'none' : 'block',
-                                        mt: 2,
-                                        mb: 2
-                                    }}
-                                    variant="contained"
-                                    color="secondary"
-                                    fullWidth={!isMd}
-                                >Cancel</Button>
-                                <Button
-                                    type="submit"
-                                    onClick={handleSubmit}
-                                    disabled={state.active || state.mode === ''}
-                                    sx={{
-                                        display: state.mode === '' ? 'none' : 'block',
-                                        mt: 2,
-                                        mb: 2
-                                    }}
-                                    variant="contained"
-                                    color="primary"
-                                    fullWidth={!isMd}
-                                >Publish to the CashClan</Button>
-                            </Box>
-                        </>
+                            type="reset"
+                            onClick={handleCancel}
+                            disabled={state.active || state.mode === ''}
+                            sx={{
+                                display: state.mode === '' ? 'none' : 'block',
+                                mt: 2,
+                                mb: 2
+                            }}
+                            variant="contained"
+                            color="secondary"
+                            fullWidth={!isMd}
+                        >Cancel</Button>
+                        <Button
+                            type="submit"
+                            onClick={handleSubmit}
+                            disabled={state.active || state.mode === ''}
+                            sx={{
+                                display: state.mode === '' ? 'none' : 'block',
+                                mt: 2,
+                                mb: 2
+                            }}
+                            variant="contained"
+                            color="primary"
+                            fullWidth={!isMd}
+                        >Publish to the CashClan</Button>
+                    </Box>
                 }
                 {/* FormControl unnecessary as buttons are explicit; native form control also unnecessary */}
                 {/* </FormControl> */}
@@ -272,13 +268,15 @@ const Publish = () => {
                     <Typography color="primary.dark" variant="h6" fontStyle="italic" sx={{mt: 4}} width="90%">
                         You'll earn {Math.abs(state.premium - .5)}% {state.premium > .5 ? 'more' : 'less'} than the 0.5% average bank rate in the USA by selling up to ${state.amount} of your cash through Venmo to a CashClan member{state.location && ` at ${state.location}`}.
                     </Typography>
-                }
-            </div>
-            {
-                state.active
-                && <div align="left"><Matches offer={state} /></div>
             }
-        </>
+            {state.active
+                &&
+                <Box width="90%">
+                    <Divider sx={{mt: 4, mb: 4}} />
+                    <Matches offer={state} />
+                </Box>
+            }
+        </Box>
     )
 }
 

@@ -32,19 +32,6 @@ const Locations = ({state, hasError, handleChange}) => {
                     fontSize: '1.5rem',
                 }}
             >
-                <ListSubheader>Polk District</ListSubheader>
-                <MenuItem value="Greens Sports Bar">Greens Sports Bar</MenuItem>
-                <MenuItem value="The Buccaneer">The Buccaneer</MenuItem>
-                <MenuItem value="Nick's Crispy Tacos">Nick's Crispy Tacos</MenuItem>
-                <MenuItem value="Shanghai Kelly's">Shanghai Kelly's</MenuItem>
-                <MenuItem value="The Cinch Saloon">The Cinch Saloon</MenuItem>
-                <MenuItem value="McTeague's Saloon">McTeague's Saloon</MenuItem>
-                <MenuItem value="Mayes">Mayes</MenuItem>
-                <MenuItem value="Lush Lounge">Lush Lounge</MenuItem>
-                <MenuItem value="R Bar">R Bar</MenuItem>
-                <MenuItem value="Decodance">Decodance</MenuItem>
-                <MenuItem value="Jackalope">Jackalope</MenuItem>
-                <MenuItem value="Edinburgh Castle Pub">Edinburgh Castle Pub</MenuItem>
                 <ListSubheader>Mission District</ListSubheader>
                 <MenuItem value="Zeitgeist">Zeitgeist</MenuItem>
                 <MenuItem value="Kilowatt">Kilowatt</MenuItem>
@@ -66,7 +53,22 @@ const Locations = ({state, hasError, handleChange}) => {
                 <MenuItem value="Mision Bar">Mission Bar</MenuItem>
                 <MenuItem value="El Rio">El Rio</MenuItem>
                 <MenuItem value="The Royal Cuckoo">The Royal Cuckoo</MenuItem>
-                <ListSubheader>Haight District</ListSubheader>
+                {/* // ToDo - uncomment below for go-to-market phase 2 */}
+                {/* <ListSubheader>Polk District</ListSubheader>
+                <MenuItem value="Greens Sports Bar">Greens Sports Bar</MenuItem>
+                <MenuItem value="The Buccaneer">The Buccaneer</MenuItem>
+                <MenuItem value="Nick's Crispy Tacos">Nick's Crispy Tacos</MenuItem>
+                <MenuItem value="Shanghai Kelly's">Shanghai Kelly's</MenuItem>
+                <MenuItem value="The Cinch Saloon">The Cinch Saloon</MenuItem>
+                <MenuItem value="McTeague's Saloon">McTeague's Saloon</MenuItem>
+                <MenuItem value="Mayes">Mayes</MenuItem>
+                <MenuItem value="Lush Lounge">Lush Lounge</MenuItem>
+                <MenuItem value="R Bar">R Bar</MenuItem>
+                <MenuItem value="Decodance">Decodance</MenuItem>
+                <MenuItem value="Jackalope">Jackalope</MenuItem>
+                <MenuItem value="Edinburgh Castle Pub">Edinburgh Castle Pub</MenuItem> */}
+                {/* // ToDo - uncomment below for go-to-market phase 3 */}
+                {/* <ListSubheader>Haight District</ListSubheader>
                 <MenuItem value="Toranado">Toranado</MenuItem>
                 <MenuItem value="Noc Noc">Noc Noc</MenuItem>
                 <MenuItem value="Molotov's">Molotov's</MenuItem>
@@ -77,7 +79,7 @@ const Locations = ({state, hasError, handleChange}) => {
                 <MenuItem value="Club Deluxe">Club Deluxe</MenuItem>
                 <MenuItem value="Hobson's Choice">Hobson's Choice</MenuItem>
                 <MenuItem value="Zam Zam">Zam Zam</MenuItem>
-                <MenuItem value="Milk Bar">Milk Bar</MenuItem>
+                <MenuItem value="Milk Bar">Milk Bar</MenuItem> */}
             </Select>
             {hasError && <FormHelperText>This is required</FormHelperText>}
         </FormControl>

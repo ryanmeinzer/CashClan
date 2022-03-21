@@ -33,7 +33,7 @@ const Home = ({refreshMembersUponSignUp}) => {
                     </Container>
                 </Box>
             }
-            <Divider sx={{mt: 8, mb: 6}} />
+            <Divider sx={{mt: 4, mb: 4}} />
             <Container>
                 <Footer />
             </Container>
