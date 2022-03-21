@@ -6,6 +6,6 @@ body {
   outline: none;
   -webkit-transition: 1s;
   transition: 1s;
-  width: 75%;
+  width: 50%;
   align-self: center;
 }
