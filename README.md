@@ -4,11 +4,9 @@ The Cash Exchange (IRL P2P DeFi).
 
 ## Use
 
-Go to www.CashClan.com - it's mobile-friendly!
+Go to https://cashclan.com - it's mobile-friendly!
 
-## About
-
-https://cashclan.com/about
+## Technical Overview
 
 Frontend Code Repository - https://github.com/ryanmeinzer/cashclan
 
