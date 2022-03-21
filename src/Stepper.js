@@ -5,8 +5,6 @@ import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact
 import HandshakeIcon from '@mui/icons-material/Handshake'
 import Avatar from '@mui/material/Avatar'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import Button from '@mui/material/Button'
-import {FontAwesomeIcon} from 'react-fontawesome'
 
 const Stepper = ({state, hasMatch}) => {
     return (
