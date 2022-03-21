@@ -27,8 +27,6 @@ const Publish = () => {
     const [hasError, setHasError] = useState(false)
     const [hasMatch, setHasMatch] = useState(false)
 
-    console.log('inside Publish - state: ', state)
-
     useEffect(() => {
         member
             && fetch(`https://cashclan-backend.herokuapp.com/members/${member.id}`)
@@ -53,6 +51,7 @@ const Publish = () => {
 
     useEffect(() => {
         state.location !== '' && setHasError(false)
+        !state.active && setHasMatch(false)
     }, [state])
 
     // BE is deleting member's pending transaction(s) if they unpublish their offer
