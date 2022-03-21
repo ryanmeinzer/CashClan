@@ -20,12 +20,9 @@ const Home = ({refreshMembersUponSignUp}) => {
             </Container>
             {member
                 ?
-                <>
-                    {/* // ToDo - move to new component, design and uncomment once finished */}
-                    <Box mt={2}>
-                        <Publish />
-                    </Box>
-                </>
+                <Box mt={2}>
+                    <Publish />
+                </Box>
                 :
                 <Box>
                     <Container>
