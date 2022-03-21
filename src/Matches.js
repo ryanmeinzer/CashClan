@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useLayoutEffect} from 'react'
 import Transaction from './Transaction'
 import {useMemberContext} from './providers/member'
 import _ from 'lodash'
@@ -41,16 +41,15 @@ const Matches = ({offer, isMd}) => {
     const match = pendingTransaction ? pendingTransactionMatch : topMatch
 
     // load new page from browser with new history entry if member has left and returned to app/page
-    // ToDo - uncomment below, temporary for local dev
-    // const onVisibilityChange = () => {
-    //     if (document.visibilityState === 'visible') {
-    //         window.location.href = 'https://cashclan.com/'
-    //     }
-    // }
-    // useLayoutEffect(() => {
-    //     document.addEventListener("visibilitychange", onVisibilityChange)
-    //     return () => document.removeEventListener("visibilitychange", onVisibilityChange)
-    // }, [])
+    const onVisibilityChange = () => {
+        if (document.visibilityState === 'visible') {
+            window.location.href = 'https://cashclan.com/'
+        }
+    }
+    useLayoutEffect(() => {
+        document.addEventListener("visibilitychange", onVisibilityChange)
+        return () => document.removeEventListener("visibilitychange", onVisibilityChange)
+    }, [])
 
     // intermittently scan for new matches only if the member is viewing app/page
     const [time, setTime] = useState(Date.now())
