@@ -84,7 +84,7 @@ const Transaction = ({mode, transactionTerms, match, isMd}) => {
                                                     }}
                                                     sx={{
                                                         '& .MuiBadge-badge': {
-                                                            left: 7
+                                                            left: 8
                                                         }
                                                     }}
                                                     badgeContent={
@@ -101,7 +101,8 @@ const Transaction = ({mode, transactionTerms, match, isMd}) => {
                                                         sx={{
                                                             width: '6rem',
                                                             height: '6rem',
-                                                            bgcolor: 'warning.dark'
+                                                            bgcolor: 'warning.dark',
+                                                            border: '2px solid #009a43',
                                                         }}
                                                     />
                                                 </Badge>
@@ -119,7 +120,7 @@ const Transaction = ({mode, transactionTerms, match, isMd}) => {
                                                     }}
                                                     sx={{
                                                         '& .MuiBadge-badge': {
-                                                            right: 7
+                                                            right: 8
                                                         },
                                                     }}
                                                     badgeContent={
@@ -135,7 +136,8 @@ const Transaction = ({mode, transactionTerms, match, isMd}) => {
                                                         sx={{
                                                             width: '6rem',
                                                             height: '6rem',
-                                                            bgcolor: 'warning.dark'
+                                                            bgcolor: 'warning.dark',
+                                                            border: '2px solid #009a43',
                                                         }}
                                                     />
                                                 </Badge>
