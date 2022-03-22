@@ -39,6 +39,8 @@ const SignUp = (props) => {
     return (
         !isLoggedIn &&
         <GoogleLogin
+            // ! uncomment below when developing locally
+            // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID_TEST}
             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
             render={renderProps => (
                 props.menuAppBarOrigin
