@@ -10,6 +10,7 @@ import AOS from 'aos'
 import "aos/dist/aos.css"
 import {useTheme} from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import Screenshots from './components/Screenshots'
 
 const Splash = (props) => {
 
@@ -39,6 +40,10 @@ const Splash = (props) => {
             </Box>
             <Container sx={{mt: 8}} >
                 <HowItWorks />
+            </Container>
+            <Divider sx={{mt: 8, mb: 8}} />
+            <Container >
+                <Screenshots />
             </Container>
             <Divider sx={{mt: 8, mb: 8}} />
             <Container>
