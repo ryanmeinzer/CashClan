@@ -13,20 +13,24 @@ const Screenshots = () => {
           <CardMedia
             component="img"
             image={PublishScreenshot}
-            sx={{maxWidth: '20rem'}}
+            sx={{
+              maxWidth: '20rem',
+              pointerEvents: "none",
+              overflow: "hidden"
+            }}
             alt="Publish Screenshot"
-            pointerEvents="none"
-            overflow="hidden"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6} data-aos={'fade-left'} sx={{textAlign: '-webkit-center'}} >
           <CardMedia
             component="img"
             image={MatchScreenshot}
-            sx={{maxWidth: '20rem'}}
+            sx={{
+              maxWidth: '20rem',
+              pointerEvents: "none",
+              overflow: "hidden"
+            }}
             alt="Match Screenshot"
-            pointerEvents="none"
-            overflow="hidden"
           />
         </Grid>
       </Grid>
