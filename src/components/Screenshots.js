@@ -15,8 +15,7 @@ const Screenshots = () => {
             image={PublishScreenshot}
             sx={{
               maxWidth: '20rem',
-              pointerEvents: "none",
-              overflow: "hidden"
+              pointerEvents: "none"
             }}
             alt="Publish Screenshot"
           />
@@ -27,8 +26,7 @@ const Screenshots = () => {
             image={MatchScreenshot}
             sx={{
               maxWidth: '20rem',
-              pointerEvents: "none",
-              overflow: "hidden"
+              pointerEvents: "none"
             }}
             alt="Match Screenshot"
           />
