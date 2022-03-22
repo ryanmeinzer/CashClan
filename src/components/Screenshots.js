@@ -8,8 +8,8 @@ import MatchScreenshot from '../images/match-screenshot.png'
 const Screenshots = () => {
   return (
     <Box>
-      <Grid container spacing={8} sx={{justifyContent: "center"}}>
-        <Grid item xs={12} sm={6} md={3} data-aos={'fade-right'} sx={{textAlign: '-webkit-center'}}>
+      <Grid container spacing={4} sx={{justifyContent: "center"}}>
+        <Grid item xs={12} sm={6} md={6} data-aos={'fade-right'} sx={{textAlign: '-webkit-center'}}>
           <CardMedia
             component="img"
             image={PublishScreenshot}
@@ -17,7 +17,7 @@ const Screenshots = () => {
             alt="Publish Screenshot"
           />
         </Grid>
-        <Grid item xs={12} sm={6} md={3} data-aos={'fade-left'} sx={{textAlign: '-webkit-center'}} >
+        <Grid item xs={12} sm={6} md={6} data-aos={'fade-left'} sx={{textAlign: '-webkit-center'}} >
           <CardMedia
             component="img"
             image={MatchScreenshot}
