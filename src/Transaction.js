@@ -4,6 +4,10 @@ import {CountdownCircleTimer} from 'react-countdown-circle-timer'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import Avatar from '@mui/material/Avatar'
+import Stack from '@mui/material/Stack'
+import Badge from '@mui/material/Badge'
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser'
 
 const Transaction = ({mode, transactionTerms, match, isMd}) => {
 
@@ -70,30 +74,84 @@ const Transaction = ({mode, transactionTerms, match, isMd}) => {
                                 matchPrivates.image
                                 &&
                                 <Box>
-                                    <Box sx={{align: "center"}}>
-                                        <Box sx={{mb: 2}}>
-                                            <span style={{position: "relative"}}>
-                                                <img src={member.image} alt="profile" style={{borderRadius: "50%"}} />
-                                                <span style={{position: "absolute", top: -75, right: 0}}>✅</span>
-                                            </span>
-                                            <span style={{fontSize: '5rem'}}> 🤝 </span>
-                                            <span style={{position: "relative"}}>
-                                                <img src={matchPrivates.image} alt="profile" style={{borderRadius: "50%"}} />
-                                                <span style={{position: "absolute", top: -75, right: 0}}>✅</span>
-                                            </span>
-                                            </Box>
-                                        <CountdownCircleTimer
-                                            isPlaying
-                                            duration={90}
+                                        <Box sx={{align: "center", color: 'warning.dark'}}>
+                                            <Stack direction="row" spacing={2} sx={{justifyContent: 'center', mb: 4}}>
+                                                <Badge
+                                                    overlap="circular"
+                                                    anchorOrigin={{
+                                                        vertical: 'top',
+                                                        horizontal: 'left',
+                                                    }}
+                                                    sx={{
+                                                        '& .MuiBadge-badge': {
+                                                            left: 7
+                                                        }
+                                                    }}
+                                                    badgeContent={
+                                                        <VerifiedUserIcon
+                                                            sx={{
+                                                                color: "primary.dark",
+                                                            }}
+                                                        />
+                                                    }
+                                                >
+                                                    <Avatar
+                                                        alt={member.name}
+                                                        src={member.image}
+                                                        sx={{
+                                                            width: '6rem',
+                                                            height: '6rem',
+                                                            bgcolor: 'warning.dark'
+                                                        }}
+                                                    />
+                                                </Badge>
+                                                <Box sx={{alignSelf: 'flex-end'}}>
+                                                    <Typography
+                                                        fontSize="5rem"
+                                                        sx={{mb: -3, ml: .5}}
+                                                    >🤝</Typography>
+                                                </Box>
+                                                <Badge
+                                                    overlap="circular"
+                                                    anchorOrigin={{
+                                                        vertical: 'top',
+                                                        horizontal: 'right',
+                                                    }}
+                                                    sx={{
+                                                        '& .MuiBadge-badge': {
+                                                            right: 7
+                                                        },
+                                                    }}
+                                                    badgeContent={
+                                                        <VerifiedUserIcon
+                                                            sx={{
+                                                                color: "primary.dark"
+                                                            }} />
+                                                    }
+                                                >
+                                                    <Avatar
+                                                        alt={matchPrivates.name}
+                                                        src={matchPrivates.image}
+                                                        sx={{
+                                                            width: '6rem',
+                                                            height: '6rem',
+                                                            bgcolor: 'warning.dark'
+                                                        }}
+                                                    />
+                                                </Badge>
+                                            </Stack>
+                                            <CountdownCircleTimer
+                                                isPlaying
+                                                duration={90}
                                                 colors={['#33cc70', '#ffb84d', '#A30000', '#A30000']}
-                                            colorsTime={[90, 60, 30, 0]}
-                                            size={100}
+                                                colorsTime={[90, 60, 30, 0]}
+                                                size={100}
                                                 onComplete={() => {
                                                     return {shouldRepeat: true}
-                                            }}
-                                        >
+                                                }}
+                                            >
                                                 {({remainingTime}) => <Typography color="text.secondary">{remainingTime}</Typography>}
-                                        </CountdownCircleTimer>
+                                            </CountdownCircleTimer>
                                         </Box>
                                     </Box>
                             }
