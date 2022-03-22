@@ -1,4 +1,4 @@
-# CashClan QA
+# CashClan QA (swap env variables for test & prod)
 
 1 - seller unpublishes after match
 	a - transaction deleted
