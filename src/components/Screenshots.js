@@ -7,7 +7,7 @@ import MatchScreenshot from '../images/match-screenshot.png'
 
 const Screenshots = () => {
   return (
-    <Box>
+    <Box width="90%">
       <Grid container spacing={4} sx={{justifyContent: "center"}}>
         <Grid item xs={12} sm={6} md={6} data-aos={'fade-right'} sx={{textAlign: '-webkit-center'}}>
           <CardMedia

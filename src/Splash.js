@@ -42,9 +42,9 @@ const Splash = (props) => {
                 <HowItWorks />
             </Container>
             <Divider sx={{mt: 8, mb: 8}} />
-            {/* <Container >
+            <Container sx={{textAlign: '-webkit-center'}}>
                 <Screenshots />
-            </Container> */}
+            </Container>
             <Divider sx={{mt: 8, mb: 8}} />
             <Container>
                 <Who refresh={props.refresh} />
