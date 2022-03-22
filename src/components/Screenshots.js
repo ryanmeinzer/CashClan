@@ -16,6 +16,7 @@ const Screenshots = () => {
             sx={{maxWidth: '20rem'}}
             alt="Publish Screenshot"
             pointerEvents="none"
+            overflow="hidden"
           />
         </Grid>
         <Grid item xs={12} sm={6} md={6} data-aos={'fade-left'} sx={{textAlign: '-webkit-center'}} >
@@ -25,6 +26,7 @@ const Screenshots = () => {
             sx={{maxWidth: '20rem'}}
             alt="Match Screenshot"
             pointerEvents="none"
+            overflow="hidden"
           />
         </Grid>
       </Grid>
