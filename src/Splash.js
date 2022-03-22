@@ -42,7 +42,7 @@ const Splash = (props) => {
                 <HowItWorks />
             </Container>
             <Divider sx={{mt: 8, mb: 8}} />
-            <Container sx={{width: "90%", textAlign: '-webkit-center'}}>
+            <Container sx={{textAlign: '-webkit-center'}}>
                 <Screenshots />
             </Container>
             <Divider sx={{mt: 8, mb: 8}} />
