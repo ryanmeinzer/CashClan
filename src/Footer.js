@@ -2,6 +2,7 @@ import React from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Logo from './images/cashclan_logo.png'
+import Link from '@mui/material/Link'
 
 const Footer = () => (
   <Box>
@@ -17,7 +18,9 @@ const Footer = () => (
       color="textSecondary"
       gutterBottom
     >
-      &copy; CashClan 2022. All rights reserved.
+      &copy; CashClan 2022. All rights reserved. We take <Link href="/privacy" color="inherit">
+        {'your privacy'}
+      </Link> seriously.
     </Typography>
   </Box>
 )
