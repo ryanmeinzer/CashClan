@@ -33,26 +33,28 @@ const Locations = ({state, hasError, handleChange}) => {
                 }}
             >
                 <ListSubheader>Mission District</ListSubheader>
-                <MenuItem value="Zeitgeist">Zeitgeist</MenuItem>
-                <MenuItem value="Kilowatt">Kilowatt</MenuItem>
-                <MenuItem value="Gestalt">Gestalt</MenuItem>
-                <MenuItem value="Delirium">Delirium</MenuItem>
+                <MenuItem value="Beauty Bar">Beauty Bar</MenuItem>
+                <MenuItem value="Blondie's Bar">Blondie's Bar</MenuItem>
                 <MenuItem value="Bond Bar">Bond Bar</MenuItem>
                 <MenuItem value="Casanova Lounge">Casanova Lounge</MenuItem>
-                <MenuItem value="Slate">Slate</MenuItem>
-                <MenuItem value="The 500 Club">The 500 Club</MenuItem>
-                <MenuItem value="The Valencia Room">The Valencia Room</MenuItem>
-                <MenuItem value="The Sycamore">The Sycamore</MenuItem>
-                <MenuItem value="Beauty Bar">Beauty Bar</MenuItem>
-                <MenuItem value="The Chapel">The Chapel</MenuItem>
-                <MenuItem value="Teeth">Teeth</MenuItem>
+                <MenuItem value="City Club">City Club</MenuItem>
+                <MenuItem value="Delirium">Delirium</MenuItem>
                 <MenuItem value="Doc's Clock">Doc's Clock</MenuItem>
+                <MenuItem value="El Rio">El Rio</MenuItem>
                 <MenuItem value="El Techo">El Techo</MenuItem>
+                <MenuItem value="Gestalt">Gestalt</MenuItem>
+                <MenuItem value="Kilowatt">Kilowatt</MenuItem>
                 <MenuItem value="Latin American Club">Latin American Club</MenuItem>
                 <MenuItem value="Make-Out Room">Make-Out Room</MenuItem>
                 <MenuItem value="Mision Bar">Mission Bar</MenuItem>
-                <MenuItem value="El Rio">El Rio</MenuItem>
+                <MenuItem value="Slate">Slate</MenuItem>
+                <MenuItem value="Teeth">Teeth</MenuItem>
+                <MenuItem value="The 500 Club">The 500 Club</MenuItem>
+                <MenuItem value="The Chapel">The Chapel</MenuItem>
                 <MenuItem value="The Royal Cuckoo">The Royal Cuckoo</MenuItem>
+                <MenuItem value="The Sycamore">The Sycamore</MenuItem>
+                <MenuItem value="The Valencia Room">The Valencia Room</MenuItem>
+                <MenuItem value="Zeitgeist">Zeitgeist</MenuItem>
                 {/* // ToDo - uncomment below for go-to-market phase 2 */}
                 {/* <ListSubheader>Polk District</ListSubheader>
                 <MenuItem value="Greens Sports Bar">Greens Sports Bar</MenuItem>
