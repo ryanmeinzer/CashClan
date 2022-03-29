@@ -14,14 +14,13 @@ const HowItWorks = () => {
       <Box marginBottom={4}>
         <Typography
           sx={{
-            textTransform: 'uppercase',
             fontWeight: 'medium',
           }}
           gutterBottom
           color={'secondary'}
           align={'center'}
         >
-          The Cash Exchange (IRL P2P DeFi)
+          THE CASH EXCHANGE (IRL P2P DeFi)
         </Typography>
         <Box
           component={Typography}
