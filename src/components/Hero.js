@@ -81,7 +81,7 @@ const Hero = (props) => {
           </Box>
           <Box mb={4}>
             <Typography variant="h6" component="p" color="textSecondary">
-              No more fees. Way more interest. We are the cash exchange by the people, for the people - the CashClan.
+              Get cash from people, not ATMs. Give cash to people, not banks. By the people, for the people - the CashClan. 
             </Typography>
           </Box>
           <Box
