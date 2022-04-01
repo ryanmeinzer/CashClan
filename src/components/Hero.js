@@ -49,7 +49,7 @@ const Hero = (props) => {
                 fontWeight: 700,
               }}
             >
-              Lets{' '}
+              Let's{' '}
               <Typography
                 variant="h2"
                 component={'span'}
