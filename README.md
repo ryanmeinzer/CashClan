@@ -30,5 +30,5 @@ https://trello.com/b/xMB0i5hW/cashclan
 
 ## Demo Video
 
-<div align="center">https://user-images.githubusercontent.com/3579498/164382361-746d6743-4725-4976-8139-50f4204335c4.mp4</div>
+https://user-images.githubusercontent.com/3579498/164382361-746d6743-4725-4976-8139-50f4204335c4.mp4
 
