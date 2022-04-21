@@ -27,3 +27,7 @@ https://trello.com/b/xMB0i5hW/cashclan
 ## Screenshot
 
 ![CashClan Screenshot](/cashclan-screenshot.png)
+
+## Demo Video
+
+![CashClan Demo Video](/CashClan_Demo.mov)

@@ -37,6 +37,7 @@ const Locations = ({state, hasError, handleChange}) => {
                 <MenuItem value="Blondie's Bar">Blondie's Bar</MenuItem>
                 <MenuItem value="Bond Bar">Bond Bar</MenuItem>
                 <MenuItem value="Casanova Lounge">Casanova Lounge</MenuItem>
+                <MenuItem value="Casements Bar">Casements Bar</MenuItem>
                 <MenuItem value="City Club">City Club</MenuItem>
                 <MenuItem value="Delirium">Delirium</MenuItem>
                 <MenuItem value="Doc's Clock">Doc's Clock</MenuItem>
