@@ -21,7 +21,7 @@ const Splash = (props) => {
 
     useEffect(() => {
         AOS.init({
-            once: true,
+            // once: true,
             delay: 50,
             duration: 500,
             easing: 'ease-in-out',

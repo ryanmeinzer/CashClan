@@ -30,4 +30,4 @@ https://trello.com/b/xMB0i5hW/cashclan
 
 ## Demo Video
 
-![CashClan Demo Video](/CashClan_Demo.mov)
+![CashClan Demo Video](/cashclan-demo-video.mp4)
