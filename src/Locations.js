@@ -34,6 +34,7 @@ const Locations = ({state, hasError, handleChange}) => {
             >
                 <ListSubheader>Mission District</ListSubheader>
                 <MenuItem value="Beauty Bar">Beauty Bar</MenuItem>
+                <MenuItem value="Bender's Bar & Grill">Bender's Bar & Grill</MenuItem>
                 <MenuItem value="Blondie's Bar">Blondie's Bar</MenuItem>
                 <MenuItem value="Bond Bar">Bond Bar</MenuItem>
                 <MenuItem value="Casanova Lounge">Casanova Lounge</MenuItem>
