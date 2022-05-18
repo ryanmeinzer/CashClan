@@ -3,6 +3,7 @@ import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
+import ListSubheader from '@mui/material/ListSubheader'
 import FormHelperText from '@mui/material/FormHelperText'
 import Airtable from 'airtable'
 import axios from 'axios'
@@ -58,6 +59,7 @@ const Locations = ({state, hasError, handleChange}) => {
                     fontSize: '1.5rem',
                 }}
             >
+                <ListSubheader>San Francisco</ListSubheader>
                 {locations?.map(location => <MenuItem key={location} value={location}>{location}</MenuItem>)}
             </Select>
             {hasError && <FormHelperText>This is required</FormHelperText>}
