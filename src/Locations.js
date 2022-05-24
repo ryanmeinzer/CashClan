@@ -60,7 +60,8 @@ const Locations = ({state, hasError, handleChange}) => {
                 }}
             >
                 <ListSubheader>San Francisco</ListSubheader>
-                {
+                <MenuItem>...Loading...</MenuItem>
+                {/* {
                     locations
                         ?
                         locations.map(
@@ -70,7 +71,7 @@ const Locations = ({state, hasError, handleChange}) => {
                         )
                         :
                         <MenuItem>...Loading...</MenuItem>
-                }
+                } */}
             </Select>
             {hasError && <FormHelperText>This is required</FormHelperText>}
         </FormControl>
