@@ -10,29 +10,29 @@ import axios from 'axios'
 
 const Locations = ({state, hasError, handleChange}) => {
 
-    // const [locations, setLocations] = useState(null)
+    const [locations, setLocations] = useState(null)
 
-    // useEffect(() => {
-    //     //create a new Airtable object in React
-    //     new Airtable({apiKey: process.env.REACT_APP_AIRTABLE_API_KEY}).base('appAgYJXeLHg9tDEU')
-    //     //base endpoint to call with each request
-    //     axios.defaults.baseURL = 'https://api.airtable.com/v0/appAgYJXeLHg9tDEU/locations/'
-    //     //content type to send with all POST requests
-    //     axios.defaults.headers.post['Content-Type'] = 'application/json'
-    //     //authenticate to the base with the API key
-    //     axios.defaults.headers['Authorization'] = `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
+    useEffect(() => {
+        //create a new Airtable object in React
+        new Airtable({apiKey: process.env.REACT_APP_AIRTABLE_API_KEY}).base('appAgYJXeLHg9tDEU')
+        //base endpoint to call with each request
+        axios.defaults.baseURL = 'https://api.airtable.com/v0/appAgYJXeLHg9tDEU/locations/'
+        //content type to send with all POST requests
+        axios.defaults.headers.post['Content-Type'] = 'application/json'
+        //authenticate to the base with the API key
+        axios.defaults.headers['Authorization'] = `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
 
-    //     const getLocations = async () => {
-    //         return axios.get('/')
-    //             .then(res => setLocations(
-    //                 res.data.records.map(item => item.fields.Name).sort()
-    //             ))
-    //             .catch(error => error)
-    //     }
+        const getLocations = async () => {
+            return axios.get('/')
+                .then(res => setLocations(
+                    res.data.records.map(item => item.fields.Name).sort()
+                ))
+                .catch(error => error)
+        }
 
-    //     getLocations()
+        getLocations()
 
-    // }, [locations])
+    }, [locations])
 
     return (
         <FormControl error={hasError} sx={{mt: 3, mb: 3}}>
@@ -60,8 +60,7 @@ const Locations = ({state, hasError, handleChange}) => {
                 }}
             >
                 <ListSubheader>San Francisco</ListSubheader>
-                <MenuItem value={'...Loading...'}>...Loading...</MenuItem>
-                {/* {
+                {
                     locations
                         ?
                         locations.map(
@@ -70,8 +69,8 @@ const Locations = ({state, hasError, handleChange}) => {
                                 </MenuItem>
                         )
                         :
-                        <MenuItem>...Loading...</MenuItem>
-                } */}
+                        <MenuItem value={'...Loading...'}>...Loading...</MenuItem>
+                }
             </Select>
             {hasError && <FormHelperText>This is required</FormHelperText>}
         </FormControl>
