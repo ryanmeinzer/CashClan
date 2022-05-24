@@ -10,7 +10,7 @@ import axios from 'axios'
 
 const Locations = ({state, hasError, handleChange}) => {
 
-    const [locations, setLocations] = useState()
+    const [locations, setLocations] = useState(null)
 
     useEffect(() => {
         //create a new Airtable object in React 
@@ -60,7 +60,17 @@ const Locations = ({state, hasError, handleChange}) => {
                 }}
             >
                 <ListSubheader>San Francisco</ListSubheader>
-                {locations?.map(location => <MenuItem key={location} value={location}>{location}</MenuItem>)}
+                {
+                    locations
+                        ?
+                        locations.map(
+                            location =>
+                                <MenuItem key={location} value={location}>{location}
+                                </MenuItem>
+                        )
+                        :
+                        <MenuItem>...Loading...</MenuItem>
+                }
             </Select>
             {hasError && <FormHelperText>This is required</FormHelperText>}
         </FormControl>
