@@ -60,7 +60,7 @@ const Locations = ({state, hasError, handleChange}) => {
                 }}
             >
                 <ListSubheader>San Francisco</ListSubheader>
-                <MenuItem>...Loading...</MenuItem>
+                <MenuItem value={'...Loading...'}>...Loading...</MenuItem>
                 {/* {
                     locations
                         ?
