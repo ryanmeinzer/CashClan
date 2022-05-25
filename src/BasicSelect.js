@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
@@ -11,6 +11,12 @@ export default function BasicSelect() {
     const handleChange = (event) => {
         setAge(event.target.value.toString())
     }
+
+    console.log('inside BasicSelect')
+
+    useEffect(() => {
+        console.log('inside BasicSelect useEffect')
+    })
 
     return (
         <Box sx={{minWidth: 120}}>

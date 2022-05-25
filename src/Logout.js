@@ -18,8 +18,8 @@ function Logout(props) {
     return (
         isLoggedIn &&
         <GoogleLogout
-            // ! uncomment below when developing locally
             // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID_TEST}
+            // ! swap above with below when developing locally
             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
             render={renderProps => (
                 <MenuItem

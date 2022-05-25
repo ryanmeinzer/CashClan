@@ -7,6 +7,7 @@ import ListSubheader from '@mui/material/ListSubheader'
 import FormHelperText from '@mui/material/FormHelperText'
 import Airtable from 'airtable'
 import axios from 'axios'
+import Divider from '@mui/material/Divider'
 
 const Locations = ({state, hasError, handleChange}) => {
 
@@ -59,7 +60,8 @@ const Locations = ({state, hasError, handleChange}) => {
                     fontSize: '1.5rem',
                 }}
             >
-                <ListSubheader>San Francisco</ListSubheader>
+                <ListSubheader value=''>San Francisco</ListSubheader>
+                <Divider sx={{margin: '.5rem 0 .5rem 0'}} />
                 {
                     locations
                         ?
