@@ -45,6 +45,7 @@ const Locations = ({state, hasError, handleChange}) => {
                     mt: -.5
                 }}
             >{state.location === '' ? 'Select Nearest Location *' : 'meeting at'}</InputLabel>
+            {/* ToDo - contemplate conditionally using NativeSelect/Select for Mobile/Desktop for optimal UI (no drop-down flickers) */}
             <Select
                 labelId="location-select-label"
                 id="location-select"
