@@ -106,9 +106,8 @@ const Locations = ({state, hasError, handleChange}) => {
                             fontSize: '1.5rem',
                         }}
                     >
-                        <optgroup label="San Francisco" disabled></optgroup>
-                        <optgroup label="----------"></optgroup>\
-                        <option value={''} disabled hidden></option>
+                        <option value={''} disabled hidden>San Francisco</option>
+                        <optgroup label="----------"></optgroup>
                         {
                             locations
                                 ?
