@@ -88,15 +88,9 @@ const Locations = ({state, hasError, handleChange}) => {
                     :
                     <NativeSelect
                         inputProps={{
-                            // label: 'location',
-                            // label: state.location === '' ? 'Select Nearest Location *' : 'meeting at',
                             name: 'location',
                             id: 'location-select'
                         }}
-                        // defaultValue={'Bond Bar'}
-                        // defaultValue='tester'
-                        // labelId="location-select-label"
-                        // label={state.location === '' ? 'Select Nearest Location *' : 'meeting at'}
                         value={state.location}
                         onChange={handleChange}
                         required
@@ -106,27 +100,20 @@ const Locations = ({state, hasError, handleChange}) => {
                             fontSize: '1.5rem',
                         }}
                     >
-                        {/* <optgroup label="San Francisco"></optgroup>
-                        <optgroup label="----------"></optgroup>
-                        <option value={''} disabled hidden></option> */}
-                        {/* <optgroup label="----------"></optgroup> */}
-                        {/* <label for="San Francisco"></label> */}
-                        {/* <select name="San Francisco" id="San Francisco"> */}
                         <optgroup label="San Francisco">
                             <option value={''} disabled hidden></option>
-                        {
-                            locations
-                                ?
-                                locations.map(
-                                    location =>
-                                        <option key={location} value={location}>{location}
-                                        </option>
-                                )
-                                :
-                                <option value={'...Loading...'}>...Loading...</option>
+                            {
+                                locations
+                                    ?
+                                    locations.map(
+                                        location =>
+                                            <option key={location} value={location}>{location}
+                                            </option>
+                                    )
+                                    :
+                                    <option value={'...Loading...'}>...Loading...</option>
                             }
                         </optgroup>
-                        {/* </select> */}
                     </NativeSelect>
             }
             {hasError && <FormHelperText>This is required</FormHelperText>}
