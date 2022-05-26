@@ -106,10 +106,14 @@ const Locations = ({state, hasError, handleChange}) => {
                             fontSize: '1.5rem',
                         }}
                     >
-                        <optgroup label="San Francisco"></optgroup>
+                        {/* <optgroup label="San Francisco"></optgroup>
                         <optgroup label="----------"></optgroup>
-                        <option value={''} disabled hidden></option>
+                        <option value={''} disabled hidden></option> */}
                         {/* <optgroup label="----------"></optgroup> */}
+                        {/* <label for="San Francisco"></label> */}
+                        {/* <select name="San Francisco" id="San Francisco"> */}
+                        <optgroup label="San Francisco">
+                            <option value={''} disabled hidden></option>
                         {
                             locations
                                 ?
@@ -120,7 +124,9 @@ const Locations = ({state, hasError, handleChange}) => {
                                 )
                                 :
                                 <option value={'...Loading...'}>...Loading...</option>
-                        }
+                            }
+                        </optgroup>
+                        {/* </select> */}
                     </NativeSelect>
             }
             {hasError && <FormHelperText>This is required</FormHelperText>}
