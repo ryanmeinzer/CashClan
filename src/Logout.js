@@ -37,13 +37,13 @@ function Logout(props) {
                     >Log Out</MenuItem>
                     :
                     <option
-                        style={{
-                            padding: '10px',
-                            fontWeight: 400,
-                            fontSize: '1rem',
-                            lineHeight: 1.5,
-                            letterSpacing: '0.00938em'
-                        }}
+                        // style={{
+                        //     padding: '10px',
+                        //     fontWeight: 400,
+                        //     fontSize: '1rem',
+                        //     lineHeight: 1.5,
+                        //     letterSpacing: '0.00938em'
+                        // }}
                         onClick={renderProps.onClick}
                         disabled={renderProps.disabled}>
                         Log Out
