@@ -3,15 +3,22 @@ import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
+import NativeSelect from '@mui/material/NativeSelect'
 import ListSubheader from '@mui/material/ListSubheader'
 import FormHelperText from '@mui/material/FormHelperText'
 import Airtable from 'airtable'
 import axios from 'axios'
 import Divider from '@mui/material/Divider'
+import {useTheme} from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 const Locations = ({state, hasError, handleChange}) => {
 
     const [locations, setLocations] = useState(null)
+    const theme = useTheme()
+    const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+        defaultMatches: true,
+    })
 
     useEffect(() => {
         //create a new Airtable object in React
@@ -45,36 +52,76 @@ const Locations = ({state, hasError, handleChange}) => {
                     mt: -.5
                 }}
             >{state.location === '' ? 'Select Nearest Location *' : 'meeting at'}</InputLabel>
-            {/* // ToDo - contemplate conditionally using NativeSelect/Select for Mobile/Desktop for optimal UI (no drop-down flickers) */}
-            <Select
-                labelId="location-select-label"
-                id="location-select"
-                label={state.location === '' ? 'Select Nearest Location *' : 'meeting at'}
-                name="location"
-                value={state.location}
-                onChange={handleChange}
-                disabled={state.active || state.mode === ''}
-                required
-                sx={{
-                    display: state.mode === '' ? 'none' : 'block',
-                    color: "text.secondary",
-                    fontSize: '1.5rem',
-                }}
-            >
-                <ListSubheader value=''>San Francisco</ListSubheader>
-                <Divider sx={{margin: '.5rem 0 .5rem 0'}} />
-                {
-                    locations
-                        ?
-                        locations.map(
-                            location =>
-                                <MenuItem key={location} value={location}>{location}
-                                </MenuItem>
-                        )
-                        :
-                        <MenuItem value={'...Loading...'}>...Loading...</MenuItem>
-                }
-            </Select>
+            {/* // ToDo - consider conditionally using NativeSelect/Select for Mobile/Desktop for optimal UI (to prevent mobile drop-down flicker) */}
+            {
+                isMd
+                    ?
+                    <Select
+                        labelId="location-select-label"
+                        id="location-select"
+                        label={state.location === '' ? 'Select Nearest Location *' : 'meeting at'}
+                        name="location"
+                        value={state.location}
+                        onChange={handleChange}
+                        disabled={state.active || state.mode === ''}
+                        required
+                        sx={{
+                            display: state.mode === '' ? 'none' : 'block',
+                            color: "text.secondary",
+                            fontSize: '1.5rem',
+                        }}
+                    >
+                        <ListSubheader value=''>San Francisco</ListSubheader>
+                        <Divider sx={{margin: '.5rem 0 .5rem 0'}} />
+                        {
+                            locations
+                                ?
+                                locations.map(
+                                    location =>
+                                        <MenuItem key={location} value={location}>{location}
+                                        </MenuItem>
+                                )
+                                :
+                                <MenuItem value={'...Loading...'}>...Loading...</MenuItem>
+                        }
+                    </Select>
+                    :
+                    <NativeSelect
+                        inputProps={{
+                            // label: 'location',
+                            // label: state.location === '' ? 'Select Nearest Location *' : 'meeting at',
+                            name: 'location',
+                            id: 'location-select'
+                        }}
+                        // defaultValue={'Bond Bar'}
+                        // defaultValue='tester'
+                        // labelId="location-select-label"
+                        // label={state.location === '' ? 'Select Nearest Location *' : 'meeting at'}
+                        value={state.location}
+                        onChange={handleChange}
+                        required
+                        sx={{
+                            display: state.mode === '' ? 'none' : 'block',
+                            color: "text.secondary",
+                            fontSize: '1.5rem',
+                        }}
+                    >
+                        <optgroup label="San Francisco" disabled></optgroup>
+                        <optgroup label="----------"></optgroup>\
+                        <option value={''} disabled hidden></option>
+                        {
+                            locations
+                                ?
+                                locations.map(
+                                    location =>
+                                        <option key={location} value={location}>{location}
+                                        </option>
+                                )
+                                :
+                                <option value={'...Loading...'}>...Loading...</option>
+                        }
+                    </NativeSelect>
+            }
             {hasError && <FormHelperText>This is required</FormHelperText>}
         </FormControl>
     )
