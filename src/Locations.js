@@ -53,9 +53,9 @@ const Locations = ({state, hasError, handleChange}) => {
                 }}
             >{state.location === '' ? 'Select Nearest Location *' : 'meeting at'}</InputLabel>
             {/* // ToDo - consider conditionally using NativeSelect/Select for Mobile/Desktop for optimal UI (to prevent mobile drop-down flicker) */}
-            {
+            {/* {
                 isMd
-                    ?
+                    ? */}
                     <Select
                         labelId="location-select-label"
                         id="location-select"
@@ -85,7 +85,8 @@ const Locations = ({state, hasError, handleChange}) => {
                                 <MenuItem value={'...Loading...'}>...Loading...</MenuItem>
                         }
                     </Select>
-                    :
+            {/* // ToDo - consider conditionally using NativeSelect/Select for Mobile/Desktop for optimal UI (to prevent mobile drop-down flicker) */}
+            {/* :
                     <NativeSelect
                         inputProps={{
                             name: 'location',
@@ -115,7 +116,7 @@ const Locations = ({state, hasError, handleChange}) => {
                             }
                         </optgroup>
                     </NativeSelect>
-            }
+            } */}
             {hasError && <FormHelperText>This is required</FormHelperText>}
         </FormControl>
     )
